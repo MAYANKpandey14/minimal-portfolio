@@ -79,13 +79,11 @@ const frontendSkills = [
 
 const backendSkills = [
   { name: "Node.js", level: "Expert", percentage: 90 },
-  { name: "PostgreSQL / MongoDB", level: "Advanced", percentage: 85 },
-  { name: "GraphQL", level: "Intermediate", percentage: 80 },
-  { name: "AWS / Cloud Infrastructure", level: "Advanced", percentage: 85 }
+  { name: "PostgreSQL / MongoDB", level: "Advanced", percentage: 85 }
 ];
 
 const otherSkills = [ 
-  "Firebase", "Redux", "Figma", "Git", "Microservices",
+  "Firebase", "Redux", "Git", "Microservices",
   "Performance Optimization", "SEO", "Accessibility"
 ];
 
