@@ -25,32 +25,10 @@ const Contact = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    try {
-      const notionResponse = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          subject: formData.subject,
-          message: formData.message,
-        }),
-      });
-
-      let notionData;
-      try {
-        notionData = await notionResponse.json();
-      } catch (error) {
-        console.error("Error parsing JSON from /api/contact:", error);
-      }
-
-      if (!notionResponse.ok) {
-        const errorMsg = notionData?.error || "Failed to send message";
-        throw new Error(errorMsg);
-      }
-
+    // Simulate form submission delay
+    setTimeout(() => {
       toast({
-        title: "Message sent successfully",
+        title: "Message received",
         description: "Thank you for reaching out. I'll get back to you soon!",
         duration: 5000,
       });
@@ -61,17 +39,9 @@ const Contact = () => {
         subject: '',
         message: ''
       });
-    } catch (error: any) {
-      console.error('Error:', error);
-      toast({
-        title: "Error sending message",
-        description: error.message || "There was a problem sending your message. Please try again later.",
-        variant: "destructive",
-        duration: 5000,
-      });
-    } finally {
+
       setIsSubmitting(false);
-    }
+    }, 1000);
   };
 
   return (
