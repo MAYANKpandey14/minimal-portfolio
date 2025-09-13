@@ -25,10 +25,18 @@ const Contact = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    // Simulate form submission delay
-    setTimeout(() => {
+    try {
+      const { sendEmail } = await import('@/lib/email');
+      
+      await sendEmail({
+        name: formData.name,
+        email: formData.email,
+        subject: formData.subject,
+        message: formData.message,
+      });
+
       toast({
-        title: "Message received",
+        title: "Message sent successfully",
         description: "Thank you for reaching out. I'll get back to you soon!",
         duration: 5000,
       });
@@ -39,9 +47,17 @@ const Contact = () => {
         subject: '',
         message: ''
       });
-
+    } catch (error: any) {
+      console.error('Error sending email:', error);
+      toast({
+        title: "Error sending message",
+        description: "There was a problem sending your message. Please try again later.",
+        variant: "destructive",
+        duration: 5000,
+      });
+    } finally {
       setIsSubmitting(false);
-    }, 1000);
+    }
   };
 
   return (
