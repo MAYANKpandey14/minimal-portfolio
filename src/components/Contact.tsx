@@ -2,9 +2,14 @@ import { useState } from 'react';
 import { Mail, MessageSquare, Phone } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { siteContent } from "@/data/content";
+import { cn } from "@/lib/utils";
+import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 
 const Contact = () => {
   const { toast } = useToast();
+  const { ref: headingRef, isVisible: headingVisible } = useScrollReveal({ threshold: 0.3 });
+  const { ref: contentRef, isVisible: contentVisible } = useScrollReveal({ threshold: 0.2 });
+  
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -66,14 +71,26 @@ const Contact = () => {
       className="section-container"
       aria-labelledby="contact-heading"
     >
-      <div className="max-w-3xl mx-auto text-center mb-16">
+      <div 
+        ref={headingRef}
+        className={cn(
+          "max-w-3xl mx-auto text-center mb-16 reveal-fade-up",
+          headingVisible && "visible"
+        )}
+      >
         <h2 id="contact-heading" className="section-heading">Get in Touch</h2>
         <p className="section-subheading">
           Have a project in mind or want to discuss an opportunity? I'd love to hear from you.
         </p>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-5 gap-12">
+      <div 
+        ref={contentRef}
+        className={cn(
+          "grid grid-cols-1 lg:grid-cols-5 gap-12 reveal-fade-up",
+          contentVisible && "visible"
+        )}
+      >
         <aside className="lg:col-span-2 space-y-8" aria-label="Contact information">
           <div>
             <h3 className="text-xl font-medium mb-4">Contact Information</h3>

@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import { cn } from "@/lib/utils";
 import LazyImage from '@/components/optimized/LazyImage';
+import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 
 // Import project images
 import ecommercePlatformImg from '@/assets/ecommerce-platform.png';
@@ -13,6 +14,9 @@ import messagingMicroserviceImg from '@/assets/messaging-microservice.png';
 
 const Projects = () => {
   const [activeFilter, setActiveFilter] = useState('all');
+  const { ref: headingRef, isVisible: headingVisible } = useScrollReveal({ threshold: 0.3 });
+  const { ref: filtersRef, isVisible: filtersVisible } = useScrollReveal({ threshold: 0.3 });
+  const { ref: projectsRef, isVisible: projectsVisible } = useScrollReveal({ threshold: 0.2 });
 
   const filteredProjects = activeFilter === 'all' 
     ? projects 
@@ -20,14 +24,26 @@ const Projects = () => {
 
   return (
     <section id="projects" className="section-container">
-      <div className="max-w-3xl mx-auto text-center mb-16">
+      <div 
+        ref={headingRef}
+        className={cn(
+          "max-w-3xl mx-auto text-center mb-16 reveal-fade-up",
+          headingVisible && "visible"
+        )}
+      >
         <h2 className="section-heading">Featured Projects</h2>
         <p className="section-subheading">
           A selection of my recent work delivering efficient, minimalist solutions.
         </p>
       </div>
       
-      <div className="flex justify-center mb-8">
+      <div 
+        ref={filtersRef}
+        className={cn(
+          "flex justify-center mb-8 reveal-scale-up",
+          filtersVisible && "visible"
+        )}
+      >
         <div className="flex flex-wrap gap-2 p-1 bg-secondary/50 rounded-full">
           {categories.map((category) => (
             <button
@@ -46,11 +62,18 @@ const Projects = () => {
         </div>
       </div>
       
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-        {filteredProjects.map((project) => (
+      <div 
+        ref={projectsRef}
+        className={cn(
+          "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 reveal-fade-up",
+          projectsVisible && "visible"
+        )}
+      >
+        {filteredProjects.map((project, index) => (
           <div 
             key={project.id} 
             className="group rounded-xl overflow-hidden border border-border hover:shadow-lg transition-all duration-300"
+            style={{ animationDelay: `${index * 0.1}s` }}
           >
             <div className="relative overflow-hidden h-48">
               <LazyImage 

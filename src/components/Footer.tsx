@@ -1,12 +1,19 @@
 
 import { siteContent } from "@/data/content";
+import { cn } from "@/lib/utils";
+import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();
+  const { ref: footerRef, isVisible: footerVisible } = useScrollReveal({ threshold: 0.3 });
 
   return (
     <footer 
-      className="py-12 px-6 bg-secondary/30"
+      ref={footerRef}
+      className={cn(
+        "py-12 px-6 bg-secondary/30 reveal-fade-up",
+        footerVisible && "visible"
+      )}
       role="contentinfo"
       aria-label="Site footer"
     >

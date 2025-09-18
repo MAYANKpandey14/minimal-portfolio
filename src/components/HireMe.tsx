@@ -1,17 +1,34 @@
 
 import { Briefcase, Clock, FileCode, Rocket } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 
 const HireMe = () => {
+  const { ref: headingRef, isVisible: headingVisible } = useScrollReveal({ threshold: 0.3 });
+  const { ref: contentRef, isVisible: contentVisible } = useScrollReveal({ threshold: 0.2 });
+
   return (
     <section id="hire-me" className="section-container bg-secondary/30">
-      <div className="max-w-3xl mx-auto text-center mb-16">
+      <div 
+        ref={headingRef}
+        className={cn(
+          "max-w-3xl mx-auto text-center mb-16 reveal-fade-up",
+          headingVisible && "visible"
+        )}
+      >
         <h2 className="section-heading">Work With Me</h2>
         <p className="section-subheading">
           I'm available for full-time positions and freelance projects.
         </p>
       </div>
       
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+      <div 
+        ref={contentRef}
+        className={cn(
+          "grid grid-cols-1 lg:grid-cols-2 gap-12 reveal-fade-up",
+          contentVisible && "visible"
+        )}
+      >
         <div className="glass-panel rounded-xl p-8 shadow-lg">
           <div className="flex items-center gap-3 mb-6">
             <div className="p-2 rounded-full bg-accent/10">

@@ -5,6 +5,7 @@ import { Code, FileJson, Database, Globe, Server, Layout, Monitor, Laptop, Figma
 import { useIsMobile } from '@/hooks/use-mobile';
 import { siteContent } from "@/data/content";
 import LazyImage from "@/components/optimized/LazyImage";
+import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 
 const Hero = () => {
   const [mounted, setMounted] = useState(false);
