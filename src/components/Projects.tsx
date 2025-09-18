@@ -1,6 +1,7 @@
 
 import { useState } from 'react';
 import { cn } from "@/lib/utils";
+import LazyImage from '@/components/optimized/LazyImage';
 
 // Import project images
 import ecommercePlatformImg from '@/assets/ecommerce-platform.png';
@@ -52,10 +53,13 @@ const Projects = () => {
             className="group rounded-xl overflow-hidden border border-border hover:shadow-lg transition-all duration-300"
           >
             <div className="relative overflow-hidden h-48">
-              <img 
+              <LazyImage 
                 src={project.image} 
-                alt={project.title}
+                alt={`${project.title} - ${project.description}`}
                 className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500"
+                width={400}
+                height={192}
+                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
               />
               <div 
                 className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent flex items-end p-6"
