@@ -11,6 +11,7 @@ import contentManagementImg from '@/assets/content-management-system.png';
 import taskApiImg from '@/assets/task-api.png';
 import realEstateImg from '@/assets/real-estate.png';
 import messagingMicroserviceImg from '@/assets/messaging-microservice.png';
+import photographyPortfolioImg from '@/assets/photographyPortfolioImg.png';
 
 const Projects = () => {
   const [activeFilter, setActiveFilter] = useState('all');
@@ -120,14 +121,6 @@ const categories = [
 const projects = [
   {
     id: 1,
-    title: "E-commerce Platform",
-    description: "A modern e-commerce solution with cart functionality and payment processing.",
-    category: "fullstack",
-    technologies: ["React", "Node.js", "MongoDB", "Stripe"],
-    image: ecommercePlatformImg
-  },
-  {
-    id: 2,
     title: "Portfolio Dashboard",
     description: "Personal investment tracker with data visualization and real-time updates.",
     category: "frontend",
@@ -135,7 +128,7 @@ const projects = [
     image: dashboardImg
   },
   {
-    id: 3,
+    id: 2,
     title: "Content Management System",
     description: "Customizable CMS built for content creators with advanced editing capabilities.",
     category: "fullstack",
@@ -143,7 +136,7 @@ const projects = [
     image: contentManagementImg
   },
   {
-    id: 4,
+    id: 3,
     title: "Task Management API",
     description: "RESTful API for task management with authentication and permission controls.",
     category: "backend",
@@ -151,7 +144,7 @@ const projects = [
     image: taskApiImg
   },
   {
-    id: 5,
+    id: 4,
     title: "Real Estate Listings",
     description: "Property search platform with filtering, sorting, and map integration.",
     category: "frontend",
@@ -159,13 +152,21 @@ const projects = [
     image: realEstateImg
   },
   {
-    id: 6,
+    id: 5,
     title: "Messaging Microservice",
     description: "Scalable microservice for real-time messaging in distributed applications.",
     category: "backend",
     technologies: ["Node.js", "Redis", "WebSockets", "Docker"],
     image: messagingMicroserviceImg
-  }
+  },
+  {
+    id: 6,
+    title: "Photography Portfolio",
+    description: "A modern, responsive portfolio website to showcase professional photography work with galleries, categories, and a clean UI.",
+    category: "frontend",
+    technologies: ["React", "Tailwind CSS", "Framer Motion", "Vercel"],
+    image: photographyPortfolioImg
+}
 ];
 
 export default Projects;
