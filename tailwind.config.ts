@@ -132,11 +132,10 @@ export default {
 				'float': 'float 6s ease-in-out infinite',
 				'spin-slow': 'spin-slow 30s linear infinite'
 			},
-		fontFamily: {
-			sans: ['Inter', 'sans-serif'],
-			mono: ['JetBrains Mono', 'monospace'],
-			heading: ['Bricolage Grotesque', 'sans-serif'],
-		}
+			fontFamily: {
+				sans: ['Inter', 'sans-serif'],
+				mono: ['JetBrains Mono', 'monospace'],
+			}
 		}
 	},
 	plugins: [require("tailwindcss-animate")],

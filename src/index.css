@@ -1,5 +1,5 @@
 
-@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@400;500;600;700;800&family=Inter:wght@100;200;300;400;500;600;700;800;900&family=JetBrains+Mono:wght@100;200;300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=JetBrains+Mono:wght@100;200;300;400;500;600;700;800&display=swap');
 
 @tailwind base;
 @tailwind components;
@@ -136,11 +136,11 @@
   }
 
   .section-heading {
-    @apply text-3xl md:text-4xl font-medium leading-tight mb-6 tracking-tight font-heading;
+    @apply text-3xl md:text-4xl font-light leading-tight mb-6 tracking-tight font-mono;
   }
 
   .section-subheading {
-    @apply text-xl md:text-2xl font-normal mb-6 text-muted-foreground tracking-tight font-heading;
+    @apply text-xl md:text-2xl font-light mb-6 text-muted-foreground tracking-tight;
   }
 
   .badge {
