@@ -99,7 +99,7 @@ const Projects = () => {
                 className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent flex items-end p-6"
               >
                 <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <span className="badge bg-primary/90 text-primary-foreground border border-primary/20">
+                  <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-gradient-to-r from-accent to-primary text-white shadow-md">
                     {getCategoryLabel(project.category)}
                   </span>
                 </div>
