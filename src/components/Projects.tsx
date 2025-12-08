@@ -3,11 +3,11 @@ import { useState } from 'react';
 import { cn } from "@/lib/utils";
 import LazyImage from '@/components/optimized/LazyImage';
 import { useScrollReveal } from "@/hooks/use-scroll-reveal";
+import { ExternalLink } from 'lucide-react';
 
 // Import project images
-import ecommercePlatformImg from '@/assets/ecommerce-platform.png';
-import dashboardImg from '@/assets/dashboard.png';
-import contentManagementImg from '@/assets/content-management-system.png';
+import spendwiseImg from '@/assets/spendwise-dashboard.png';
+import methodosImg from '@/assets/methodos-dashboard.png';
 import taskApiImg from '@/assets/task-api.png';
 import realEstateImg from '@/assets/real-estate.png';
 import messagingMicroserviceImg from '@/assets/messaging-microservice.png';
@@ -22,6 +22,16 @@ const Projects = () => {
   const filteredProjects = activeFilter === 'all' 
     ? projects 
     : projects.filter(project => project.category === activeFilter);
+
+  const getCategoryLabel = (category: string) => {
+    switch(category) {
+      case 'frontend': return 'Frontend';
+      case 'fullstack': return 'Full Stack';
+      case 'backend': return 'Backend';
+      case 'freelance': return 'Freelance';
+      default: return category;
+    }
+  };
 
   return (
     <section id="projects" className="section-container">
@@ -73,7 +83,7 @@ const Projects = () => {
         {filteredProjects.map((project, index) => (
           <div 
             key={project.id} 
-            className="group rounded-xl overflow-hidden border border-border hover:shadow-lg transition-all duration-300"
+            className="group rounded-xl overflow-hidden border border-border hover:shadow-lg transition-all duration-300 bg-card"
             style={{ animationDelay: `${index * 0.1}s` }}
           >
             <div className="relative overflow-hidden h-48">
@@ -89,12 +99,27 @@ const Projects = () => {
                 className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent flex items-end p-6"
               >
                 <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <span className="badge bg-white/90 text-foreground">{project.category}</span>
+                  <span className="badge bg-primary/90 text-primary-foreground border border-primary/20">
+                    {getCategoryLabel(project.category)}
+                  </span>
                 </div>
               </div>
             </div>
             <div className="p-6">
-              <h3 className="text-lg font-medium mb-2">{project.title}</h3>
+              <div className="flex items-center justify-between mb-2">
+                <h3 className="text-lg font-medium">{project.title}</h3>
+                {project.previewUrl && (
+                  <a 
+                    href={project.previewUrl} 
+                    target="_blank" 
+                    rel="noopener noreferrer"
+                    className="text-primary hover:text-primary/80 transition-colors"
+                    aria-label={`Preview ${project.title}`}
+                  >
+                    <ExternalLink className="w-5 h-5" />
+                  </a>
+                )}
+              </div>
               <p className="text-muted-foreground text-sm mb-4">{project.description}</p>
               <div className="flex flex-wrap gap-2">
                 {project.technologies.map((tech) => (
@@ -121,27 +146,30 @@ const categories = [
 const projects = [
   {
     id: 1,
-    title: "Portfolio Dashboard",
-    description: "Personal investment tracker with data visualization and real-time updates.",
-    category: "frontend",
-    technologies: ["Next.js", "TypeScript", "Tailwind CSS", "Recharts"],
-    image: dashboardImg
+    title: "SpendWise - Expense Tracker",
+    description: "Personal finance management app with spending analytics, budgets, and real-time expense tracking.",
+    category: "fullstack",
+    technologies: ["React", "TypeScript", "Supabase", "Tailwind CSS"],
+    image: spendwiseImg,
+    previewUrl: "https://smartpocket.vercel.app/login"
   },
   {
     id: 2,
-    title: "Content Management System",
-    description: "Customizable CMS built for content creators with advanced editing capabilities.",
+    title: "MethodOS - Productivity Suite",
+    description: "Task management and productivity platform with pomodoro timer, notes, and analytics dashboard.",
     category: "fullstack",
-    technologies: ["React", "GraphQL", "PostgreSQL", "AWS"],
-    image: contentManagementImg
+    technologies: ["React", "TypeScript", "Supabase", "Tailwind CSS"],
+    image: methodosImg,
+    previewUrl: "https://methodos.lovable.app/login"
   },
   {
     id: 3,
-    title: "Task Management API",
-    description: "RESTful API for task management with authentication and permission controls.",
-    category: "backend",
-    technologies: ["Node.js", "Express", "MongoDB", "JWT"],
-    image: taskApiImg
+    title: "Photography Portfolio",
+    description: "A modern, responsive portfolio website to showcase professional photography work with galleries and clean UI.",
+    category: "freelance",
+    technologies: ["React", "Tailwind CSS", "Framer Motion", "Vercel"],
+    image: photographyPortfolioImg,
+    previewUrl: "https://www.aesphotography.in/"
   },
   {
     id: 4,
@@ -149,24 +177,27 @@ const projects = [
     description: "Property search platform with filtering, sorting, and map integration.",
     category: "frontend",
     technologies: ["React", "Redux", "Mapbox", "Styled Components"],
-    image: realEstateImg
+    image: realEstateImg,
+    previewUrl: null
   },
   {
     id: 5,
+    title: "Task Management API",
+    description: "RESTful API for task management with authentication and permission controls.",
+    category: "backend",
+    technologies: ["Node.js", "Express", "MongoDB", "JWT"],
+    image: taskApiImg,
+    previewUrl: null
+  },
+  {
+    id: 6,
     title: "Messaging Microservice",
     description: "Scalable microservice for real-time messaging in distributed applications.",
     category: "backend",
     technologies: ["Node.js", "Redis", "WebSockets", "Docker"],
-    image: messagingMicroserviceImg
-  },
-  {
-    id: 6,
-    title: "Photography Portfolio",
-    description: "A modern, responsive portfolio website to showcase professional photography work with galleries, categories, and a clean UI.",
-    category: "frontend",
-    technologies: ["React", "Tailwind CSS", "Framer Motion", "Vercel"],
-    image: photographyPortfolioImg
-}
+    image: messagingMicroserviceImg,
+    previewUrl: null
+  }
 ];
 
 export default Projects;
