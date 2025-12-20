@@ -1,10 +1,22 @@
 
 import { Briefcase, Clock, Rocket, Zap } from "lucide-react";
+import { cn } from "@/lib/utils";
+import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 
 const About = () => {
+  const { ref: headingRef, isVisible: headingVisible } = useScrollReveal({ threshold: 0.3 });
+  const { ref: cardsRef, isVisible: cardsVisible } = useScrollReveal({ threshold: 0.2 });
+  const { ref: approachRef, isVisible: approachVisible } = useScrollReveal({ threshold: 0.3 });
+
   return (
     <section id="about" className="section-container">
-      <div className="max-w-3xl mx-auto text-center mb-16">
+      <div 
+        ref={headingRef}
+        className={cn(
+          "max-w-3xl mx-auto text-center mb-16 reveal-fade-up",
+          headingVisible && "visible"
+        )}
+      >
         <h2 className="section-heading">
           <span className="gradient-text">About Me</span>
         </h2>
@@ -13,9 +25,19 @@ const About = () => {
         </p>
       </div>
       
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-        {valueProps.map((prop) => (
-          <div key={prop.title} className="group tech-card p-6 rounded-xl glow-effect">
+      <div 
+        ref={cardsRef}
+        className={cn(
+          "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 reveal-scale-up",
+          cardsVisible && "visible"
+        )}
+      >
+        {valueProps.map((prop, index) => (
+          <div 
+            key={prop.title} 
+            className="group tech-card p-6 rounded-xl glow-effect"
+            style={{ animationDelay: `${index * 0.1}s` }}
+          >
             <div className="mb-4 text-primary">
               <prop.icon size={28} className="group-hover:scale-110 transition-transform duration-300" />
             </div>
@@ -25,7 +47,13 @@ const About = () => {
         ))}
       </div>
       
-      <div className="mt-16 lg:mt-24 bg-white/50 backdrop-blur-sm rounded-2xl p-8 md:p-12 border border-border/50 shadow-sm">
+      <div 
+        ref={approachRef}
+        className={cn(
+          "mt-16 lg:mt-24 bg-white/50 backdrop-blur-sm rounded-2xl p-8 md:p-12 border border-border/50 shadow-sm reveal-fade-up",
+          approachVisible && "visible"
+        )}
+      >
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <div>
             <h3 className="text-2xl font-light mb-4 tracking-tight font-mono">My Approach</h3>

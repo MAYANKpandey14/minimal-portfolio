@@ -1,4 +1,7 @@
-import emailjs from "emailjs-com";
+import emailjs from "@emailjs/browser";
+
+// Initialize EmailJS with public key
+emailjs.init(import.meta.env.VITE_EMAILJS_USER_ID!);
 
 export const sendEmail = async ({
   name,
@@ -19,7 +22,7 @@ export const sendEmail = async ({
       from_email: email,
       subject,
       message,
-    },
-    import.meta.env.VITE_EMAILJS_USER_ID!
+      to_name: "Developer", // Add recipient name for template
+    }
   );
 };

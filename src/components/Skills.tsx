@@ -1,8 +1,21 @@
 
+import { cn } from "@/lib/utils";
+import { useScrollReveal } from "@/hooks/use-scroll-reveal";
+
 const Skills = () => {
+  const { ref: headingRef, isVisible: headingVisible } = useScrollReveal({ threshold: 0.3 });
+  const { ref: skillsRef, isVisible: skillsVisible } = useScrollReveal({ threshold: 0.2 });
+  const { ref: otherRef, isVisible: otherVisible } = useScrollReveal({ threshold: 0.3 });
+
   return (
     <section id="skills" className="section-container bg-gradient-to-b from-white/0 to-white/50">
-      <div className="max-w-3xl mx-auto text-center mb-16">
+      <div 
+        ref={headingRef}
+        className={cn(
+          "max-w-3xl mx-auto text-center mb-16 reveal-fade-up",
+          headingVisible && "visible"
+        )}
+      >
         <h2 className="section-heading">
           <span className="gradient-text">Skills & Expertise</span>
         </h2>
@@ -11,7 +24,13 @@ const Skills = () => {
         </p>
       </div>
       
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+      <div 
+        ref={skillsRef}
+        className={cn(
+          "grid grid-cols-1 md:grid-cols-2 gap-12 reveal-fade-up",
+          skillsVisible && "visible"
+        )}
+      >
         <div className="tech-card p-6 rounded-xl">
           <h3 className="text-xl font-medium mb-6 font-mono">Frontend Development</h3>
           <div className="space-y-6">
@@ -53,13 +72,20 @@ const Skills = () => {
         </div>
       </div>
       
-      <div className="mt-16">
+      <div 
+        ref={otherRef}
+        className={cn(
+          "mt-16 reveal-scale-up",
+          otherVisible && "visible"
+        )}
+      >
         <h3 className="text-xl font-medium mb-6 text-center font-mono">Other Technologies</h3>
         <div className="flex flex-wrap gap-3 justify-center">
-          {otherSkills.map((skill) => (
+          {otherSkills.map((skill, index) => (
             <span 
               key={skill} 
               className="px-4 py-2 rounded-full bg-white shadow-sm border border-border/50 text-sm font-mono hover:border-primary/30 hover:bg-primary/5 transition-all"
+              style={{ animationDelay: `${index * 0.1}s` }}
             >
               {skill}
             </span>
@@ -79,13 +105,11 @@ const frontendSkills = [
 
 const backendSkills = [
   { name: "Node.js", level: "Expert", percentage: 90 },
-  { name: "PostgreSQL / MongoDB", level: "Advanced", percentage: 85 },
-  { name: "GraphQL", level: "Intermediate", percentage: 80 },
-  { name: "AWS / Cloud Infrastructure", level: "Advanced", percentage: 85 }
+  { name: "PostgreSQL / MongoDB", level: "Advanced", percentage: 85 }
 ];
 
 const otherSkills = [ 
-  "Firebase", "Redux", "Figma", "Git", "Microservices",
+  "Firebase", "Redux", "Git", "Microservices",
   "Performance Optimization", "SEO", "Accessibility"
 ];
 

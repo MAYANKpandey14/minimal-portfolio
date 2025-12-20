@@ -12,12 +12,14 @@ const Index = () => {
   return (
     <div className="min-h-screen bg-background text-foreground overflow-hidden">
       {/* Background subtle tech patterns */}
-      <div className="fixed inset-0 -z-10">
+      <div className="fixed inset-0 -z-10" aria-hidden="true">
         <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-gradient-to-b from-primary/5 to-transparent opacity-50 blur-3xl"></div>
         <div className="absolute bottom-0 left-0 w-1/3 h-1/3 bg-gradient-to-t from-accent/5 to-transparent opacity-50 blur-3xl"></div>
       </div>
+      
       <Header />
-      <main>
+      
+      <main id="main-content" role="main">
         <Hero />
         <About />
         <Skills />
@@ -25,6 +27,7 @@ const Index = () => {
         <HireMe />
         <Contact />
       </main>
+      
       <Footer />
     </div>
   );

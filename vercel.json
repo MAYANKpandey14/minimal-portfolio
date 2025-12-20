@@ -1,7 +1,10 @@
 {
-  "functions": {
-    "api/*.ts": {
-      "runtime": "@vercel/node@3.0.8"
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
     }
-  }
+  ]
 }
