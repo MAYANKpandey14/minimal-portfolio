@@ -33,28 +33,6 @@ const Contact = () => {
         message: formData.message,
       });
 
-      const notionResponse = await fetch("/api/contact", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          subject: formData.subject,
-          message: formData.message,
-        }),
-      });
-
-      let notionData;
-      try {
-        notionData = await notionResponse.json();
-      } catch (error) {
-        console.error("Error parsing JSON from /api/contact:", error);
-      }
-
-      if (!notionResponse.ok) {
-        const errorMsg = notionData?.error || "Failed to save contact info to Notion";
-        throw new Error(errorMsg);
-      }
 
       toast({
         title: "Message sent successfully",
@@ -68,7 +46,7 @@ const Contact = () => {
         subject: '',
         message: ''
       });
-    } catch (error: any) {
+    } catch (error) {
       console.error('Error:', error);
       toast({
         title: "Error sending message",
