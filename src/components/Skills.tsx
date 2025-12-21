@@ -9,7 +9,7 @@ const Skills = () => {
 
   return (
     <section id="skills" className="section-container bg-gradient-to-b from-white/0 to-white/50">
-      <div 
+      <div
         ref={headingRef}
         className={cn(
           "max-w-3xl mx-auto text-center mb-16 reveal-fade-up",
@@ -23,8 +23,8 @@ const Skills = () => {
           Technical proficiency combined with a keen eye for detail.
         </p>
       </div>
-      
-      <div 
+
+      <div
         ref={skillsRef}
         className={cn(
           "grid grid-cols-1 md:grid-cols-2 gap-12 reveal-fade-up",
@@ -41,7 +41,7 @@ const Skills = () => {
                   <span className="text-xs text-muted-foreground bg-primary/5 px-2 py-0.5 rounded">{skill.level}</span>
                 </div>
                 <div className="h-2 bg-secondary rounded-full overflow-hidden">
-                  <div 
+                  <div
                     className="h-full bg-gradient-to-r from-primary to-accent rounded-full transition-all duration-1000 ease-out"
                     style={{ width: `${skill.percentage}%` }}
                   ></div>
@@ -50,7 +50,7 @@ const Skills = () => {
             ))}
           </div>
         </div>
-        
+
         <div className="tech-card p-6 rounded-xl">
           <h3 className="text-xl font-medium mb-6 font-mono">Backend Development</h3>
           <div className="space-y-6">
@@ -61,7 +61,7 @@ const Skills = () => {
                   <span className="text-xs text-muted-foreground bg-primary/5 px-2 py-0.5 rounded">{skill.level}</span>
                 </div>
                 <div className="h-2 bg-secondary rounded-full overflow-hidden">
-                  <div 
+                  <div
                     className="h-full bg-gradient-to-r from-primary to-accent rounded-full transition-all duration-1000 ease-out"
                     style={{ width: `${skill.percentage}%` }}
                   ></div>
@@ -71,8 +71,8 @@ const Skills = () => {
           </div>
         </div>
       </div>
-      
-      <div 
+
+      <div
         ref={otherRef}
         className={cn(
           "mt-16 reveal-scale-up",
@@ -82,8 +82,8 @@ const Skills = () => {
         <h3 className="text-xl font-medium mb-6 text-center font-mono">Other Technologies</h3>
         <div className="flex flex-wrap gap-3 justify-center">
           {otherSkills.map((skill, index) => (
-            <span 
-              key={skill} 
+            <span
+              key={skill}
               className="px-4 py-2 rounded-full bg-white shadow-sm border border-border/50 text-sm font-mono hover:border-primary/30 hover:bg-primary/5 transition-all"
               style={{ animationDelay: `${index * 0.1}s` }}
             >
@@ -97,18 +97,18 @@ const Skills = () => {
 };
 
 const frontendSkills = [
-  { name: "React / Next.js", level: "Expert", percentage: 95 },
+  { name: "React / Next.js", level: "Advanced", percentage: 95 },
   { name: "TypeScript", level: "Advanced", percentage: 90 },
-  { name: "CSS / Tailwind", level: "Expert", percentage: 95 },
-  { name: "UI/UX Design", level: "Advanced", percentage: 85 }
+  { name: "CSS / Tailwind", level: "Advanced", percentage: 95 },
+  { name: "UI/UX Design", level: "Intermediate", percentage: 70 }
 ];
 
 const backendSkills = [
-  { name: "Node.js", level: "Expert", percentage: 90 },
-  { name: "PostgreSQL / MongoDB", level: "Advanced", percentage: 85 }
+  { name: "Node.js", level: "Intermediate", percentage: 70 },
+  { name: "PostgreSQL / MongoDB", level: "Intermediate", percentage: 70 }
 ];
 
-const otherSkills = [ 
+const otherSkills = [
   "Firebase", "Redux", "Git", "Microservices",
   "Performance Optimization", "SEO", "Accessibility"
 ];

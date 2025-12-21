@@ -19,12 +19,12 @@ const Projects = () => {
   const { ref: filtersRef, isVisible: filtersVisible } = useScrollReveal({ threshold: 0.3 });
   const { ref: projectsRef, isVisible: projectsVisible } = useScrollReveal({ threshold: 0.2 });
 
-  const filteredProjects = activeFilter === 'all' 
-    ? projects 
+  const filteredProjects = activeFilter === 'all'
+    ? projects
     : projects.filter(project => project.category === activeFilter);
 
   const getCategoryLabel = (category: string) => {
-    switch(category) {
+    switch (category) {
       case 'frontend': return 'Frontend';
       case 'fullstack': return 'Full Stack';
       case 'backend': return 'Backend';
@@ -35,7 +35,7 @@ const Projects = () => {
 
   return (
     <section id="projects" className="section-container">
-      <div 
+      <div
         ref={headingRef}
         className={cn(
           "max-w-3xl mx-auto text-center mb-16 reveal-fade-up",
@@ -47,24 +47,24 @@ const Projects = () => {
           A selection of my recent work delivering efficient, minimalist solutions.
         </p>
       </div>
-      
-      <div 
+
+      <div
         ref={filtersRef}
         className={cn(
-          "flex justify-center mb-8 reveal-scale-up",
+          "flex justify-center mb-12 reveal-scale-up",
           filtersVisible && "visible"
         )}
       >
-        <div className="flex flex-wrap gap-2 p-1 bg-secondary/50 rounded-full">
+        <div className="flex flex-wrap gap-2 p-1.5 bg-secondary/30 backdrop-blur-sm rounded-full border border-border/50">
           {categories.map((category) => (
             <button
               key={category.id}
               onClick={() => setActiveFilter(category.id)}
               className={cn(
-                "px-4 py-2 text-sm font-medium rounded-full transition-all",
-                activeFilter === category.id 
-                  ? "bg-accent shadow-sm text-white" 
-                  : "text-muted-foreground hover:text-foreground"
+                "px-5 py-2.5 text-sm font-medium rounded-full transition-all duration-300",
+                activeFilter === category.id
+                  ? "bg-primary text-primary-foreground shadow-md"
+                  : "text-muted-foreground hover:text-foreground hover:bg-secondary/50"
               )}
             >
               {category.name}
@@ -72,8 +72,8 @@ const Projects = () => {
           ))}
         </div>
       </div>
-      
-      <div 
+
+      <div
         ref={projectsRef}
         className={cn(
           "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 reveal-fade-up",
@@ -81,49 +81,56 @@ const Projects = () => {
         )}
       >
         {filteredProjects.map((project, index) => (
-          <div 
-            key={project.id} 
-            className="group rounded-xl overflow-hidden border border-border hover:shadow-lg transition-all duration-300 bg-card"
+          <div
+            key={project.id}
+            className="group relative flex flex-col h-full bg-card rounded-2xl border border-border/50 overflow-hidden hover:shadow-xl hover:border-primary/20 transition-all duration-500"
             style={{ animationDelay: `${index * 0.1}s` }}
           >
-            <div className="relative overflow-hidden h-48">
-              <LazyImage 
-                src={project.image} 
+            <div className="relative h-56 overflow-hidden">
+              <LazyImage
+                src={project.image}
                 alt={`${project.title} - ${project.description}`}
-                className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500"
+                className="h-full w-full object-cover group-hover:scale-110 transition-transform duration-700"
                 width={400}
-                height={192}
+                height={224}
                 sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
               />
-              <div 
-                className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent flex items-end p-6"
+              <div
+                className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center p-4 backdrop-blur-[2px]"
               >
-                <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-gradient-to-r from-accent to-primary text-white shadow-md">
-                    {getCategoryLabel(project.category)}
-                  </span>
-                </div>
-              </div>
-            </div>
-            <div className="p-6">
-              <div className="flex items-center justify-between mb-2">
-                <h3 className="text-lg font-medium">{project.title}</h3>
                 {project.previewUrl && (
-                  <a 
-                    href={project.previewUrl} 
-                    target="_blank" 
+                  <a
+                    href={project.previewUrl}
+                    target="_blank"
                     rel="noopener noreferrer"
-                    className="text-primary hover:text-primary/80 transition-colors"
-                    aria-label={`Preview ${project.title}`}
+                    className="transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300 flex items-center gap-2 bg-white text-black px-6 py-3 rounded-full font-medium text-sm hover:bg-white/90"
+                    aria-label={`View ${project.title}`}
                   >
-                    <ExternalLink className="w-5 h-5" />
+                    View Project <ExternalLink className="w-4 h-4" />
                   </a>
                 )}
               </div>
-              <p className="text-muted-foreground text-sm mb-4">{project.description}</p>
-              <div className="flex flex-wrap gap-2">
+              <div className="absolute top-4 left-4">
+                <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-background/80 backdrop-blur-md border border-border/50 shadow-sm">
+                  {getCategoryLabel(project.category)}
+                </span>
+              </div>
+            </div>
+
+            <div className="flex flex-col flex-grow p-6">
+              <div className="mb-4">
+                <h3 className="text-xl font-semibold mb-2 group-hover:text-primary transition-colors">{project.title}</h3>
+                <p className="text-muted-foreground text-sm leading-relaxed line-clamp-3">
+                  {project.description}
+                </p>
+              </div>
+
+              <div className="mt-auto pt-4 border-t border-border/30 flex flex-wrap gap-2">
                 {project.technologies.map((tech) => (
-                  <span key={tech} className="text-xs text-muted-foreground bg-secondary px-2 py-1 rounded">
+                  <span
+                    key={tech}
+                    className="text-xs font-medium text-secondary-foreground bg-secondary/50 px-2.5 py-1 rounded-md border border-secondary/50"
+                  >
                     {tech}
                   </span>
                 ))}
