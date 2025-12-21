@@ -146,7 +146,7 @@ const categories = [
 const projects = [
   {
     id: 1,
-    title: "SpendWise - Expense Tracker",
+    title: "SpendWise - AI Expense Tracker",
     description: "Personal finance management app with spending analytics, budgets, and real-time expense tracking.",
     category: "fullstack",
     technologies: ["React", "TypeScript", "Supabase", "Tailwind CSS"],
