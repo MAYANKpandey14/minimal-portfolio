@@ -9,7 +9,7 @@ import { ExternalLink } from 'lucide-react';
 import spendwiseImg from '@/assets/spendwise-dashboard.png';
 import methodosImg from '@/assets/methodos-dashboard.png';
 import taskApiImg from '@/assets/task-api.png';
-import realEstateImg from '@/assets/real-estate.png';
+import vertexAirseaImg from '@/assets/vertex-airsea.jpg';
 import messagingMicroserviceImg from '@/assets/messaging-microservice.png';
 import photographyPortfolioImg from '@/assets/photographyPortfolioImg.png';
 
@@ -173,12 +173,12 @@ const projects = [
   },
   {
     id: 4,
-    title: "Real Estate Listings",
-    description: "Property search platform with filtering, sorting, and map integration.",
-    category: "frontend",
-    technologies: ["React", "Redux", "Mapbox", "Styled Components"],
-    image: realEstateImg,
-    previewUrl: null
+    title: "Vertex Air Sea Cargo Solutions",
+    description: "Freight forwarding website with comprehensive air, ocean, and road transportation services.",
+    category: "freelance",
+    technologies: ["React", "Tailwind CSS", "Framer Motion", "Vercel"],
+    image: vertexAirseaImg,
+    previewUrl: "https://www.vertexairsea.com/"
   },
   {
     id: 5,
