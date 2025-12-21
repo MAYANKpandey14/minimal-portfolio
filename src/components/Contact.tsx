@@ -40,10 +40,6 @@ const Contact = () => {
         message: formData.message,
       });
 
-<<<<<<< HEAD
-
-=======
->>>>>>> 4d21d461b264e7454e62c3d63b79afac415d446c
       toast({
         title: "Message sent successfully",
         description: "Thank you for reaching out. I'll get back to you soon!",
@@ -56,13 +52,8 @@ const Contact = () => {
         subject: '',
         message: ''
       });
-<<<<<<< HEAD
-    } catch (error) {
-      console.error('Error:', error);
-=======
     } catch (error: any) {
       console.error('Error sending email:', error);
->>>>>>> 4d21d461b264e7454e62c3d63b79afac415d446c
       toast({
         title: "Error sending message",
         description: "There was a problem sending your message. Please try again later.",
