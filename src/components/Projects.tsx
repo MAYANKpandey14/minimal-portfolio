@@ -138,7 +138,7 @@ const Projects = () => {
 
 const categories = [
   { id: 'all', name: 'All Projects' },
-  { id: 'frontend', name: 'Frontend' },
+  { id: 'freelance', name: 'Freelance' },
   { id: 'fullstack', name: 'Full Stack' },
   { id: 'backend', name: 'Backend' }
 ];
