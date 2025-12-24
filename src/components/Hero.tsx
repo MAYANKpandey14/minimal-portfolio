@@ -10,13 +10,13 @@ import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 const Hero = () => {
   const [mounted, setMounted] = useState(false);
   const isMobile = useIsMobile();
-  
+
   useEffect(() => {
     setMounted(true);
   }, []);
 
   return (
-    <section 
+    <section
       className="min-h-screen flex items-center relative overflow-hidden px-6 pt-20"
       aria-labelledby="hero-heading"
       role="banner"
@@ -28,15 +28,15 @@ const Hero = () => {
         <div className="absolute top-1/3 right-1/4 w-48 h-48 rounded-full border border-accent/20"></div>
         <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-accent/5 via-transparent to-transparent"></div>
       </div>
-      
+
       <div className="max-w-6xl mx-auto w-full">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
           <div className={cn("space-y-6", mounted && "animate-fade-up")}>
             <div className="inline-block">
               <span className="badge font-mono text-xs tracking-wider" role="status">Available for hire</span>
             </div>
-            
-            <h1 
+
+            <h1
               id="hero-heading"
               className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light tracking-tight leading-none font-mono"
             >
@@ -44,21 +44,21 @@ const Hero = () => {
               <br />
               Developer
             </h1>
-            
+
             <p className="text-xl md:text-2xl font-light text-muted-foreground max-w-lg">
               {siteContent.personal.tagline}
             </p>
-            
+
             <div className="flex flex-col sm:flex-row gap-4 pt-4" role="group" aria-label="Primary actions">
-              <a 
-                href="#projects" 
+              <a
+                href="#projects"
                 className="inline-flex h-11 items-center justify-center rounded-md bg-accent px-8 text-sm font-medium text-white shadow-md transition-colors hover:bg-accent/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
                 aria-label="View my portfolio projects"
               >
                 View Projects
               </a>
-              <a 
-                href="#contact" 
+              <a
+                href="#book"
                 className="inline-flex h-11 items-center justify-center rounded-md border border-input bg-white/50 backdrop-blur-sm px-8 text-sm font-medium shadow-sm transition-colors hover:bg-accent/10 hover:border-accent/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
                 aria-label="Get in touch with me"
               >
@@ -66,12 +66,12 @@ const Hero = () => {
               </a>
             </div>
           </div>
-          
-          <div className={cn("relative flex items-center justify-center opacity-0 transition-opacity duration-1000 delay-300", 
+
+          <div className={cn("relative flex items-center justify-center opacity-0 transition-opacity duration-1000 delay-300",
             mounted && "opacity-100",
             "h-[350px] sm:h-[400px] md:h-[450px] lg:h-[500px]"
           )}
-          aria-label="Technology skills visualization with profile picture"
+            aria-label="Technology skills visualization with profile picture"
           >
             {/* Revolving tech icons - adjusted for responsiveness and uniform appearance */}
             <div className="absolute inset-0 flex items-center justify-center">
@@ -96,18 +96,18 @@ const Hero = () => {
                 <RevolvingTechIcon Icon={Code} position={330} label="HTML" />
               </div>
             </div>
-            
+
             {/* Blob shape gradient background - responsive sizing */}
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none" aria-hidden="true">
               <div className="blob-shape bg-gradient-to-br from-accent/60 to-accent/30 animate-pulse filter blur-md
                  w-[160px] h-[160px]
               sm:w-[200px] sm:h-[200px]
               md:w-[220px] md:h-[220px]
-              lg:w-[240px] lg:h-[240px]" 
+              lg:w-[240px] lg:h-[240px]"
                 style={{ animationDuration: '10s' }}>
               </div>
             </div>
-            
+
             {/* Professional portrait in blob shape - responsive sizing */}
             <div className="relative z-10 overflow-hidden
               w-[160px] h-[160px]
@@ -116,7 +116,7 @@ const Hero = () => {
               lg:w-[240px] lg:h-[240px]">
               <div className="blob-card w-full h-full border border-white/30 backdrop-blur-lg flex items-center justify-center overflow-hidden">
                 <LazyImage
-                  src="/profile-pic.png" 
+                  src="/profile-pic.png"
                   alt={`Professional portrait of ${siteContent.personal.name}, Full Stack Developer`}
                   className="w-full h-full object-cover"
                   priority={true}
@@ -136,25 +136,25 @@ const Hero = () => {
 // Revolving tech icon component - now with responsive sizing and uniform appearance
 const RevolvingTechIcon = ({ Icon, position, label }: { Icon: any, position: number, label: string }) => {
   const isMobile = useIsMobile();
-  
+
   // Calculate position based on angle - adjusted orbit radius for different screen sizes
   const angle = (position * Math.PI) / 180;
   const radius = isMobile ? 48 : 52; // Increased radius to move icons outward
   const x = 50 + radius * Math.cos(angle);
   const y = 50 + radius * Math.sin(angle);
-  
+
   // Uniform sizes for all icons
   const iconSize = isMobile ? 18 : 22;
   const fontSize = isMobile ? "text-[8px]" : "text-[10px]";
-  
+
   return (
-    <div 
+    <div
       className={`absolute flex flex-col items-center justify-center -translate-x-1/2 -translate-y-1/2 
         text-foreground/70 bg-white/90 shadow-sm backdrop-blur-sm rounded-full 
         hover:scale-110 hover:text-accent transition-all border border-white/40
         w-16 h-16 sm:w-20 sm:h-20 md:w-22 md:h-22 lg:w-24 lg:h-24 animate-spin-reverse`}
-      style={{ 
-        left: `${x}%`, 
+      style={{
+        left: `${x}%`,
         top: `${y}%`,
       }}
     >
