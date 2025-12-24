@@ -67,100 +67,105 @@ const Hero = () => {
             </div>
           </div>
 
-          <div className={cn("relative flex items-center justify-center opacity-0 transition-opacity duration-1000 delay-300",
-            mounted && "opacity-100",
-            "h-[350px] sm:h-[400px] md:h-[450px] lg:h-[500px]"
-          )}
+          {/* Tech visualization container - all layers share this exact center */}
+          <div 
+            className={cn(
+              "relative opacity-0 transition-opacity duration-1000 delay-300",
+              mounted && "opacity-100",
+              "w-[280px] h-[280px] sm:w-[320px] sm:h-[320px] md:w-[420px] md:h-[420px] lg:w-[480px] lg:h-[480px]"
+            )}
             aria-label="Technology skills visualization with profile picture"
           >
-            {/* Revolving tech icons - adjusted for responsiveness and uniform appearance */}
-            <div className="absolute inset-0 flex items-center justify-center">
-              <div className="relative rounded-full border border-accent/20 animate-spin-slow
-                w-[280px] h-[280px] 
-                sm:w-[300px] sm:h-[300px] 
-                md:w-[400px] md:h-[400px]
-                lg:w-[460px] lg:h-[460px]"
+            {/* Layer 1: Blue orbit ring - absolute positioned, centered via inset-0 + flex */}
+            <div className="absolute inset-0 flex items-center justify-center" aria-hidden="true">
+              <div 
+                className="rounded-full border border-accent/20"
+                style={{
+                  width: '100%',
+                  height: '100%',
+                }}
+              />
+            </div>
+
+            {/* Layer 2: Rotating icon wrapper - same size as orbit, spins around shared center */}
+            <div 
+              className="absolute inset-0 animate-spin-slow"
+              aria-hidden="true"
+            >
+              {/* Icons positioned on the circumference using polar coordinates */}
+              {[
+                { Icon: Code, label: "JavaScript" },
+                { Icon: Figma, label: "UI/UX" },
+                { Icon: Database, label: "SQL" },
+                { Icon: Globe, label: "React" },
+                { Icon: Server, label: "Node.js" },
+                { Icon: Layout, label: "CSS" },
+                { Icon: Monitor, label: "Responsive" },
+                { Icon: Laptop, label: "Next.js" },
+                { Icon: Github, label: "Git" },
+                { Icon: FileJson, label: "JSON" },
+                { Icon: Binary, label: "TypeScript" },
+                { Icon: Code, label: "HTML" },
+              ].map((item, index) => {
+                const totalIcons = 12;
+                const angle = (2 * Math.PI * index) / totalIcons - Math.PI / 2; // Start from top
+                // Icons sit exactly on the orbit (50% radius from center)
+                const x = 50 + 50 * Math.cos(angle);
+                const y = 50 + 50 * Math.sin(angle);
+                
+                return (
+                  <div
+                    key={`${item.label}-${index}`}
+                    className="absolute flex flex-col items-center justify-center 
+                      text-foreground/70 bg-background/90 shadow-sm backdrop-blur-sm rounded-full 
+                      hover:scale-110 hover:text-accent transition-all border border-border/40
+                      w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-18 lg:h-18
+                      animate-spin-reverse"
+                    style={{
+                      left: `${x}%`,
+                      top: `${y}%`,
+                      transform: 'translate(-50%, -50%)',
+                    }}
+                  >
+                    <item.Icon size={isMobile ? 16 : 20} className="opacity-80" />
+                    <span className="mt-0.5 font-mono font-medium opacity-80 text-[7px] sm:text-[8px] md:text-[9px]">
+                      {item.label}
+                    </span>
+                  </div>
+                );
+              })}
+            </div>
+
+            {/* Layer 3: Center content - blob background + profile image */}
+            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+              {/* Blob gradient background */}
+              <div 
+                className="absolute blob-shape bg-gradient-to-br from-accent/60 to-accent/30 animate-pulse filter blur-md
+                  w-[100px] h-[100px] sm:w-[120px] sm:h-[120px] md:w-[150px] md:h-[150px] lg:w-[170px] lg:h-[170px]"
+                style={{ animationDuration: '10s' }}
                 aria-hidden="true"
-              >
-                <RevolvingTechIcon Icon={Code} position={0} label="JavaScript" />
-                <RevolvingTechIcon Icon={Figma} position={30} label="UI/UX" />
-                <RevolvingTechIcon Icon={Database} position={60} label="SQL" />
-                <RevolvingTechIcon Icon={Globe} position={90} label="React" />
-                <RevolvingTechIcon Icon={Server} position={120} label="Node.js" />
-                <RevolvingTechIcon Icon={Layout} position={150} label="CSS" />
-                <RevolvingTechIcon Icon={Monitor} position={180} label="Responsive" />
-                <RevolvingTechIcon Icon={Laptop} position={210} label="Next.js" />
-                <RevolvingTechIcon Icon={Github} position={240} label="Git" />
-                <RevolvingTechIcon Icon={FileJson} position={270} label="JSON" />
-                <RevolvingTechIcon Icon={Binary} position={300} label="TypeScript" />
-                <RevolvingTechIcon Icon={Code} position={330} label="HTML" />
-              </div>
-            </div>
-
-            {/* Blob shape gradient background - responsive sizing */}
-            <div className="absolute inset-0 flex items-center justify-center pointer-events-none" aria-hidden="true">
-              <div className="blob-shape bg-gradient-to-br from-accent/60 to-accent/30 animate-pulse filter blur-md
-                 w-[160px] h-[160px]
-              sm:w-[200px] sm:h-[200px]
-              md:w-[220px] md:h-[220px]
-              lg:w-[240px] lg:h-[240px]"
-                style={{ animationDuration: '10s' }}>
-              </div>
-            </div>
-
-            {/* Professional portrait in blob shape - responsive sizing */}
-            <div className="relative z-10 overflow-hidden
-              w-[160px] h-[160px]
-              sm:w-[200px] sm:h-[200px]
-              md:w-[220px] md:h-[220px]
-              lg:w-[240px] lg:h-[240px]">
-              <div className="blob-card w-full h-full border border-white/30 backdrop-blur-lg flex items-center justify-center overflow-hidden">
-                <LazyImage
-                  src="/profile-pic.png"
-                  alt={`Professional portrait of ${siteContent.personal.name}, Full Stack Developer`}
-                  className="w-full h-full object-cover"
-                  priority={true}
-                  width={240}
-                  height={240}
-                  sizes="(max-width: 640px) 160px, (max-width: 768px) 200px, (max-width: 1024px) 220px, 240px"
-                />
+              />
+              
+              {/* Profile image */}
+              <div className="relative z-10 overflow-hidden
+                w-[100px] h-[100px] sm:w-[120px] sm:h-[120px] md:w-[150px] md:h-[150px] lg:w-[170px] lg:h-[170px]">
+                <div className="blob-card w-full h-full border border-white/30 backdrop-blur-lg flex items-center justify-center overflow-hidden">
+                  <LazyImage
+                    src="/profile-pic.png"
+                    alt={`Professional portrait of ${siteContent.personal.name}, Full Stack Developer`}
+                    className="w-full h-full object-cover"
+                    priority={true}
+                    width={170}
+                    height={170}
+                    sizes="(max-width: 640px) 100px, (max-width: 768px) 120px, (max-width: 1024px) 150px, 170px"
+                  />
+                </div>
               </div>
             </div>
           </div>
         </div>
       </div>
     </section>
-  );
-};
-
-// Revolving tech icon component - now with responsive sizing and uniform appearance
-const RevolvingTechIcon = ({ Icon, position, label }: { Icon: any, position: number, label: string }) => {
-  const isMobile = useIsMobile();
-
-  // Calculate position based on angle - adjusted orbit radius for different screen sizes
-  const angle = (position * Math.PI) / 180;
-  const radius = isMobile ? 48 : 52; // Increased radius to move icons outward
-  const x = 50 + radius * Math.cos(angle);
-  const y = 50 + radius * Math.sin(angle);
-
-  // Uniform sizes for all icons
-  const iconSize = isMobile ? 18 : 22;
-  const fontSize = isMobile ? "text-[8px]" : "text-[10px]";
-
-  return (
-    <div
-      className={`absolute flex flex-col items-center justify-center -translate-x-1/2 -translate-y-1/2 
-        text-foreground/70 bg-white/90 shadow-sm backdrop-blur-sm rounded-full 
-        hover:scale-110 hover:text-accent transition-all border border-white/40
-        w-16 h-16 sm:w-20 sm:h-20 md:w-22 md:h-22 lg:w-24 lg:h-24 animate-spin-reverse`}
-      style={{
-        left: `${x}%`,
-        top: `${y}%`,
-      }}
-    >
-      <Icon size={iconSize} className="opacity-80" />
-      <span className={`mt-1 font-mono font-medium opacity-80 ${fontSize}`}>{label}</span>
-    </div>
   );
 };
 
