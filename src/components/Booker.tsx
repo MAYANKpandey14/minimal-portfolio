@@ -27,7 +27,7 @@ export default function Booker({
                     "dark": { "cal-brand": "#292929" }
                 },
                 "hideEventTypeDetails": false,
-                "layout": "week_view"
+                "layout": view
             });
         })();
     }, [eventSlug]);

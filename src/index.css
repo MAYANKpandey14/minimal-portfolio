@@ -1,9 +1,7 @@
-
+@import "tailwindcss";
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=JetBrains+Mono:wght@100;200;300;400;500;600;700;800&display=swap');
 
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@config "../tailwind.config.js";
 
 @layer base {
   :root {
@@ -85,7 +83,7 @@
 
   body {
     @apply bg-background text-foreground font-sans;
-    background-image: 
+    background-image:
       radial-gradient(circle at 10% 20%, rgba(120, 119, 198, 0.05) 0%, transparent 20%),
       radial-gradient(circle at 80% 80%, rgba(120, 119, 198, 0.08) 0%, transparent 20%);
   }
@@ -118,9 +116,11 @@
     0% {
       border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
     }
+
     50% {
       border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
     }
+
     100% {
       border-radius: 50% 60% 30% 70% / 40% 40% 70% 50%;
     }
@@ -161,10 +161,12 @@
 
   .highlight-box {
     @apply relative overflow-hidden rounded-xl;
+
     &::before {
       content: '';
       @apply absolute inset-0 bg-gradient-to-r from-accent/20 to-primary/20 opacity-0 transition-opacity duration-300;
     }
+
     &:hover::before {
       @apply opacity-100;
     }
@@ -172,10 +174,12 @@
 
   .glow-effect {
     @apply relative;
+
     &::after {
       content: '';
       @apply absolute inset-0 -z-10 bg-gradient-to-r from-accent/5 to-primary/5 rounded-xl opacity-0 transition-opacity duration-300;
     }
+
     &:hover::after {
       @apply opacity-100 animate-glow;
     }
@@ -190,6 +194,7 @@
     from {
       transform: translate(-50%, -50%) rotate(0deg);
     }
+
     to {
       transform: translate(-50%, -50%) rotate(-360deg);
     }
