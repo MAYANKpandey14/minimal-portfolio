@@ -1,15 +1,11 @@
-
 import { useEffect, useState } from 'react';
 import { cn } from "@/lib/utils";
 import { Code, FileJson, Database, Globe, Server, Layout, Monitor, Laptop, Figma, Github, Binary } from 'lucide-react';
-import { useIsMobile } from '@/hooks/use-mobile';
 import { siteContent } from "@/data/content";
 import LazyImage from "@/components/optimized/LazyImage";
-import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 
 const Hero = () => {
   const [mounted, setMounted] = useState(false);
-  const isMobile = useIsMobile();
 
   useEffect(() => {
     setMounted(true);
@@ -67,68 +63,74 @@ const Hero = () => {
             </div>
           </div>
 
-          {/* Tech visualization container - all layers share this exact center */}
+          {/* Tech visualization container - uses CSS variables for responsive sizing */}
           <div 
             className={cn(
-              "relative opacity-0 transition-opacity duration-1000 delay-300",
-              mounted && "opacity-100",
-              "w-[280px] h-[280px] sm:w-[320px] sm:h-[320px] md:w-[420px] md:h-[420px] lg:w-[480px] lg:h-[480px]"
+              "relative opacity-0 transition-opacity duration-1000 delay-300 mx-auto",
+              mounted && "opacity-100"
             )}
+            style={{
+              width: 'var(--orbit-size)',
+              height: 'var(--orbit-size)',
+            }}
             aria-label="Technology skills visualization with profile picture"
           >
-            {/* Layer 1: Blue orbit ring - absolute positioned, centered via inset-0 + flex */}
+            {/* Layer 1: Orbit ring - sized to container */}
             <div className="absolute inset-0 flex items-center justify-center" aria-hidden="true">
               <div 
-                className="rounded-full border border-accent/20"
-                style={{
-                  width: '100%',
-                  height: '100%',
-                }}
+                className="w-full h-full rounded-full border border-accent/20"
               />
             </div>
 
-            {/* Layer 2: Rotating icon wrapper - same size as orbit, spins around shared center */}
+            {/* Layer 2: Rotating icon wrapper */}
             <div 
               className="absolute inset-0 animate-spin-slow"
               aria-hidden="true"
             >
-              {/* Icons positioned on the circumference using polar coordinates */}
               {[
-                { Icon: Code, label: "JavaScript" },
+                { Icon: Code, label: "JS" },
                 { Icon: Figma, label: "UI/UX" },
                 { Icon: Database, label: "SQL" },
                 { Icon: Globe, label: "React" },
-                { Icon: Server, label: "Node.js" },
+                { Icon: Server, label: "Node" },
                 { Icon: Layout, label: "CSS" },
-                { Icon: Monitor, label: "Responsive" },
-                { Icon: Laptop, label: "Next.js" },
+                { Icon: Monitor, label: "Web" },
+                { Icon: Laptop, label: "Next" },
                 { Icon: Github, label: "Git" },
-                { Icon: FileJson, label: "JSON" },
-                { Icon: Binary, label: "TypeScript" },
+                { Icon: FileJson, label: "API" },
+                { Icon: Binary, label: "TS" },
                 { Icon: Code, label: "HTML" },
               ].map((item, index) => {
                 const totalIcons = 12;
-                const angle = (2 * Math.PI * index) / totalIcons - Math.PI / 2; // Start from top
-                // Icons sit exactly on the orbit (50% radius from center)
-                const x = 50 + 50 * Math.cos(angle);
-                const y = 50 + 50 * Math.sin(angle);
+                const angle = (2 * Math.PI * index) / totalIcons - Math.PI / 2;
+                // Use CSS variable for orbit radius (tighter packing at 42%)
+                const radiusPercent = 42;
+                const x = 50 + radiusPercent * Math.cos(angle);
+                const y = 50 + radiusPercent * Math.sin(angle);
                 
                 return (
                   <div
                     key={`${item.label}-${index}`}
-                    className="absolute flex flex-col items-center justify-center 
-                      text-foreground/70 bg-background/90 shadow-sm backdrop-blur-sm rounded-full 
-                      hover:scale-110 hover:text-accent transition-all border border-border/40
-                      w-12 h-12 sm:w-14 sm:h-14 md:w-16 md:h-16 lg:w-18 lg:h-18
+                    className="orbit-icon absolute flex flex-col items-center justify-center 
+                      text-foreground/70 bg-background/95 shadow-md backdrop-blur-sm rounded-full 
+                      hover:scale-110 hover:text-accent transition-all border border-border/50
                       animate-spin-reverse"
                     style={{
                       left: `${x}%`,
                       top: `${y}%`,
                       transform: 'translate(-50%, -50%)',
+                      width: 'var(--icon-size)',
+                      height: 'var(--icon-size)',
                     }}
                   >
-                    <item.Icon size={isMobile ? 16 : 20} className="opacity-80" />
-                    <span className="mt-0.5 font-mono font-medium opacity-80 text-[7px] sm:text-[8px] md:text-[9px]">
+                    <item.Icon 
+                      style={{ width: 'var(--icon-lucide-size)', height: 'var(--icon-lucide-size)' }} 
+                      className="opacity-80" 
+                    />
+                    <span 
+                      className="mt-0.5 font-mono font-semibold opacity-80"
+                      style={{ fontSize: 'var(--icon-font-size)' }}
+                    >
                       {item.label}
                     </span>
                   </div>
@@ -136,28 +138,36 @@ const Hero = () => {
               })}
             </div>
 
-            {/* Layer 3: Center content - blob background + profile image */}
+            {/* Layer 3: Center blob + profile (larger, more prominent) */}
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-              {/* Blob gradient background */}
+              {/* Blob gradient background - slightly larger than image for glow effect */}
               <div 
-                className="absolute blob-shape bg-gradient-to-br from-accent/60 to-accent/30 animate-pulse filter blur-md
-                  w-[100px] h-[100px] sm:w-[120px] sm:h-[120px] md:w-[150px] md:h-[150px] lg:w-[170px] lg:h-[170px]"
-                style={{ animationDuration: '10s' }}
+                className="absolute blob-shape bg-gradient-to-br from-accent/50 to-accent/20 animate-pulse filter blur-lg"
+                style={{ 
+                  width: 'calc(var(--blob-size) + 20px)', 
+                  height: 'calc(var(--blob-size) + 20px)',
+                  animationDuration: '10s' 
+                }}
                 aria-hidden="true"
               />
               
-              {/* Profile image */}
-              <div className="relative z-10 overflow-hidden
-                w-[100px] h-[100px] sm:w-[120px] sm:h-[120px] md:w-[150px] md:h-[150px] lg:w-[170px] lg:h-[170px]">
-                <div className="blob-card w-full h-full border border-white/30 backdrop-blur-lg flex items-center justify-center overflow-hidden">
+              {/* Profile image - uses blob-size variable */}
+              <div 
+                className="relative z-10 overflow-hidden"
+                style={{
+                  width: 'var(--blob-size)',
+                  height: 'var(--blob-size)',
+                }}
+              >
+                <div className="blob-card w-full h-full border-2 border-white/40 backdrop-blur-lg flex items-center justify-center overflow-hidden shadow-xl">
                   <LazyImage
                     src="/profile-pic.png"
                     alt={`Professional portrait of ${siteContent.personal.name}, Full Stack Developer`}
                     className="w-full h-full object-cover"
                     priority={true}
-                    width={170}
-                    height={170}
-                    sizes="(max-width: 640px) 100px, (max-width: 768px) 120px, (max-width: 1024px) 150px, 170px"
+                    width={220}
+                    height={220}
+                    sizes="(max-width: 640px) 130px, (max-width: 768px) 160px, (max-width: 1024px) 190px, 220px"
                   />
                 </div>
               </div>
