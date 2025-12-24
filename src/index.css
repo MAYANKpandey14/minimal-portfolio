@@ -34,6 +34,14 @@
     --ring: 196 100% 45%;
 
     --radius: 0.5rem;
+
+    /* Orbit component responsive sizing - single source of truth */
+    --orbit-size: clamp(260px, 45vw, 480px);
+    --orbit-radius: 42%; /* Tighter packing - icons closer to center */
+    --icon-size: clamp(40px, 4vw, 64px);
+    --icon-font-size: clamp(6px, 0.8vw, 9px);
+    --icon-lucide-size: clamp(14px, 1.5vw, 20px);
+    --blob-size: clamp(130px, 22vw, 220px); /* Larger center blob */
   }
 
   * {
