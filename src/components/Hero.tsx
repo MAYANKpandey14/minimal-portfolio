@@ -27,7 +27,8 @@ const Hero = () => {
 
       <div className="max-w-6xl mx-auto w-full">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          <div className={cn("space-y-6", mounted && "animate-fade-up")}>
+          {/* Text section - order-2 on mobile, order-1 on md+ */}
+          <div className={cn("space-y-6 order-2 md:order-1", mounted && "animate-fade-up")}>
             <div className="inline-block">
               <span className="badge font-mono text-xs tracking-wider" role="status">Available for hire</span>
             </div>
@@ -63,10 +64,10 @@ const Hero = () => {
             </div>
           </div>
 
-          {/* Tech visualization container - uses CSS variables for responsive sizing */}
+          {/* Tech visualization container - order-1 on mobile, order-2 on md+ */}
           <div 
             className={cn(
-              "relative opacity-0 transition-opacity duration-1000 delay-300 mx-auto",
+              "relative opacity-0 transition-opacity duration-1000 delay-300 mx-auto order-1 md:order-2",
               mounted && "opacity-100"
             )}
             style={{
