@@ -75,10 +75,11 @@ const Hero = () => {
             }}
             aria-label="Technology skills visualization with profile picture"
           >
-            {/* Layer 1: Orbit ring - sized to container */}
+            {/* Layer 1: Orbit ring - sized to match icon orbit radius (84% = 2 × 42%) */}
             <div className="absolute inset-0 flex items-center justify-center" aria-hidden="true">
               <div 
-                className="w-full h-full rounded-full border border-accent/20"
+                className="rounded-full border border-accent/30"
+                style={{ width: '84%', height: '84%' }}
               />
             </div>
 
