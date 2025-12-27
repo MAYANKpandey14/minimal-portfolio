@@ -116,7 +116,7 @@ const Hero = () => {
                     className="orbit-icon absolute flex flex-col items-center justify-center 
                       text-foreground/70 bg-background/95 shadow-md backdrop-blur-sm rounded-full 
                       hover:scale-110 hover:text-accent transition-all border border-border/50
-                      animate-spin-reverse"
+                      animate-spin-reverse gap-0.5"
                     style={{
                       left: `${x}%`,
                       top: `${y}%`,
@@ -130,7 +130,7 @@ const Hero = () => {
                       className="opacity-80"
                     />
                     <span
-                      className="mt-0.5 font-mono font-semibold opacity-80"
+                      className="font-mono font-semibold opacity-80 leading-none"
                       style={{ fontSize: 'var(--icon-font-size)' }}
                     >
                       {item.label}

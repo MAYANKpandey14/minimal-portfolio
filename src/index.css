@@ -39,10 +39,10 @@
     --orbit-size: clamp(260px, 45vw, 520px);
     --orbit-radius: 42%;
     /* Tighter packing - icons closer to center */
-    --icon-size: clamp(42px, 5vw, 80px);
+    --icon-size: clamp(40px, 5vw, 70px);
     /* Larger icons for bigger screens */
-    --icon-font-size: clamp(7px, 1vw, 11px);
-    --icon-lucide-size: clamp(16px, 2vw, 28px);
+    --icon-font-size: clamp(5px, 1vw, 10px);
+    --icon-lucide-size: clamp(14px, 2vw, 26px);
     --blob-size: clamp(130px, 22vw, 240px);
     /* Larger center blob */
   }
