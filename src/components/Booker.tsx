@@ -23,7 +23,7 @@ export default function Booker({
             cal("ui", {
                 "theme": "light",
                 "cssVarsPerTheme": {
-                    "light": { "cal-brand": "#fafafa" },
+                    "light": { "cal-brand": "#000000" },
                     "dark": { "cal-brand": "#292929" }
                 },
                 "hideEventTypeDetails": false,
