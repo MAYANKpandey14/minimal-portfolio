@@ -65,7 +65,7 @@ const Hero = () => {
           </div>
 
           {/* Tech visualization container - order-1 on mobile, order-2 on md+ */}
-          <div 
+          <div
             className={cn(
               "relative opacity-0 transition-opacity duration-1000 delay-300 mx-auto order-1 md:order-2",
               mounted && "opacity-100"
@@ -78,14 +78,14 @@ const Hero = () => {
           >
             {/* Layer 1: Orbit ring - sized to match icon orbit radius (84% = 2 × 42%) */}
             <div className="absolute inset-0 flex items-center justify-center" aria-hidden="true">
-              <div 
+              <div
                 className="rounded-full border border-accent/30"
                 style={{ width: '84%', height: '84%' }}
               />
             </div>
 
             {/* Layer 2: Rotating icon wrapper */}
-            <div 
+            <div
               className="absolute inset-0 animate-spin-slow"
               aria-hidden="true"
             >
@@ -109,7 +109,7 @@ const Hero = () => {
                 const radiusPercent = 42;
                 const x = 50 + radiusPercent * Math.cos(angle);
                 const y = 50 + radiusPercent * Math.sin(angle);
-                
+
                 return (
                   <div
                     key={`${item.label}-${index}`}
@@ -125,11 +125,11 @@ const Hero = () => {
                       height: 'var(--icon-size)',
                     }}
                   >
-                    <item.Icon 
-                      style={{ width: 'var(--icon-lucide-size)', height: 'var(--icon-lucide-size)' }} 
-                      className="opacity-80" 
+                    <item.Icon
+                      style={{ width: 'var(--icon-lucide-size)', height: 'var(--icon-lucide-size)' }}
+                      className="opacity-80"
                     />
-                    <span 
+                    <span
                       className="mt-0.5 font-mono font-semibold opacity-80"
                       style={{ fontSize: 'var(--icon-font-size)' }}
                     >
@@ -143,25 +143,25 @@ const Hero = () => {
             {/* Layer 3: Center blob + profile (larger, more prominent) */}
             <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
               {/* Blob gradient background - slightly larger than image for glow effect */}
-              <div 
+              <div
                 className="absolute blob-shape bg-gradient-to-br from-accent/50 to-accent/20 animate-pulse filter blur-lg"
-                style={{ 
-                  width: 'calc(var(--blob-size) + 20px)', 
+                style={{
+                  width: 'calc(var(--blob-size) + 20px)',
                   height: 'calc(var(--blob-size) + 20px)',
-                  animationDuration: '10s' 
+                  animationDuration: '10s'
                 }}
                 aria-hidden="true"
               />
-              
+
               {/* Profile image - uses blob-size variable */}
-              <div 
+              <div
                 className="relative z-10 overflow-hidden"
                 style={{
                   width: 'var(--blob-size)',
                   height: 'var(--blob-size)',
                 }}
               >
-                <div className="blob-card w-full h-full border-2 border-white/40 backdrop-blur-lg flex items-center justify-center overflow-hidden shadow-xl">
+                <div className="blob-card w-full h-full border-2 border-white/40 backdrop-blur-lg flex items-center justify-center overflow-hidden">
                   <LazyImage
                     src="/profile-pic.png"
                     alt={`Professional portrait of ${siteContent.personal.name}, Full Stack Developer`}
