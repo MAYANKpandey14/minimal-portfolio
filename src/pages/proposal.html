@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopify Website Proposal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        display: ['Instrument Serif', 'serif'],
+                    },
+                    colors: {
+                        primary: 'var(--color-primary)',
+                        secondary: 'var(--color-secondary)',
+                        accent: 'var(--color-accent)',
+                        paper: 'var(--color-paper)',
+                        card: 'var(--color-card)',
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        :root {
+            --color-primary: #ffffff;
+            --color-secondary: #a1a1aa;
+            --color-accent: #27272a;
+            --color-paper: #09090b;
+            --color-card: #18181b;
+        }
+
+        body {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        .section-fade {
+            animation: fadeIn 0.8s ease-out forwards;
+            opacity: 0;
+            transform: translateY(10px);
+        }
+
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .delay-100 {
+            animation-delay: 100ms;
+        }
+
+        .delay-200 {
+            animation-delay: 200ms;
+        }
+
+        .delay-300 {
+            animation-delay: 300ms;
+        }
+
+        @media print {
+            @page {
+                margin: 10mm;
+            }
+
+            html {
+                background-color: var(--color-paper) !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            body {
+                margin: 0 !important;
+                padding: 0 !important;
+                background-color: var(--color-paper) !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            * {
+                box-sizing: border-box !important;
+                -webkit-print-color-adjust: exact !important;
+                print-color-adjust: exact !important;
+            }
+
+            /* Wrapper padding for visual margins */
+            header.max-w-4xl,
+            main.max-w-4xl {
+                max-width: 100% !important;
+                padding-left: 20mm !important;
+                /* 2cm generic margin */
+                padding-right: 20mm !important;
+            }
+
+            header {
+                padding-top: 10mm !important;
+                /* Reduced from 15mm */
+                padding-bottom: 5mm !important;
+                /* Reduced from 1cm */
+                margin-bottom: 5mm !important;
+            }
+
+            main {
+                padding-bottom: 1.5cm !important;
+                padding-top: 0 !important;
+            }
+
+            /* Spacing adjustments for Print - simpler and cleaner */
+            .pt-20 {
+                padding-top: 1.5rem !important;
+            }
+
+            .pb-12 {
+                padding-bottom: 2rem !important;
+            }
+
+            /* Tighten Grid */
+            .gap-y-16 {
+                row-gap: 2rem !important;
+            }
+
+            /* Typography */
+            h1 {
+                font-size: 2.5rem !important;
+                line-height: 1.1 !important;
+                margin-bottom: 1rem !important;
+            }
+
+            h2 {
+                margin-top: 0 !important;
+                /* Remove extra top margin on h2, section spacing handles it */
+            }
+
+            /* FIX: Reduce gap between header and first section */
+            .space-y-24>*:first-child {
+                margin-top: 0 !important;
+            }
+
+            .space-y-24>*+* {
+                margin-top: 1.5cm !important;
+                /* Reduced from 2cm */
+            }
+
+            /* Snapshot card styling fix - PREVENT OVERFLOW */
+            header .bg-card {
+                padding: 1rem !important;
+                border: 1px solid var(--color-accent) !important;
+                width: 280px !important;
+                /* Fixed width to prevent overflow */
+                max-width: 280px !important;
+                flex-shrink: 0 !important;
+                break-inside: avoid !important;
+                page-break-inside: avoid !important;
+            }
+
+            /* Keep card text on single lines */
+            header .bg-card p,
+            header .bg-card span {
+                white-space: nowrap !important;
+                overflow: hidden !important;
+                text-overflow: ellipsis !important;
+            }
+
+            /* Card internal grid fix */
+            header .bg-card .grid-cols-2 {
+                display: grid !important;
+                grid-template-columns: repeat(2, 1fr) !important;
+                gap: 0.5rem !important;
+            }
+
+            header .flex-col.gap-4 {
+                gap: 0.75rem !important;
+            }
+
+            /* Ensure grids align perfectly like desktop */
+            .grid-cols-1.md\:grid-cols-2 {
+                display: grid !important;
+                grid-template-columns: repeat(2, 1fr) !important;
+                column-gap: 2.5rem !important;
+            }
+
+            /* Restore Utility Spacing */
+            .mb-10 {
+                margin-bottom: 1rem !important;
+            }
+
+            /* Specific fix for the 'A', 'B', 'C' circles to align with text */
+            .flex.items-center.gap-3 {
+                align-items: center !important;
+                gap: 0.75rem !important;
+            }
+
+            .w-8.h-8 {
+                width: 2rem !important;
+                height: 2rem !important;
+                min-width: 2rem !important;
+            }
+
+            /* Layout Fixes - Force desktop layout in print */
+            .md\:flex-row {
+                flex-direction: row !important;
+            }
+
+            /* Header main wrapper only - force row layout */
+            header>div.flex.justify-between {
+                display: flex !important;
+                flex-direction: row !important;
+                justify-content: space-between !important;
+                align-items: flex-start !important;
+                gap: 2rem !important;
+            }
+
+            /* IMPORTANT: Preserve the card's internal column layout */
+            header .bg-card>div.flex-col,
+            header .bg-card .flex.flex-col {
+                display: flex !important;
+                flex-direction: column !important;
+                gap: 0.75rem !important;
+            }
+
+            /* Ensure all divs inside cards stay column */
+            header .bg-card div {
+                flex-direction: column !important;
+            }
+
+            /* But the grid inside card stays grid */
+            header .bg-card .grid {
+                display: grid !important;
+                flex-direction: unset !important;
+            }
+
+            .gap-8 {
+                gap: 1.5rem !important;
+            }
+
+            .gap-12,
+            .gap-x-12 {
+                gap: 1.5rem !important;
+            }
+
+            /* Grid adjustments */
+            .md\:grid-cols-2 {
+                display: grid !important;
+                grid-template-columns: repeat(2, 1fr) !important;
+            }
+
+            /* FIX: Snapshot card sizing - make it fit properly */
+            header .w-full.md\:w-auto,
+            header .min-w-\[280px\] {
+                width: 250px !important;
+                min-width: 250px !important;
+                max-width: 250px !important;
+                flex-shrink: 0 !important;
+            }
+
+            /* Ensure card internal grid works */
+            header .grid.grid-cols-2 {
+                display: grid !important;
+                grid-template-columns: 1fr 1fr !important;
+                gap: 1rem !important;
+            }
+
+            /* Breakpoints control */
+            .bg-card,
+            li,
+            .grid>div {
+                break-inside: avoid !important;
+                page-break-inside: avoid !important;
+            }
+
+            .print-no-break {
+                break-inside: avoid !important;
+                page-break-inside: avoid !important;
+            }
+
+            section {
+                break-inside: auto !important;
+            }
+
+            /* Page breaks for specific sections */
+            .break-before {
+                break-before: page !important;
+                page-break-before: always !important;
+                margin-top: 0 !important;
+                padding-top: 1.5cm !important;
+            }
+
+            /* Hide non-print elements */
+            .no-print {
+                display: none !important;
+            }
+
+            /* Animation Reset for print */
+            .section-fade {
+                animation: none !important;
+                opacity: 1 !important;
+                transform: none !important;
+                transition: none !important;
+            }
+
+            /* Print Colors */
+            .bg-paper {
+                background-color: var(--color-paper) !important;
+            }
+
+            .bg-card {
+                background-color: var(--color-card) !important;
+            }
+
+            .bg-accent {
+                background-color: var(--color-accent) !important;
+            }
+
+            .text-primary {
+                color: var(--color-primary) !important;
+            }
+
+            .text-secondary {
+                color: var(--color-secondary) !important;
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-paper text-primary font-sans selection:bg-zinc-500 selection:text-white pb-20">
+
+    <!-- Proposal Content Wrapper for PDF Export -->
+    <div id="proposal-content">
+
+        <!-- Header / Cover -->
+        <header class="max-w-4xl mx-auto pt-28 pb-12 px-6 md:px-12 section-fade">
+            <div class="flex justify-between items-start flex-col md:flex-row gap-8">
+                <div>
+                    <p class="text-sm tracking-widest uppercase text-secondary font-medium mb-4">Web Development
+                        Proposal
+                    </p>
+                    <h1
+                        class="font-display text-5xl md:text-6xl font-bold leading-tight tracking-tight text-primary mb-6">
+                        Shopify Store <br>
+                        <span class="text-secondary opacity-60">Development.</span>
+                    </h1>
+                    <div class="flex flex-col gap-1 text-sm text-secondary">
+                        <p>Date: <span class="text-primary font-medium">January 14, 2026</span></p>
+                        <p>Valid Until: <span class="text-primary font-medium">February 14, 2026</span></p>
+                        <a href="https://mayankpandey.vercel.app" target="_blank"
+                            class="mt-2 block font-display text-lg text-secondary hover:text-primary transition-colors italic opacity-70 hover:opacity-100">
+                            by Mayank Pandey
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Snapshot Card -->
+                <div class="bg-card border border-accent p-6 rounded-2xl shadow-sm w-full md:w-auto min-w-[280px]">
+                    <div class="flex flex-col gap-4">
+                        <div>
+                            <p class="text-xs text-secondary uppercase tracking-wider mb-1">Total Investment</p>
+                            <p class="font-display text-3xl font-bold">₹40,000</p>
+                            <p class="text-xs text-secondary">One-time Development Fee</p>
+                        </div>
+                        <div class="h-px bg-accent w-full"></div>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <p class="text-xs text-secondary uppercase tracking-wider mb-1">Timeline</p>
+                                <p class="font-medium">3-4 Weeks</p>
+                            </div>
+                            <div>
+                                <p class="text-xs text-secondary uppercase tracking-wider mb-1">Support</p>
+                                <p class="font-medium">Included</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <main class="max-w-4xl mx-auto px-6 md:px-12 space-y-24">
+
+            <!-- What's Included Grid -->
+            <section class="section-fade delay-100">
+                <h2 class="font-display text-3xl font-semibold mb-10 border-b border-accent pb-4">What's Included</h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16">
+
+                    <!-- A -->
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-3 mb-2">
+                            <span
+                                class="font-display text-xl font-bold bg-accent text-white w-8 h-8 flex items-center justify-center rounded-full">A</span>
+                            <h3 class="font-display text-xl font-medium">Platform & Store Setup</h3>
+                        </div>
+                        <ul class="space-y-3 text-secondary pl-2">
+                            <li class="flex gap-3 text-sm leading-relaxed"><i data-lucide="check"
+                                    class="w-4 h-4 mt-1 text-white"></i>Shopify Basic Plan integration and configuration
+                            </li>
+                            <li class="flex gap-3 text-sm leading-relaxed"><i data-lucide="check"
+                                    class="w-4 h-4 mt-1 text-white"></i>Store domain setup assistance (domain purchased
+                                separately)</li>
+                            <li class="flex gap-3 text-sm leading-relaxed"><i data-lucide="check"
+                                    class="w-4 h-4 mt-1 text-white"></i>Complete store configuration & optimization</li>
+                            <li class="flex gap-3 text-sm leading-relaxed"><i data-lucide="check"
+                                    class="w-4 h-4 mt-1 text-white"></i>SSL/HTTPS security implementation</li>
+                            <li class="flex gap-3 text-sm leading-relaxed"><i data-lucide="check"
+                                    class="w-4 h-4 mt-1 text-white"></i>Backup & disaster recovery setup</li>
+                        </ul>
+                    </div>
+
+                    <!-- B -->
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-3 mb-2">
+                            <span
+                                class="font-display text-xl font-bold bg-accent text-white w-8 h-8 flex items-center justify-center rounded-full">B</span>
+                            <h3 class="font-display text-xl font-medium">Website Design & Branding</h3>
+                        </div>
+                        <ul class="space-y-3 text-secondary pl-2">
+                            <li class="flex gap-3 text-sm leading-relaxed"><i data-lucide="check"
+                                    class="w-4 h-4 mt-1 text-white"></i>Minimal, clean design optimized for conversions
+                            </li>
+                            <li class="flex gap-3 text-sm leading-relaxed"><i data-lucide="check"
+                                    class="w-4 h-4 mt-1 text-white"></i>Fully mobile-responsive layout (tested on all
+                                devices)</li>
+                            <li class="flex gap-3 text-sm leading-relaxed"><i data-lucide="check"
+                                    class="w-4 h-4 mt-1 text-white"></i>Logo integration & professional typography</li>
+                            <li class="flex gap-3 text-sm leading-relaxed"><i data-lucide="check"
+                                    class="w-4 h-4 mt-1 text-white"></i><strong>5-7 Essential Pages:</strong> Home,
+                                Products, About, Contact, Policies</li>
+                            <li class="flex gap-3 text-sm leading-relaxed"><i data-lucide="check"
+                                    class="w-4 h-4 mt-1 text-white"></i>Product gallery with image optimization</li>
+                        </ul>
+                    </div>
+
+                </div>
+                <!-- End first grid (A, B) -->
+
+                <!-- Second grid (C, D, E, F) - starts on new page -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-16 break-before">
+
+                    <!-- C -->
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-3 mb-2">
+                            <span
+                                class="font-display text-xl font-bold bg-accent text-white w-8 h-8 flex items-center justify-center rounded-full">C</span>
+                            <h3 class="font-display text-xl font-medium">E-Commerce Functionality</h3>
+                        </div>
+                        <ul class="space-y-3 text-secondary pl-2">
+                            <li class="flex gap-3 text-sm leading-relaxed"><i data-lucide="check"
+                                    class="w-4 h-4 mt-1 text-white"></i>Product catalog setup (up to 50 products)</li>
+                            <li class="flex gap-3 text-sm leading-relaxed"><i data-lucide="check"
+                                    class="w-4 h-4 mt-1 text-white"></i>Organization into 5 collections/categories</li>
+                            <li class="flex gap-3 text-sm leading-relaxed"><i data-lucide="check"
+                                    class="w-4 h-4 mt-1 text-white"></i>Advanced shopping cart with persistent storage
+                            </li>
+                            <li class="flex gap-3 text-sm leading-relaxed"><i data-lucide="check"
+                                    class="w-4 h-4 mt-1 text-white"></i>Automated confirmation emails & Inventory
+                                tracking
+                            </li>
+                            <li class="flex gap-3 text-sm leading-relaxed"><i data-lucide="check"
+                                    class="w-4 h-4 mt-1 text-white"></i>Review & rating system implementation</li>
+                        </ul>
+                    </div>
+
+                    <!-- D -->
+                    <div class="space-y-4">
+                        <div class="flex items-center gap-3 mb-2">
+                            <span
+                                class="font-display text-xl font-bold bg-accent text-white w-8 h-8 flex items-center justify-center rounded-full">D</span>
+                            <h3 class="font-display text-xl font-medium">WhatsApp for Payment & Support</h3>
+                        </div>
+                        <ul class="space-y-3 text-secondary pl-2">
+                            <li class="flex gap-3 text-sm leading-relaxed"><i data-lucide="check"
+                                    class="w-4 h-4 mt-1 text-white"></i>Floating "Chat with Us" WhatsApp button</li>
+                            <li class="flex gap-3 text-sm leading-relaxed"><i data-lucide="check"
+                                    class="w-4 h-4 mt-1 text-white"></i>Direct "Inquire on WhatsApp" link on product
+                                pages</li>
+                            <li class="flex gap-3 text-sm leading-relaxed"><i data-lucide="check"
+                                    class="w-4 h-4 mt-1 text-white"></i>Direct customer support communication channel
+                            </li>
+                            <li class="flex gap-3 text-sm leading-relaxed"><i data-lucide="check"
+                                    class="w-4 h-4 mt-1 text-white"></i>Payment collection via WhatsApp (UPI/QR Code
+                                sharing)</li>
+                            <li class="flex gap-3 text-sm leading-relaxed"><i data-lucide="check"
+                                    class="w-4 h-4 mt-1 text-white"></i>Manual order confirmation & receipt generation
+                            </li>
+                            <li class="flex gap-3 text-sm leading-relaxed"><i data-lucide="info"
+                                    class="w-4 h-4 mt-1 text-white"></i>Can be upgraded and automated easily in future
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- E - Full width section -->
+                    <div class="space-y-4 col-span-1 md:col-span-2 pt-8 border-t border-accent">
+                        <div class="flex items-center gap-3 mb-4">
+                            <span
+                                class="font-display text-xl font-bold bg-accent text-white w-8 h-8 flex items-center justify-center rounded-full">E</span>
+                            <h3 class="font-display text-xl font-medium">Additional Features</h3>
+                        </div>
+                        <ul class="grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-3 text-secondary pl-2">
+                            <li class="flex gap-3 text-sm leading-relaxed"><i data-lucide="check"
+                                    class="w-4 h-4 mt-1 text-white"></i>SEO optimization (meta tags, descriptions)</li>
+                            <li class="flex gap-3 text-sm leading-relaxed"><i data-lucide="check"
+                                    class="w-4 h-4 mt-1 text-white"></i>XML sitemap generation</li>
+                            <li class="flex gap-3 text-sm leading-relaxed"><i data-lucide="check"
+                                    class="w-4 h-4 mt-1 text-white"></i>Mobile performance optimization</li>
+                            <li class="flex gap-3 text-sm leading-relaxed"><i data-lucide="check"
+                                    class="w-4 h-4 mt-1 text-white"></i>Basic security audit</li>
+                        </ul>
+                    </div>
+
+                </div>
+            </section>
+
+            <!-- Implementation Timeline -->
+            <section class="section-fade delay-200 break-before">
+                <h2 class="font-display text-3xl font-semibold mb-10 border-b border-accent pb-4">Implementation
+                    Timeline
+                </h2>
+
+                <div class="relative border-l border-accent ml-4 space-y-12">
+
+                    <!-- Week 1 -->
+                    <div class="relative pl-8">
+                        <div class="absolute -left-1.5 top-2 w-3 h-3 bg-white rounded-full ring-4 ring-paper"></div>
+                        <h3 class="font-display text-lg font-medium mb-1">Week 1: Planning & Setup</h3>
+                        <p class="text-sm text-secondary mb-3">Foundational work and configuration.</p>
+                        <ul class="space-y-2">
+                            <li class="text-sm text-secondary grid grid-cols-[80px_1fr] gap-4">
+                                <span class="font-medium text-white">Day 1-2</span>
+                                <span>Project kickoff & requirements validation</span>
+                            </li>
+                            <li class="text-sm text-secondary grid grid-cols-[80px_1fr] gap-4">
+                                <span class="font-medium text-white">Day 3-4</span>
+                                <span>Domain registration & Shopify store creation</span>
+                            </li>
+                            <li class="text-sm text-secondary grid grid-cols-[80px_1fr] gap-4">
+                                <span class="font-medium text-white">Day 5</span>
+                                <span>Theme selection & configuration</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Week 2 -->
+                    <div class="relative pl-8">
+                        <div class="absolute -left-1.5 top-2 w-3 h-3 bg-zinc-600 rounded-full ring-4 ring-paper"></div>
+                        <h3 class="font-display text-lg font-medium mb-1">Week 2: Design & Product Setup</h3>
+                        <p class="text-sm text-secondary mb-3">Content integration and visual design.</p>
+                        <ul class="space-y-2">
+                            <li class="text-sm text-secondary grid grid-cols-[80px_1fr] gap-4">
+                                <span class="font-medium text-white">Day 6-7</span>
+                                <span>Page creation (Home, Policies, Contact)</span>
+                            </li>
+                            <li class="text-sm text-secondary grid grid-cols-[80px_1fr] gap-4">
+                                <span class="font-medium text-white">Day 8-9</span>
+                                <span>Product upload & collection organization</span>
+                            </li>
+                            <li class="text-sm text-secondary grid grid-cols-[80px_1fr] gap-4">
+                                <span class="font-medium text-white">Day 10</span>
+                                <span>WhatsApp Chat button configuration</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Week 3 -->
+                    <div class="relative pl-8">
+                        <div class="absolute -left-1.5 top-2 w-3 h-3 bg-zinc-600 rounded-full ring-4 ring-paper"></div>
+                        <h3 class="font-display text-lg font-medium mb-1">Week 3: Integration & Launch</h3>
+                        <p class="text-sm text-secondary mb-3">Testing, training and deployment.</p>
+                        <ul class="space-y-2">
+                            <li class="text-sm text-secondary grid grid-cols-[80px_1fr] gap-4">
+                                <span class="font-medium text-white">Day 11-12</span>
+                                <span>Payment gateway setup & checkout testing</span>
+                            </li>
+                            <li class="text-sm text-secondary grid grid-cols-[80px_1fr] gap-4">
+                                <span class="font-medium text-white">Day 13</span>
+                                <span>QA & End-to-end testing</span>
+                            </li>
+                            <li class="text-sm text-secondary grid grid-cols-[80px_1fr] gap-4">
+                                <span class="font-medium text-white">Day 14-15</span>
+                                <span>Training, Handover & Live Deployment</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Financial Structure -->
+            <section class="section-fade delay-300">
+                <h2 class="font-display text-3xl font-semibold mb-10 border-b border-accent pb-4">Financial Structure
+                </h2>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <!-- Development Fee -->
+                    <div
+                        class="bg-card p-6 rounded-2xl border border-accent shadow-sm flex flex-col justify-between print-no-break">
+                        <div>
+                            <div class="flex justify-between items-start mb-6">
+                                <h3 class="font-display text-lg font-medium text-primary">Development Fee</h3>
+                                <span
+                                    class="bg-white text-black text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wider">One-Time</span>
+                            </div>
+
+                            <div class="space-y-4">
+                                <div class="flex justify-between items-center text-sm group">
+                                    <span class="text-secondary group-hover:text-primary transition-colors">Shopify
+                                        Store
+                                        Setup & Dev</span>
+                                    <span class="font-medium">₹40,000</span>
+                                </div>
+                                <div class="flex justify-between items-center text-sm group">
+                                    <span
+                                        class="text-secondary group-hover:text-primary transition-colors">Implementation
+                                        &
+                                        Integration</span>
+                                    <span
+                                        class="font-medium text-primary bg-accent px-2 py-0.5 rounded text-xs">Included</span>
+                                </div>
+                                <div class="flex justify-between items-center text-sm group">
+                                    <span class="text-secondary group-hover:text-primary transition-colors">30-Day
+                                        Post-Launch Support</span>
+                                    <span
+                                        class="font-medium text-primary bg-accent px-2 py-0.5 rounded text-xs">Included</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div>
+                            <div class="h-px bg-accent my-6"></div>
+                            <div class="flex justify-between items-end">
+                                <div>
+                                    <span
+                                        class="text-xs text-secondary uppercase tracking-wider font-medium block mb-1">Total
+                                        Investment</span>
+                                    <span class="text-[10px] text-zinc-500">Taxes may apply</span>
+                                </div>
+                                <span class="font-display font-bold text-3xl">₹40,000</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Recurring Costs -->
+                    <div
+                        class="bg-paper p-6 rounded-2xl border-2 border-dashed border-accent relative group hover:border-zinc-700 transition-colors">
+                        <div
+                            class="absolute top-0 right-0 p-6 opacity-5 group-hover:opacity-10 transition-opacity pointer-events-none">
+                            <i data-lucide="refresh-cw" class="w-24 h-24 text-white"></i>
+                        </div>
+
+                        <div class="mb-6">
+                            <h3 class="font-display text-lg font-medium mb-1 text-primary">Recurring Monthly Costs</h3>
+                            <p class="text-xs font-medium text-secondary uppercase tracking-wider">(Client
+                                Responsibility)
+                            </p>
+                        </div>
+
+                        <div class="space-y-5 relative z-10">
+                            <!-- Item 1 -->
+                            <div class="flex justify-between items-start text-sm">
+                                <div class="flex gap-3">
+                                    <div class="mt-0.5 bg-card p-1.5 rounded-lg border border-accent shadow-sm h-fit">
+                                        <i data-lucide="server" class="w-3.5 h-3.5 text-secondary"></i>
+                                    </div>
+                                    <div>
+                                        <span class="font-bold text-primary block text-sm">Shopify Basic Plan</span>
+                                        <span class="text-[10px] text-secondary mt-0.5 block">Hosting, SSL, CDN
+                                            included</span>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <span class="font-bold text-primary block">₹20<span
+                                            class="text-[10px] font-normal text-secondary">/mo</span></span>
+                                    <span class="text-[10px] text-secondary">then ₹1,994/mo</span>
+                                </div>
+                            </div>
+
+                            <!-- Item 2 -->
+                            <div class="flex justify-between items-start text-sm">
+                                <div class="flex gap-3">
+                                    <div class="mt-0.5 bg-card p-1.5 rounded-lg border border-accent shadow-sm h-fit">
+                                        <i data-lucide="globe" class="w-3.5 h-3.5 text-secondary"></i>
+                                    </div>
+                                    <div>
+                                        <span class="font-bold text-primary block text-sm">Domain Name</span>
+                                        <span class="text-[10px] text-secondary mt-0.5 block">Annual renewal cost</span>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <span class="font-bold text-primary block">~₹250<span
+                                            class="text-[10px] font-normal text-secondary">/mo</span></span>
+                                    <span class="text-[10px] text-secondary">billed yearly (~₹3k)</span>
+                                </div>
+                            </div>
+
+                            <!-- Total Box -->
+                            <div
+                                class="bg-card rounded-xl p-4 border border-accent shadow-sm mt-2 relative overflow-hidden">
+                                <div
+                                    class="absolute right-0 top-0 w-16 h-16 bg-gradient-to-br from-transparent to-zinc-800 rounded-bl-full -mr-4 -mt-4">
+                                </div>
+                                <div class="flex justify-between items-center mb-1 relative z-10">
+                                    <span class="text-xs uppercase tracking-wider text-secondary font-bold">Est. Monthly
+                                        Total</span>
+                                    <span class="font-display font-bold text-xl text-primary">~₹2,250<span
+                                            class="text-sm text-secondary font-normal">/mo</span></span>
+                                </div>
+                                <p class="text-[10px] text-secondary leading-tight relative z-10">* Standard rates apply
+                                    after promotional period.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Terms & Next Steps -->
+            <section class="grid grid-cols-1 md:grid-cols-2 gap-12 section-fade break-before">
+                <!-- Terms -->
+                <div>
+                    <h2 class="font-display text-2xl font-semibold mb-6 border-b border-accent pb-4">Terms & Conditions
+                    </h2>
+                    <div class="space-y-6">
+                        <div>
+                            <h4 class="font-medium text-sm mb-2 text-primary">Payment Terms</h4>
+                            <p class="text-sm text-secondary leading-relaxed">Development begins upon receipt of 50%
+                                advance
+                                payment. The final 50% is due before the store goes live.</p>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-sm mb-2 text-primary">Content & Assets</h4>
+                            <p class="text-sm text-secondary leading-relaxed">Client to provide logo, product
+                                images/descriptions, and branding guidelines. Timeline assumes timely feedback.</p>
+                        </div>
+                        <div>
+                            <h4 class="font-medium text-sm mb-2 text-primary">Revisions</h4>
+                            <p class="text-sm text-secondary leading-relaxed">Unlimited design revisions during dev. Up
+                                to 5
+                                rounds of major changes. Additional revisions at ₹2,000/round.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Next Steps -->
+                <div>
+                    <h2 class="font-display text-2xl font-semibold mb-6 border-b border-accent pb-4">Next Steps</h2>
+                    <div class="space-y-0">
+                        <div class="flex gap-4 pb-6 border-l border-accent pl-6 relative">
+                            <div class="absolute -left-[5px] top-1 w-2.5 h-2.5 bg-white rounded-full"></div>
+                            <div>
+                                <h4 class="font-medium text-sm text-primary">1. Review & Approval</h4>
+                                <p class="text-sm text-secondary mt-1">Review this proposal and ask any questions
+                                    regarding
+                                    scope.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4 pb-6 border-l border-accent pl-6 relative">
+                            <div class="absolute -left-[5px] top-1 w-2.5 h-2.5 bg-zinc-600 rounded-full"></div>
+                            <div>
+                                <h4 class="font-medium text-sm text-primary">2. Agreement & Payment</h4>
+                                <p class="text-sm text-secondary mt-1">Sign proposal and submit 50% advance payment.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4 pb-6 border-l border-accent pl-6 relative">
+                            <div class="absolute -left-[5px] top-1 w-2.5 h-2.5 bg-zinc-600 rounded-full"></div>
+                            <div>
+                                <h4 class="font-medium text-sm text-primary">3. Kickoff & Development</h4>
+                                <p class="text-sm text-secondary mt-1">We schedule requirements gathering and begin the
+                                    3-4
+                                    week build.</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-4 border-l border-transparent pl-6 relative">
+                            <div class="absolute -left-[5px] top-1 w-2.5 h-2.5 bg-zinc-600 rounded-full"></div>
+                            <div>
+                                <h4 class="font-medium text-sm text-primary">4. Launch</h4>
+                                <p class="text-sm text-secondary mt-1">Go-live followed by 30 days of included support.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Footer / Contact -->
+            <footer class="mt-24 pt-12 border-t border-accent section-fade">
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-end">
+                    <div>
+                        <h2 class="font-display text-3xl font-semibold mb-4">Ready to start?</h2>
+                        <p class="text-secondary mb-8 max-w-sm text-sm">Thank you for considering our proposal. We're
+                            excited to help scale your business through a professional e-commerce presence.</p>
+
+                        <div class="space-y-2">
+                            <div class="flex items-center gap-2 text-sm">
+                                <i data-lucide="map-pin" class="w-4 h-4 text-zinc-500"></i>
+                                <span>Moradabad, Uttar Pradesh, India</span>
+                            </div>
+                            <a href="mailto:mayankpandeyofficial404@gmail.com"
+                                class="flex items-center gap-2 text-sm hover:text-white transition-colors">
+                                <i data-lucide="mail" class="w-4 h-4 text-zinc-500"></i>
+                                <span>mayankpandeyofficial404@gmail.com</span>
+                            </a>
+                            <a href="tel:+917505728099"
+                                class="flex items-center gap-2 text-sm hover:text-white transition-colors">
+                                <i data-lucide="phone" class="w-4 h-4 text-zinc-500"></i>
+                                <span>+91 7505728099</span>
+                            </a>
+                            <a href="https://mayankpandey.vercel.app" target="_blank" rel="noopener noreferrer"
+                                class="flex items-center gap-2 text-sm hover:text-white transition-colors">
+                                <i data-lucide="globe" class="w-4 h-4 text-zinc-500"></i>
+                                <span>mayankpandey.vercel.app</span>
+                            </a>
+                        </div>
+
+
+                    </div>
+
+                    <div class="flex justify-start md:justify-end">
+                        <div class="text-right">
+                            <p class="text-xs text-zinc-500 mb-2">Valid for 30 days from issuance</p>
+                            <button onclick="window.print()"
+                                class="no-print bg-card border border-accent text-primary px-8 py-3 rounded-xl font-medium text-sm hover:bg-accent transition-all flex items-center gap-2 justify-center w-full md:w-auto">
+                                <i data-lucide="printer" class="w-4 h-4"></i>
+                                Print / Save as PDF
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+
+        </main>
+
+    </div> <!-- End proposal-content wrapper -->
+
+    <script>
+        lucide.createIcons();
+    </script>
+</body>
+
+</html>

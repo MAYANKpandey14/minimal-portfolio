@@ -11,6 +11,7 @@ import { trackWebVitals } from "@/lib/performance";
 import { useEffect } from "react";
 import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
+import Proposal from "./pages/Proposal";
 
 const queryClient = new QueryClient();
 
@@ -25,7 +26,7 @@ const App = () => {
       <QueryClientProvider client={queryClient}>
         <TooltipProvider>
           <BrowserRouter>
-            <SEOHead 
+            <SEOHead
               title={siteContent.seo.title}
               description={siteContent.seo.description}
               structuredData={siteContent.structuredData}
@@ -35,6 +36,7 @@ const App = () => {
             <Sonner />
             <Routes>
               <Route path="/" element={<Index />} />
+              <Route path="/proposal" element={<Proposal />} />
               {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
               <Route path="*" element={<NotFound />} />
             </Routes>
