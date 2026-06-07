@@ -10,10 +10,19 @@ import {
   Info
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import SEOHead from "@/components/optimized/SEOHead";
+import { siteContent } from "@/data/content";
 
 const Proposal = () => {
   return (
     <div className="min-h-screen bg-[#09090b] text-white font-sans selection:bg-zinc-500 selection:text-white pb-20 print:p-0">
+      <SEOHead
+        title={siteContent.proposalSeo.title}
+        description={siteContent.proposalSeo.description}
+        canonical={siteContent.proposalSeo.canonical}
+        structuredData={siteContent.proposalStructuredData}
+      />
+
       <style>{`
         @import url('https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&display=swap');
         
