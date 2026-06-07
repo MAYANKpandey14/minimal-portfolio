@@ -15,6 +15,13 @@ import { siteContent } from "@/data/content";
 const Index = () => {
   return (
     <div className="min-h-screen bg-background text-foreground overflow-hidden">
+      <SEOHead
+        title={siteContent.seo.title}
+        description={siteContent.seo.description}
+        canonical={`${siteContent.seo.siteUrl}/`}
+        structuredData={siteContent.structuredData}
+      />
+
       {/* Background subtle tech patterns */}
       <div className="fixed inset-0 -z-10" aria-hidden="true">
         <div className="absolute top-0 right-0 w-1/3 h-1/3 bg-gradient-to-b from-primary/5 to-transparent opacity-50 blur-3xl"></div>
