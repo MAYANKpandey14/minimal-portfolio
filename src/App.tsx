@@ -26,11 +26,6 @@ const App = () => {
       <QueryClientProvider client={queryClient}>
         <TooltipProvider>
           <BrowserRouter>
-            <SEOHead
-              title={siteContent.seo.title}
-              description={siteContent.seo.description}
-              structuredData={siteContent.structuredData}
-            />
             <SkipNavigation />
             <Toaster />
             <Sonner />
