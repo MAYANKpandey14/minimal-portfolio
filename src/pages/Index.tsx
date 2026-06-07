@@ -8,6 +8,9 @@ import HireMe from "@/components/HireMe";
 import Contact from "@/components/Contact";
 import Booker from "@/components/Booker";
 import Footer from "@/components/Footer";
+import SEOHead from "@/components/optimized/SEOHead";
+import { siteContent } from "@/data/content";
+
 
 const Index = () => {
   return (
