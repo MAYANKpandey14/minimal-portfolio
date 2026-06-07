@@ -5,7 +5,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ErrorBoundary from "@/components/optimized/ErrorBoundary";
 import SkipNavigation from "@/components/optimized/SkipNavigation";
-import SEOHead from "@/components/optimized/SEOHead";
+
 import { siteContent } from "@/data/content";
 import { trackWebVitals } from "@/lib/performance";
 import { useEffect } from "react";
