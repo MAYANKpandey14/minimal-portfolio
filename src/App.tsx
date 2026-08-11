@@ -5,6 +5,8 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import ErrorBoundary from "@/components/optimized/ErrorBoundary";
 import SkipNavigation from "@/components/optimized/SkipNavigation";
+import { Analytics } from "@vercel/analytics/react";
+import { SpeedInsights } from "@vercel/speed-insights/react";
 
 import { trackWebVitals } from "@/lib/performance";
 import { useEffect } from "react";
@@ -13,6 +15,7 @@ import Index from "./pages/Index";
 import NotFound from "./pages/NotFound";
 import Proposal from "./pages/Proposal";
 import CursorFollower from "@/components/CursorFollower";
+import ThemeToggle from "@/components/ThemeToggle";
 
 const queryClient = new QueryClient();
 
@@ -30,6 +33,7 @@ const App = () => {
             <BrowserRouter>
               <CursorFollower />
               <SkipNavigation />
+              <ThemeToggle />
               <Toaster />
               <Sonner />
               <Routes>
@@ -42,6 +46,8 @@ const App = () => {
           </TooltipProvider>
         </ThemeProvider>
       </QueryClientProvider>
+      <Analytics />
+      <SpeedInsights />
     </ErrorBoundary>
   );
 };
