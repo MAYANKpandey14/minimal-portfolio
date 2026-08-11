@@ -2,20 +2,43 @@
 export const siteContent = {
   personal: {
     name: "Mayank Pandey",
-    title: "Full Stack Developer",
-    tagline: "Building elegant digital solutions with a focus on efficiency and on-time delivery.",
+    title: "Freelance Web Designer & Developer",
+    tagline: "I build high-converting websites and web apps that help businesses establish their digital presence and scale online revenue.",
     email: "mayankpandeyofficial404@gmail.com",
     phone: "+91 7505728099",
     location: "India",
-    availability: "August 2024"
+    availability: "Available for Projects"
   },
   
   navigation: [
-    { href: "#about", label: "About", ariaLabel: "Learn more about me" },
-    { href: "#skills", label: "Skills", ariaLabel: "View my technical skills" },
-    { href: "#projects", label: "Projects", ariaLabel: "Browse my portfolio projects" },
-    { href: "#hire-me", label: "Hire Me", ariaLabel: "Information about hiring me" },
-    { href: "#contact", label: "Contact", ariaLabel: "Get in touch with me" }
+    { href: "#about", label: "About", ariaLabel: "Learn about my approach" },
+    { href: "#services", label: "Services", ariaLabel: "View web design and development services" },
+    { href: "#projects", label: "Projects", ariaLabel: "Browse client websites & case studies" },
+    { href: "#hire-me", label: "Why Me", ariaLabel: "Why hire me for your website" },
+    { href: "#contact", label: "Contact", ariaLabel: "Get a custom project estimate" }
+  ],
+
+  services: [
+    {
+      title: "Custom Web Design & Branding",
+      description: "Bespoke visual design that captures your brand's identity, engages visitors, and establishes digital authority.",
+      icon: "Figma"
+    },
+    {
+      title: "Full-Stack Web Development",
+      description: "Lightning-fast, scalable React & Node web applications engineered for sub-second load times and seamless UX.",
+      icon: "Code"
+    },
+    {
+      title: "SEO & Search Visibility",
+      description: "Optimized technical structure and search engine strategy to drive organic traffic and qualified customer leads.",
+      icon: "Globe"
+    },
+    {
+      title: "Conversion Rate Optimization",
+      description: "Frictionless user flows, clear CTAs, and engineered layouts designed to maximize leads, calls, and sales.",
+      icon: "Layout"
+    }
   ],
 
   social: {
@@ -25,9 +48,9 @@ export const siteContent = {
   },
 
   seo: {
-    title: "Mayank Pandey | Full Stack Developer",
-    description: "Full Stack Developer building fast, scalable React, TypeScript & Node.js apps with clean code and user-focused design.",
-    keywords: ["Full Stack Developer", "React Developer", "Node.js", "TypeScript", "Web Development", "JavaScript", "Frontend", "Backend"],
+    title: "Mayank Pandey | Freelance Web Designer & Developer",
+    description: "Freelance web designer & developer helping businesses establish digitally, scale online presence, and convert visitors into paying clients.",
+    keywords: ["Freelance Web Designer", "Web Developer", "High-Converting Websites", "React Developer", "UI/UX Design", "Business Growth", "Web Design India"],
     author: "Mayank Pandey",
     siteUrl: "https://mayankpandey-portfolio.lovable.app"
   },
@@ -45,8 +68,8 @@ export const siteContent = {
         "@type": "Person",
         "@id": "https://mayankpandey-portfolio.lovable.app/#person",
         "name": "Mayank Pandey",
-        "jobTitle": "Full Stack Developer",
-        "description": "Experienced Full Stack Developer specializing in React, Node.js, and modern web technologies.",
+        "jobTitle": "Freelance Web Designer & Developer",
+        "description": "Freelance web designer & developer helping businesses establish digitally and scale online revenue.",
         "email": "mayankpandeyofficial404@gmail.com",
         "telephone": "+91-7505728099",
         "url": "https://mayankpandey-portfolio.lovable.app",
@@ -55,21 +78,21 @@ export const siteContent = {
           "https://github.com/MAYANKpandey14"
         ],
         "knowsAbout": [
-          "JavaScript",
-          "TypeScript",
+          "Web Design",
+          "UI/UX Design",
+          "Conversion Optimization",
           "React",
+          "TypeScript",
           "Node.js",
           "Full Stack Development",
-          "Web Development",
-          "Frontend Development",
-          "Backend Development"
+          "Search Engine Optimization"
         ]
       },
       {
         "@type": "WebSite",
         "@id": "https://mayankpandey-portfolio.lovable.app/#website",
         "url": "https://mayankpandey-portfolio.lovable.app",
-        "name": "Mayank Pandey | Full Stack Developer",
+        "name": "Mayank Pandey | Freelance Web Designer & Developer",
         "publisher": { "@id": "https://mayankpandey-portfolio.lovable.app/#person" }
       }
     ]
@@ -95,7 +118,6 @@ export const siteContent = {
     }
   }
 };
-
 
 export const technologies = [
   { name: "JavaScript", Icon: "Code", category: "Frontend" },
