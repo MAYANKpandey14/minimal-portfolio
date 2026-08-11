@@ -16,10 +16,14 @@ const Hero = () => {
         {/* Layer 1: headline (fastest, most important) */}
         <h1
           id="hero-heading"
-          className="hero-display font-extrabold font-display text-foreground max-w-3xl mx-auto mt-2 sm:mt-4 md:mt-6 hero-headline-shadow hero-enter-1"
+          className="hero-display font-extrabold font-display text-foreground max-w-4xl mx-auto mt-2 sm:mt-4 md:mt-6 hero-headline-shadow hero-enter-1 tracking-tight"
         >
-          High-Converting <span className="italic font-normal text-primary hero-accent-glow">Websites</span>{' '}
-          <span className="italic font-normal text-primary hero-accent-glow">Built to Grow</span> Your Business.
+          <span className="block sm:whitespace-nowrap">
+            High-Converting <span className="italic font-normal text-primary hero-accent-glow">Websites</span>
+          </span>
+          <span className="block mt-1 sm:mt-2 sm:whitespace-nowrap">
+            <span className="italic font-normal text-primary hero-accent-glow">Built to Grow</span> Your Business.
+          </span>
         </h1>
 
         {/* Layer 2: subtitle */}
