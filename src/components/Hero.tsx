@@ -1,181 +1,100 @@
-import { useEffect, useState } from 'react';
-import { cn } from "@/lib/utils";
-import { Code, FileJson, Database, Globe, Server, Layout, Monitor, Laptop, Figma, Github, Binary } from 'lucide-react';
-import { siteContent } from "@/data/content";
-import LazyImage from "@/components/optimized/LazyImage";
+import { ArrowRight, Star } from 'lucide-react';
 
 const Hero = () => {
-  const [mounted, setMounted] = useState(false);
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
   return (
     <section
-      className="min-h-screen flex items-center relative overflow-hidden px-6 pt-20"
+      className="min-h-[calc(100vh-80px)] flex items-center justify-center relative overflow-hidden px-6 pt-20 sm:pt-24 md:pt-28 lg:pt-32 pb-12"
       aria-labelledby="hero-heading"
       role="banner"
     >
-      {/* Tech background pattern */}
-      <div className="absolute inset-0 -z-10 opacity-10" aria-hidden="true">
-        <div className="absolute top-1/4 left-1/4 w-64 h-64 rounded-full border border-accent/30"></div>
-        <div className="absolute top-3/4 left-1/2 w-32 h-32 rounded-full border border-accent/30"></div>
-        <div className="absolute top-1/3 right-1/4 w-48 h-48 rounded-full border border-accent/20"></div>
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-accent/5 via-transparent to-transparent"></div>
-      </div>
+      {/* Grid Backdrop */}
+      <div className="absolute inset-0 bg-grid-pattern z-0 pointer-events-none opacity-90" />
 
-      <div className="max-w-6xl mx-auto w-full">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-          {/* Text section - order-2 on mobile, order-1 on md+ */}
-          <div className={cn("space-y-6 order-2 md:order-1", mounted && "animate-fade-up")}>
-            <div className="inline-block">
-              <span className="badge font-mono text-xs tracking-wider" role="status">Available for hire</span>
-            </div>
+      <div className="max-w-4xl mx-auto w-full text-center relative z-10 my-auto">
+        {/* Choreographed entrance — each child has its own delay class */}
 
-            <h1
-              id="hero-heading"
-              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-light tracking-tight leading-none font-mono"
-            >
-              <span className="gradient-text">Full Stack</span>
-              <br />
-              Developer
-            </h1>
+        {/* Layer 1: headline (fastest, most important) */}
+        <h1
+          id="hero-heading"
+          className="hero-display font-extrabold font-display text-foreground max-w-3xl mx-auto mt-2 sm:mt-4 md:mt-6 hero-headline-shadow hero-enter-1"
+        >
+          High-Converting <span className="italic font-normal text-primary hero-accent-glow">Websites</span>{' '}
+          <span className="italic font-normal text-primary hero-accent-glow">Built to Grow</span> Your Business.
+        </h1>
 
-            <p className="text-xl md:text-2xl font-light text-muted-foreground max-w-lg">
-              {siteContent.personal.tagline}
-            </p>
+        {/* Layer 2: subtitle */}
+        <p className="mt-5 text-sm sm:text-base font-normal text-muted-foreground max-w-xl mx-auto leading-relaxed font-sans hero-enter-2">
+          I build custom, high-speed websites for <strong className="font-bold text-foreground">growing businesses</strong> and <strong className="font-bold text-foreground">founders</strong> that rank on <strong className="font-bold text-foreground">Google</strong>, capture market attention, and turn visitors into <strong className="font-bold text-foreground">revenue</strong>.
+        </p>
 
-            <div className="flex flex-col sm:flex-row gap-4 pt-4" role="group" aria-label="Primary actions">
-              <a
-                href="#projects"
-                className="inline-flex h-11 items-center justify-center rounded-md bg-accent px-8 text-sm font-medium text-white shadow-md transition-colors hover:bg-accent/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-                aria-label="View my portfolio projects"
-              >
-                View Projects
-              </a>
-              <a
-                href="#book"
-                className="inline-flex h-11 items-center justify-center rounded-md border border-input bg-white/50 backdrop-blur-sm px-8 text-sm font-medium shadow-sm transition-colors hover:bg-accent/10 hover:border-accent/30 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
-                aria-label="Get in touch with me"
-              >
-                Get in Touch
-              </a>
-            </div>
+        {/* Layer 3: social proof */}
+        <div className="mt-5 flex flex-col sm:flex-row items-center justify-center gap-2.5 sm:gap-3.5 hero-enter-3">
+          {/* 5 Overlapping Avatars */}
+          <div className="flex items-center -space-x-2.5 overflow-hidden p-0.5">
+            {[
+              "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=120&q=80",
+              "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=120&q=80",
+              "https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=120&q=80",
+              "https://images.unsplash.com/photo-1494790108377-be9c29b29330?auto=format&fit=crop&w=120&q=80",
+              "https://images.unsplash.com/photo-1522075469751-3a6694fb2f61?auto=format&fit=crop&w=120&q=80",
+            ].map((src, i) => (
+              <img
+                key={i}
+                src={src}
+                alt={`Client portrait ${i + 1}`}
+                className="inline-block h-8 w-8 rounded-full ring-2 ring-background object-cover shadow-xs"
+              />
+            ))}
           </div>
-
-          {/* Tech visualization container - order-1 on mobile, order-2 on md+ */}
-          <div
-            className={cn(
-              "relative opacity-0 transition-opacity duration-1000 delay-300 mx-auto order-1 md:order-2",
-              mounted && "opacity-100"
-            )}
-            style={{
-              width: 'var(--orbit-size)',
-              height: 'var(--orbit-size)',
-            }}
-            aria-label="Technology skills visualization with profile picture"
-          >
-            {/* Layer 1: Orbit ring - sized to match icon orbit radius (84% = 2 × 42%) */}
-            <div className="absolute inset-0 flex items-center justify-center" aria-hidden="true">
-              <div
-                className="rounded-full border border-accent/30"
-                style={{ width: '84%', height: '84%' }}
-              />
+          <div className="flex flex-col items-center sm:items-start">
+            <div className="flex items-center gap-0.5">
+              {[...Array(5)].map((_, i) => (
+                <Star key={i} size={14} className="fill-amber-400 text-amber-400" />
+              ))}
             </div>
-
-            {/* Layer 2: Rotating icon wrapper */}
-            <div
-              className="absolute inset-0 animate-spin-slow"
-              aria-hidden="true"
-            >
-              {[
-                { Icon: Code, label: "JS" },
-                { Icon: Figma, label: "UI/UX" },
-                { Icon: Database, label: "SQL" },
-                { Icon: Globe, label: "React" },
-                { Icon: Server, label: "Node" },
-                { Icon: Layout, label: "CSS" },
-                { Icon: Monitor, label: "Web" },
-                { Icon: Laptop, label: "Next" },
-                { Icon: Github, label: "Git" },
-                { Icon: FileJson, label: "API" },
-                { Icon: Binary, label: "TS" },
-                { Icon: Code, label: "HTML" },
-              ].map((item, index) => {
-                const totalIcons = 12;
-                const angle = (2 * Math.PI * index) / totalIcons - Math.PI / 2;
-                // Use CSS variable for orbit radius (tighter packing at 42%)
-                const radiusPercent = 42;
-                const x = 50 + radiusPercent * Math.cos(angle);
-                const y = 50 + radiusPercent * Math.sin(angle);
-
-                return (
-                  <div
-                    key={`${item.label}-${index}`}
-                    className="orbit-icon absolute flex flex-col items-center justify-center 
-                      text-foreground/70 bg-background/95 shadow-md backdrop-blur-sm rounded-full 
-                      hover:scale-110 hover:text-accent transition-all border border-border/50
-                      animate-spin-reverse gap-0.5"
-                    style={{
-                      left: `${x}%`,
-                      top: `${y}%`,
-                      transform: 'translate(-50%, -50%)',
-                      width: 'var(--icon-size)',
-                      height: 'var(--icon-size)',
-                    }}
-                  >
-                    <item.Icon
-                      style={{ width: 'var(--icon-lucide-size)', height: 'var(--icon-lucide-size)' }}
-                      className="opacity-80"
-                    />
-                    <span
-                      className="font-mono font-semibold opacity-80 leading-none"
-                      style={{ fontSize: 'var(--icon-font-size)' }}
-                    >
-                      {item.label}
-                    </span>
-                  </div>
-                );
-              })}
-            </div>
-
-            {/* Layer 3: Center blob + profile (larger, more prominent) */}
-            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-              {/* Blob gradient background - slightly larger than image for glow effect */}
-              <div
-                className="absolute blob-shape bg-gradient-to-br from-accent/50 to-accent/20 animate-pulse filter blur-lg"
-                style={{
-                  width: 'calc(var(--blob-size) + 20px)',
-                  height: 'calc(var(--blob-size) + 20px)',
-                  animationDuration: '10s'
-                }}
-                aria-hidden="true"
-              />
-
-              {/* Profile image - uses blob-size variable */}
-              <div
-                className="relative z-10 overflow-hidden"
-                style={{
-                  width: 'var(--blob-size)',
-                  height: 'var(--blob-size)',
-                }}
-              >
-                <div className="blob-card w-full h-full border-2 border-white/40 backdrop-blur-lg flex items-center justify-center overflow-hidden">
-                  <LazyImage
-                    src="/profile-pic.png"
-                    alt={`Professional portrait of ${siteContent.personal.name}, Full Stack Developer`}
-                    className="w-full h-full object-cover"
-                    priority={true}
-                    width={220}
-                    height={220}
-                    sizes="(max-width: 640px) 130px, (max-width: 768px) 160px, (max-width: 1024px) 190px, 220px"
-                  />
-                </div>
-              </div>
-            </div>
+            <p className="text-[11px] font-sans text-muted-foreground mt-0.5">
+              <strong className="font-bold text-foreground text-xs">20+</strong> businesses &amp; founders scaled online
+            </p>
           </div>
         </div>
+
+        {/* Layer 4: capability pills */}
+        <div className="mt-4 flex flex-wrap justify-center items-center gap-2.5 sm:gap-3 hero-enter-4">
+          {['Custom Web Design', 'Sub-Second Speed', 'Google SEO Ranking', 'Conversion Optimization'].map((label) => (
+            <span
+              key={label}
+              className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-card/60 backdrop-blur-md border border-border/40 hover:border-primary/40 hover:bg-secondary/60 text-xs font-sans font-semibold text-foreground/90 transition-all duration-200 cursor-default group shadow-xs"
+            >
+              <span className="w-1.5 h-1.5 rounded-full bg-primary group-hover:scale-125 transition-transform" />
+              <span className="group-hover:text-primary transition-colors">{label}</span>
+            </span>
+          ))}
+        </div>
+
+        {/* Layer 5: CTAs */}
+        <div className="mt-6 flex flex-col sm:flex-row items-center justify-center gap-3.5 hero-enter-5" role="group" aria-label="Primary actions">
+          <a
+            href="#contact"
+            className="inline-flex items-center gap-2.5 px-6 py-2.5 rounded-full bg-primary text-primary-foreground font-semibold text-xs shadow-md hover:bg-primary/90 hover:scale-[1.02] active:scale-[0.98] transition-all group cursor-pointer"
+            aria-label="Request project quote"
+          >
+            <span>Request Web Quote</span>
+            <span className="w-5 h-5 rounded-full bg-primary-foreground text-primary flex items-center justify-center group-hover:translate-x-0.5 transition-transform" aria-hidden="true">
+              <ArrowRight size={12} />
+            </span>
+          </a>
+          <a
+            href="#projects"
+            className="text-[11px] font-semibold text-muted-foreground hover:text-foreground transition-colors underline underline-offset-4"
+          >
+            View Recent Projects
+          </a>
+        </div>
+
+        {/* Trust caption */}
+        <p className="mt-5 text-[11px] text-muted-foreground/70 font-mono border-t border-border/20 max-w-sm mx-auto pt-4 hero-enter-5">
+          Freelance Web Designer &amp; Developer building high-converting digital storefronts.
+        </p>
       </div>
     </section>
   );
