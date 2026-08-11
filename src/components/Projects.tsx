@@ -3,10 +3,10 @@ import { cn } from "@/lib/utils";
 import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 import { ArrowUpRight } from 'lucide-react';
 
-// Project images
-import vertexAirseaImg from '@/assets/www.vertexairsea.com_.png';
-import photographyPortfolioImg from '@/assets/www.aesphotography.in_ (1).png';
-import grnlSupplyChainImg from '@/assets/grnlsupplychain.com_ (1).png';
+// Project images (optimized modern WebP formats)
+import vertexAirseaImg from '@/assets/vertexairsea.webp';
+import photographyPortfolioImg from '@/assets/aesphotography.webp';
+import grnlSupplyChainImg from '@/assets/grnlsupplychain.webp';
 
 interface Project {
   id: number;
@@ -222,6 +222,8 @@ const Projects = () => {
                     alt={p.imageAlt}
                     className="w-full h-auto block"
                     loading={i === 0 ? "eager" : "lazy"}
+                    decoding="async"
+                    width={1400}
                   />
                 </div>
               ))}
@@ -248,6 +250,9 @@ const Projects = () => {
             src={projects[activeIndex].image}
             alt={projects[activeIndex].imageAlt}
             className="w-full h-auto block"
+            loading="lazy"
+            decoding="async"
+            width={1400}
           />
         </div>
       </div>

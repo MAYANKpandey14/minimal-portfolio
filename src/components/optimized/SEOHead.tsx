@@ -12,7 +12,7 @@ const SEOHead = ({
   title = "Mayank Pandey | Full Stack Developer", 
   description = "Experienced Full Stack Developer specializing in React, Node.js, and modern web technologies. Building efficient, scalable applications with clean code and user-focused design.",
   canonical = window.location.href,
-  ogImage = "/profile-pic.png",
+  ogImage = "/profile-pic.webp",
   structuredData
 }: SEOHeadProps) => {
 
