@@ -1,203 +1,258 @@
-
 import { useState } from 'react';
 import { cn } from "@/lib/utils";
-import LazyImage from '@/components/optimized/LazyImage';
 import { useScrollReveal } from "@/hooks/use-scroll-reveal";
-import { ExternalLink } from 'lucide-react';
+import { ArrowUpRight } from 'lucide-react';
 
-// Import project images
-import spendwiseImg from '@/assets/spendwise-dashboard.png';
-import methodosImg from '@/assets/methodos-dashboard.png';
-import taskApiImg from '@/assets/task-api.png';
-import vertexAirseaImg from '@/assets/vertex-airsea.jpg';
-import messagingMicroserviceImg from '@/assets/messaging-microservice.png';
-import photographyPortfolioImg from '@/assets/photographyPortfolioImg.png';
+// Project images
+import vertexAirseaImg from '@/assets/www.vertexairsea.com_.png';
+import photographyPortfolioImg from '@/assets/www.aesphotography.in_ (1).png';
+import grnlSupplyChainImg from '@/assets/grnlsupplychain.com_ (1).png';
+
+interface Project {
+  id: number;
+  title: string;
+  year: string;
+  category: string;
+  tech: string[];
+  previewUrl: string;
+  image: string;
+  imageAlt: string;
+  liveDomain: string;
+}
+
+const projects: Project[] = [
+  {
+    id: 1,
+    title: "GRNL Supply Chain",
+    year: "2025",
+    category: "Logistics Platform",
+    tech: ["React", "TypeScript", "Tailwind CSS", "Vercel"],
+    previewUrl: "https://www.grnlsupplychain.com/",
+    image: grnlSupplyChainImg,
+    imageAlt: "GRNL Supply Chain — Global Freight Platform",
+    liveDomain: "grnlsupplychain.com",
+  },
+  {
+    id: 2,
+    title: "AES Photography",
+    year: "2025",
+    category: "Photography Portfolio",
+    tech: ["React", "Tailwind CSS", "Framer Motion", "Vercel"],
+    previewUrl: "https://www.aesphotography.in/",
+    image: photographyPortfolioImg,
+    imageAlt: "AES Photography — Editorial Portfolio",
+    liveDomain: "aesphotography.in",
+  },
+  {
+    id: 3,
+    title: "Vertex Air Sea",
+    year: "2025",
+    category: "International Cargo",
+    tech: ["React", "Tailwind CSS", "Framer Motion", "Vercel"],
+    previewUrl: "https://www.vertexairsea.com/",
+    image: vertexAirseaImg,
+    imageAlt: "Vertex Air Sea Cargo — Freight Forwarding",
+    liveDomain: "vertexairsea.com",
+  },
+];
 
 const Projects = () => {
-  const [activeFilter, setActiveFilter] = useState('all');
-  const { ref: headingRef, isVisible: headingVisible } = useScrollReveal({ threshold: 0.3 });
-  const { ref: filtersRef, isVisible: filtersVisible } = useScrollReveal({ threshold: 0.3 });
-  const { ref: projectsRef, isVisible: projectsVisible } = useScrollReveal({ threshold: 0.2 });
-
-  const filteredProjects = activeFilter === 'all' 
-    ? projects 
-    : projects.filter(project => project.category === activeFilter);
-
-  const getCategoryLabel = (category: string) => {
-    switch(category) {
-      case 'frontend': return 'Frontend';
-      case 'fullstack': return 'Full Stack';
-      case 'backend': return 'Backend';
-      case 'freelance': return 'Freelance';
-      default: return category;
-    }
-  };
+  const [activeIndex, setActiveIndex] = useState(0);
+  const { ref: sectionRef, isVisible } = useScrollReveal({ threshold: 0.1 });
 
   return (
-    <section id="projects" className="section-container">
-      <div 
-        ref={headingRef}
+    <section
+      id="projects"
+      ref={sectionRef}
+      className="section-container overflow-hidden"
+    >
+      {/* Header row */}
+      <div
         className={cn(
-          "max-w-3xl mx-auto text-center mb-16 reveal-fade-up",
-          headingVisible && "visible"
+          "flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4 mb-14 sm:mb-16 transition-all duration-700 ease-out",
+          isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"
         )}
       >
-        <h2 className="section-heading">Featured Projects</h2>
-        <p className="section-subheading">
-          A selection of my recent work delivering efficient, minimalist solutions.
+        <div>
+          <p className="text-xs font-mono text-primary uppercase tracking-[0.2em] mb-2">
+            Client Work
+          </p>
+          <h2 className="text-3xl sm:text-4xl md:text-5xl font-extrabold font-display text-foreground tracking-tight">
+            Featured Projects
+          </h2>
+        </div>
+        <p className="text-sm text-muted-foreground max-w-xs leading-relaxed font-sans">
+          High-performance websites built for real clients — engineered for speed, trust, and conversion.
         </p>
       </div>
-      
-      <div 
-        ref={filtersRef}
+
+      {/* Main showcase: list + image */}
+      <div
         className={cn(
-          "flex justify-center mb-8 reveal-scale-up",
-          filtersVisible && "visible"
+          "grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 transition-all duration-700 ease-out delay-100",
+          isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
         )}
       >
-        <div className="flex flex-wrap gap-2 p-1 bg-secondary/50 rounded-full">
-          {categories.map((category) => (
-            <button
-              key={category.id}
-              onClick={() => setActiveFilter(category.id)}
-              className={cn(
-                "px-4 py-2 text-sm font-medium rounded-full transition-all",
-                activeFilter === category.id 
-                  ? "bg-accent shadow-sm text-white" 
-                  : "text-muted-foreground hover:text-foreground"
-              )}
-            >
-              {category.name}
-            </button>
-          ))}
-        </div>
-      </div>
-      
-      <div 
-        ref={projectsRef}
-        className={cn(
-          "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 reveal-fade-up",
-          projectsVisible && "visible"
-        )}
-      >
-        {filteredProjects.map((project, index) => (
-          <div 
-            key={project.id} 
-            className="group rounded-xl overflow-hidden border border-border hover:shadow-lg transition-all duration-300 bg-card"
-            style={{ animationDelay: `${index * 0.1}s` }}
-          >
-            <div className="relative overflow-hidden h-48">
-              <LazyImage 
-                src={project.image} 
-                alt={`${project.title} - ${project.description}`}
-                className="h-full w-full object-cover group-hover:scale-105 transition-transform duration-500"
-                width={400}
-                height={192}
-                sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
-              />
-              <div 
-                className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent flex items-end p-6"
-              >
-                <div className="opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <span className="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-gradient-to-r from-accent to-primary text-white shadow-md">
-                    {getCategoryLabel(project.category)}
-                  </span>
-                </div>
-              </div>
-            </div>
-            <div className="p-6">
-              <div className="flex items-center justify-between mb-2">
-                <h3 className="text-lg font-medium">{project.title}</h3>
-                {project.previewUrl && (
-                  <a 
-                    href={project.previewUrl} 
-                    target="_blank" 
-                    rel="noopener noreferrer"
-                    className="text-primary hover:text-primary/80 transition-colors"
-                    aria-label={`Preview ${project.title}`}
-                  >
-                    <ExternalLink className="w-5 h-5" />
-                  </a>
+        {/* Left: Rollover list */}
+        <div className="flex flex-col justify-center divide-y divide-border/30">
+          {projects.map((project, i) => {
+            const isActive = i === activeIndex;
+            return (
+              <a
+                key={project.id}
+                href={project.previewUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                onMouseEnter={() => setActiveIndex(i)}
+                onClick={(e) => {
+                  // On mobile: first tap activates, second tap navigates
+                  if (!isActive) {
+                    e.preventDefault();
+                    setActiveIndex(i);
+                  }
+                }}
+                aria-label={`Open ${project.title} live website`}
+                className={cn(
+                  "group relative py-7 sm:py-8 flex items-center justify-between gap-4 transition-all duration-300 outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-sm",
                 )}
+              >
+                {/* Active bar */}
+                <span
+                  className={cn(
+                    "absolute left-0 top-0 bottom-0 w-0.5 rounded-full transition-all duration-500 ease-out",
+                    isActive ? "bg-primary opacity-100" : "bg-transparent opacity-0"
+                  )}
+                />
+
+                <div className="pl-5 flex-1 min-w-0">
+                  {/* Category + year */}
+                  <div className={cn(
+                    "flex items-center gap-3 mb-1.5 transition-all duration-300",
+                    isActive ? "opacity-100" : "opacity-50 group-hover:opacity-70"
+                  )}>
+                    <span className="text-[11px] font-mono text-primary uppercase tracking-wider">
+                      {project.category}
+                    </span>
+                    <span className="text-[11px] text-muted-foreground font-mono">
+                      {project.year}
+                    </span>
+                  </div>
+
+                  {/* Project title */}
+                  <h3
+                    className={cn(
+                      "font-display font-extrabold tracking-tight text-foreground transition-all duration-300",
+                      "text-2xl sm:text-3xl md:text-4xl",
+                      isActive
+                        ? "text-foreground"
+                        : "text-foreground/40 group-hover:text-foreground/70"
+                    )}
+                  >
+                    {project.title}
+                  </h3>
+
+                  {/* Tech tags — only show on active */}
+                  <div
+                    className={cn(
+                      "flex flex-wrap gap-1.5 mt-3 transition-all duration-400 ease-out",
+                      isActive ? "opacity-100 max-h-10" : "opacity-0 max-h-0 overflow-hidden"
+                    )}
+                  >
+                    {project.tech.map((t) => (
+                      <span
+                        key={t}
+                        className="text-[10px] font-mono px-2 py-0.5 rounded bg-primary/10 text-primary border border-primary/20"
+                      >
+                        {t}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+
+                {/* Arrow — right side */}
+                <div className={cn(
+                  "shrink-0 w-9 h-9 rounded-full border flex items-center justify-center transition-all duration-300",
+                  isActive
+                    ? "border-primary bg-primary text-primary-foreground scale-100"
+                    : "border-border/30 bg-transparent text-muted-foreground scale-75 opacity-40 group-hover:scale-90 group-hover:opacity-60"
+                )}>
+                  <ArrowUpRight className="w-4 h-4" />
+                </div>
+              </a>
+            );
+          })}
+        </div>
+
+        {/* Right: Full-page screenshot frame */}
+        <div className="hidden lg:block relative">
+          <div className="sticky top-28">
+            {/* Browser chrome */}
+            <div className="rounded-t-xl border border-b-0 border-border/40 bg-secondary/80 px-4 py-2.5 flex items-center gap-2 backdrop-blur-md">
+              <span className="w-2.5 h-2.5 rounded-full bg-rose-400/80" />
+              <span className="w-2.5 h-2.5 rounded-full bg-amber-400/80" />
+              <span className="w-2.5 h-2.5 rounded-full bg-emerald-400/80" />
+              <div className="ml-2 flex-1 max-w-xs px-3 py-0.5 rounded bg-background/70 border border-border/30 text-[10px] font-mono text-muted-foreground truncate">
+                {projects[activeIndex].liveDomain}
               </div>
-              <p className="text-muted-foreground text-sm mb-4">{project.description}</p>
-              <div className="flex flex-wrap gap-2">
-                {project.technologies.map((tech) => (
-                  <span key={tech} className="text-xs text-muted-foreground bg-secondary px-2 py-1 rounded">
-                    {tech}
-                  </span>
-                ))}
-              </div>
+              <a
+                href={projects[activeIndex].previewUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="ml-auto text-[10px] font-mono text-primary hover:underline flex items-center gap-1 shrink-0"
+              >
+                Open <ArrowUpRight className="w-3 h-3" />
+              </a>
+            </div>
+
+            {/* Screenshot viewport */}
+            <div
+              className="relative border border-border/40 rounded-b-xl overflow-hidden bg-background"
+              style={{ height: 'clamp(360px, 55vh, 520px)' }}
+            >
+              {projects.map((p, i) => (
+                <div
+                  key={p.id}
+                  className={cn(
+                    "absolute inset-0 overflow-y-auto scrollbar-none transition-opacity duration-500 ease-out",
+                    i === activeIndex ? "opacity-100 z-10" : "opacity-0 z-0"
+                  )}
+                >
+                  <img
+                    src={p.image}
+                    alt={p.imageAlt}
+                    className="w-full h-auto block"
+                    loading={i === 0 ? "eager" : "lazy"}
+                  />
+                </div>
+              ))}
+
+              {/* Bottom gradient fade */}
+              <div className="absolute inset-x-0 bottom-0 h-16 bg-gradient-to-t from-background to-transparent pointer-events-none z-20" />
             </div>
           </div>
-        ))}
+        </div>
+      </div>
+
+      {/* Mobile image (below list on small screens) */}
+      <div className="mt-8 lg:hidden rounded-xl border border-border/40 overflow-hidden bg-background">
+        <div className="px-3 py-2 bg-secondary/80 border-b border-border/30 flex items-center gap-1.5">
+          <span className="w-2 h-2 rounded-full bg-rose-400/70" />
+          <span className="w-2 h-2 rounded-full bg-amber-400/70" />
+          <span className="w-2 h-2 rounded-full bg-emerald-400/70" />
+          <span className="ml-2 text-[10px] font-mono text-muted-foreground truncate">
+            {projects[activeIndex].liveDomain}
+          </span>
+        </div>
+        <div className="overflow-y-auto scrollbar-none" style={{ maxHeight: '360px' }}>
+          <img
+            src={projects[activeIndex].image}
+            alt={projects[activeIndex].imageAlt}
+            className="w-full h-auto block"
+          />
+        </div>
       </div>
     </section>
   );
 };
-
-const categories = [
-  { id: 'all', name: 'All Projects' },
-  { id: 'freelance', name: 'Freelance' },
-  { id: 'fullstack', name: 'Full Stack' },
-  { id: 'backend', name: 'Backend' }
-];
-
-const projects = [
-  {
-    id: 1,
-    title: "SpendWise - AI Expense Tracker",
-    description: "Personal finance management app with spending analytics, budgets, and real-time expense tracking.",
-    category: "fullstack",
-    technologies: ["React", "TypeScript", "Supabase", "Tailwind CSS"],
-    image: spendwiseImg,
-    previewUrl: "https://smartpocket.vercel.app/login"
-  },
-  {
-    id: 2,
-    title: "MethodOS - Productivity Suite",
-    description: "Task management and productivity platform with pomodoro timer, notes, and analytics dashboard.",
-    category: "fullstack",
-    technologies: ["React", "TypeScript", "Supabase", "Tailwind CSS"],
-    image: methodosImg,
-    previewUrl: "https://methodos.lovable.app/login"
-  },
-  {
-    id: 3,
-    title: "Photography Portfolio",
-    description: "A modern, responsive portfolio website to showcase professional photography work with galleries and clean UI.",
-    category: "freelance",
-    technologies: ["React", "Tailwind CSS", "Framer Motion", "Vercel"],
-    image: photographyPortfolioImg,
-    previewUrl: "https://www.aesphotography.in/"
-  },
-  {
-    id: 4,
-    title: "Vertex Air Sea Cargo Solutions",
-    description: "Freight forwarding website with comprehensive air, ocean, and road transportation services.",
-    category: "freelance",
-    technologies: ["React", "Tailwind CSS", "Framer Motion", "Vercel"],
-    image: vertexAirseaImg,
-    previewUrl: "https://www.vertexairsea.com/"
-  },
-  {
-    id: 5,
-    title: "Task Management API",
-    description: "RESTful API for task management with authentication and permission controls.",
-    category: "backend",
-    technologies: ["Node.js", "Express", "MongoDB", "JWT"],
-    image: taskApiImg,
-    previewUrl: null
-  },
-  {
-    id: 6,
-    title: "Messaging Microservice",
-    description: "Scalable microservice for real-time messaging in distributed applications.",
-    category: "backend",
-    technologies: ["Node.js", "Redis", "WebSockets", "Docker"],
-    image: messagingMicroserviceImg,
-    previewUrl: null
-  }
-];
 
 export default Projects;
