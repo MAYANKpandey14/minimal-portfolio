@@ -1,19 +1,14 @@
 import { useState, useEffect } from 'react';
 import { cn } from "@/lib/utils";
-import { Menu, X, Sun, Moon, ArrowRight } from 'lucide-react';
+import { Menu, X, ArrowRight } from 'lucide-react';
 import { siteContent } from "@/data/content";
-import { useTheme } from "next-themes";
 
 const Header = () => {
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState('');
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const { theme, setTheme } = useTheme();
-  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    setMounted(true);
-
     const handleScroll = () => {
       // Direct state evaluation guarantees reset when scrolling back up to top
       setScrolled(window.scrollY > 20);
@@ -46,23 +41,6 @@ const Header = () => {
     setMobileMenuOpen(false);
   };
 
-  const renderThemeToggle = () => {
-    if (!mounted) return <div className="w-9 h-9" />;
-    return (
-      <button
-        onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-        className="p-2 rounded-full border border-border/30 hover:bg-secondary/50 transition-colors text-muted-foreground hover:text-foreground flex items-center justify-center cursor-pointer"
-        aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} theme`}
-      >
-        {theme === 'dark' ? (
-          <Sun size={17} className="text-amber-400" />
-        ) : (
-          <Moon size={17} className="text-slate-700" />
-        )}
-      </button>
-    );
-  };
-
   return (
     <header
       className="fixed inset-x-0 top-0 z-50 transition-all duration-500 ease-in-out pointer-events-none px-3 sm:px-6"
@@ -80,40 +58,42 @@ const Header = () => {
         <a 
           href="#" 
           className="text-lg sm:text-xl font-bold tracking-tight font-display text-foreground hover:opacity-80 transition-opacity"
-          aria-label="Mayank Pandey - Freelance Web Designer"
+          aria-label="mayankpandey - Freelance Web Designer"
         >
           <span className="text-primary font-mono font-bold">&lt;</span>
           <span>mayankpandey</span>
           <span className="text-primary font-mono font-bold">/&gt;</span>
         </a>
 
-        <div className="flex items-center space-x-3 sm:space-x-5">
-          <nav className="hidden md:flex space-x-6 mr-1" role="navigation" aria-label="Main navigation">
-            {siteContent.navigation.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className={cn(
-                  "text-xs font-semibold uppercase tracking-wider transition-colors py-1 relative",
-                  activeSection === link.href
-                    ? "text-primary font-bold after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5 after:bg-primary after:rounded-full"
-                    : "text-muted-foreground hover:text-foreground"
-                )}
-                aria-label={link.ariaLabel}
-                aria-current={activeSection === link.href ? "page" : undefined}
-              >
-                {link.label}
-              </a>
-            ))}
+        <div className="flex items-center gap-3 sm:gap-4 lg:gap-5">
+          <nav 
+            className="hidden md:flex items-center gap-1.5 lg:gap-2 p-1 rounded-full bg-secondary/30 border border-border/20 backdrop-blur-xs" 
+            role="navigation" 
+            aria-label="Main navigation"
+          >
+            {siteContent.navigation.map((link) => {
+              const isActive = activeSection === link.href;
+              return (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className={cn(
+                    "text-xs font-medium uppercase tracking-wider transition-all duration-200 px-3.5 py-1.5 rounded-full flex items-center justify-center text-center",
+                    isActive
+                      ? "text-primary font-bold bg-primary/10 shadow-xs"
+                      : "text-muted-foreground hover:text-foreground hover:bg-secondary/60"
+                  )}
+                  aria-current={isActive ? "page" : undefined}
+                >
+                  {link.label}
+                </a>
+              );
+            })}
           </nav>
-
-          <div className="flex items-center gap-2">
-            {renderThemeToggle()}
-          </div>
 
           <a
             href="#contact"
-            className="hidden sm:inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary text-primary-foreground text-xs font-semibold hover:bg-primary/90 transition-all shadow-xs group"
+            className="hidden sm:inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary text-primary-foreground text-xs font-semibold hover:bg-primary/90 transition-all shadow-xs group"
           >
             <span>Request Quote</span>
             <ArrowRight size={13} className="group-hover:translate-x-0.5 transition-transform" />
@@ -157,20 +137,29 @@ const Header = () => {
           </button>
         </div>
 
-        <div className="flex flex-col h-full px-6">
-          <div className="flex flex-col space-y-6 py-8" role="list">
-            {siteContent.navigation.map((link) => (
-              <a
-                key={link.href}
-                href={link.href}
-                className="text-base font-medium text-foreground hover:text-accent transition-colors py-2 border-b border-border/20 focus:outline-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-md"
-                onClick={closeMobileMenu}
-                aria-label={link.ariaLabel}
-                role="listitem"
-              >
-                {link.label}
-              </a>
-            ))}
+        <div className="flex flex-col h-full px-5">
+          <div className="flex flex-col space-y-2 py-4" role="list">
+            {siteContent.navigation.map((link) => {
+              const isActive = activeSection === link.href;
+              return (
+                <a
+                  key={link.href}
+                  href={link.href}
+                  className={cn(
+                    "text-sm font-medium transition-all duration-200 px-4 py-3 rounded-xl flex items-center justify-between focus:outline-none focus-visible:ring-2 focus-visible:ring-primary",
+                    isActive
+                      ? "text-primary font-bold bg-primary/10"
+                      : "text-foreground hover:text-primary hover:bg-secondary/60"
+                  )}
+                  onClick={closeMobileMenu}
+                  role="listitem"
+                  aria-current={isActive ? "page" : undefined}
+                >
+                  <span>{link.label}</span>
+                  {isActive && <span className="w-1.5 h-1.5 rounded-full bg-primary" />}
+                </a>
+              );
+            })}
           </div>
 
           <div className="mt-auto pb-8">

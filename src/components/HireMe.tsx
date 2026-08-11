@@ -100,7 +100,7 @@ const HireMe = () => {
                   <span className="text-xs font-mono font-bold text-primary">0{index + 1}</span>
                 </div>
                 <div>
-                  <h5 className="font-bold text-xs font-display text-foreground">{step.title}</h5>
+                  <h4 className="font-bold text-xs font-display text-foreground">{step.title}</h4>
                   <p className="text-xs text-muted-foreground leading-relaxed mt-0.5">{step.description}</p>
                 </div>
               </div>

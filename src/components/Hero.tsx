@@ -47,6 +47,10 @@ const Hero = () => {
                 src={src}
                 alt={`Client portrait ${i + 1}`}
                 className="inline-block h-8 w-8 rounded-full ring-2 ring-background object-cover shadow-xs"
+                width={32}
+                height={32}
+                loading="lazy"
+                decoding="async"
               />
             ))}
           </div>
@@ -80,7 +84,6 @@ const Hero = () => {
           <a
             href="#contact"
             className="inline-flex items-center gap-2.5 px-6 py-2.5 rounded-full bg-primary text-primary-foreground font-semibold text-xs shadow-md hover:bg-primary/90 hover:scale-[1.02] active:scale-[0.98] transition-all group cursor-pointer"
-            aria-label="Request project quote"
           >
             <span>Request Web Quote</span>
             <span className="w-5 h-5 rounded-full bg-primary-foreground text-primary flex items-center justify-center group-hover:translate-x-0.5 transition-transform" aria-hidden="true">
