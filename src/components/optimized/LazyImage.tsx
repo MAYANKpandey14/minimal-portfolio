@@ -45,7 +45,7 @@ const LazyImage = ({
   }, [priority]);
 
   return (
-    <div ref={imgRef} className={cn("overflow-hidden", className)}>
+    <div ref={imgRef} className="overflow-hidden relative w-full h-full">
       {isInView && (
         <img
           src={src}
@@ -65,8 +65,7 @@ const LazyImage = ({
       )}
       {(!isInView || !isLoaded) && (
         <div 
-          className="bg-muted animate-pulse"
-          style={{ width, height }}
+          className="bg-muted animate-pulse absolute inset-0"
           aria-hidden="true"
         />
       )}

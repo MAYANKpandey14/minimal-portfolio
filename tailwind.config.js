@@ -133,8 +133,10 @@ export default {
                 'spin-slow': 'spin-slow 30s linear infinite'
             },
             fontFamily: {
-                sans: ['Inter', 'sans-serif'],
-                mono: ['JetBrains Mono', 'monospace'],
+                sans: ['Figtree', 'system-ui', 'sans-serif'],
+                display: ['Sora', 'system-ui', 'sans-serif'],
+                serif: ['Sora', 'system-ui', 'sans-serif'],
+                mono: ['JetBrains Mono', 'Consolas', 'monospace'],
             }
         }
     },

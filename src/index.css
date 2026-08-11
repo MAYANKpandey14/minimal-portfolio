@@ -1,12 +1,10 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=JetBrains+Mono:wght@100;200;300;400;500;600;700;800&display=swap');
 @import "tailwindcss";
 @config "../tailwind.config.js";
 
-
 @layer base {
   :root {
-    --background: 220 20% 97%;
-    --foreground: 220 70% 13%;
+    --background: 220 20% 97%; /* Light cool gray */
+    --foreground: 220 70% 13%; /* Deep navy text */
 
     --card: 0 0% 100%;
     --card-foreground: 220 70% 13%;
@@ -14,37 +12,112 @@
     --popover: 0 0% 100%;
     --popover-foreground: 220 70% 13%;
 
-    --primary: 219 92.4% 63.7%;
-    --primary-foreground: 230 70% 50%;
+    /* Default Palette: Emerald Growth */
+    --primary: 160 84% 39%; /* Emerald Green #10B981 */
+    --primary-foreground: 0 0% 100%;
 
     --secondary: 210 40% 96.1%;
     --secondary-foreground: 222.2 47.4% 11.2%;
 
     --muted: 210 40% 93%;
-    --muted-foreground: 220 10% 40%;
+    --muted-foreground: 220 25% 28%; /* WCAG AA contrast compliant */
 
-    --accent: 196 100% 45%;
-    --accent-foreground: 210 40% 98%;
+    --accent: 188 86% 46%; /* Cyan #06B6D4 */
+    --accent-foreground: 0 0% 100%;
 
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 210 40% 98%;
 
     --border: 214.3 31.8% 91.4%;
     --input: 214.3 31.8% 91.4%;
-    --ring: 196 100% 45%;
+    --ring: 160 84% 39%;
 
-    --radius: 0.5rem;
+    --radius: 0.875rem;
 
-    /* Orbit component responsive sizing - single source of truth */
+    --card-glass: rgba(255, 255, 255, 0.7);
+    --border-glass: rgba(16, 185, 129, 0.15);
+
     --orbit-size: clamp(260px, 45vw, 520px);
     --orbit-radius: 42%;
-    /* Tighter packing - icons closer to center */
     --icon-size: clamp(40px, 5vw, 70px);
-    /* Larger icons for bigger screens */
     --icon-font-size: clamp(5px, 1vw, 10px);
     --icon-lucide-size: clamp(14px, 2vw, 26px);
     --blob-size: clamp(130px, 22vw, 240px);
-    /* Larger center blob */
+
+    /* Animation easing tokens */
+    --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+    --ease-quart: cubic-bezier(0.25, 1, 0.5, 1);
+    --ease-quint: cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .dark {
+    --background: 224 71% 4%; /* #0B0F17 Deep Obsidian */
+    --foreground: 210 40% 98%;
+
+    --card: 224 60% 7%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 224 60% 7%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 160 84% 45%; /* Emerald Green #10B981 */
+    --primary-foreground: 224 71% 4%;
+
+    --secondary: 217.2 32.6% 14%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 14%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 188 86% 46%; /* Cyan #06B6D4 */
+    --accent-foreground: 224 71% 4%;
+
+    --border: 217.2 32.6% 18%;
+    --input: 217.2 32.6% 18%;
+    --ring: 160 84% 45%;
+
+    --card-glass: rgba(11, 15, 23, 0.75);
+    --border-glass: rgba(16, 185, 129, 0.2);
+  }
+
+  /* Theme 2: Midnight Violet (Luxury Tech) */
+  [data-palette="violet"] {
+    --primary: 263 90% 60%; /* Vibrant Violet #8B5CF6 */
+    --primary-foreground: 0 0% 100%;
+    --accent: 330 81% 60%; /* Hot Pink/Rose #EC4899 */
+    --accent-foreground: 0 0% 100%;
+    --ring: 263 90% 60%;
+  }
+  [data-palette="violet"].dark, .dark [data-palette="violet"] {
+    --background: 260 50% 6%; /* Deep Velvet Night #0F0B1C */
+    --card: 260 45% 9%;
+    --popover: 260 45% 9%;
+    --primary: 263 90% 66%;
+    --primary-foreground: 260 50% 6%;
+    --accent: 330 81% 60%;
+    --accent-foreground: 260 50% 6%;
+    --border: 260 30% 18%;
+    --border-glass: rgba(139, 92, 246, 0.25);
+  }
+
+  /* Theme 3: Amber Bronze (Warm Editorial) */
+  [data-palette="amber"] {
+    --primary: 38 92% 50%; /* Amber Gold #F59E0B */
+    --primary-foreground: 0 0% 100%;
+    --accent: 0 84% 60%; /* Crimson #EF4444 */
+    --accent-foreground: 0 0% 100%;
+    --ring: 38 92% 50%;
+  }
+  [data-palette="amber"].dark, .dark [data-palette="amber"] {
+    --background: 30 35% 6%; /* Warm Espresso #18130B */
+    --card: 30 30% 9%;
+    --popover: 30 30% 9%;
+    --primary: 38 92% 52%;
+    --primary-foreground: 30 35% 6%;
+    --accent: 0 84% 60%;
+    --accent-foreground: 30 35% 6%;
+    --border: 30 25% 18%;
+    --border-glass: rgba(245, 158, 11, 0.25);
   }
 
   * {
@@ -56,110 +129,251 @@
     scroll-padding-top: 80px;
   }
 
-  * {
-    scroll-behavior: smooth;
+  body {
+    @apply bg-background text-foreground font-sans antialiased selection:bg-primary/20 selection:text-primary;
+    background-image:
+      radial-gradient(circle at 50% 0%, var(--bg-glow-1) 0%, transparent 50%),
+      radial-gradient(circle at 85% 60%, var(--bg-glow-2) 0%, transparent 40%);
+    background-attachment: fixed;
+    font-kerning: normal;
+    font-optical-sizing: auto;
+    line-height: 1.6;
+    transition: background-color 0.4s var(--ease-expo), color 0.4s var(--ease-expo);
   }
 
-  /* Scroll reveal animations */
+  .dark body {
+    line-height: 1.65;
+    letter-spacing: 0.005em;
+  }
+
+  /* Typography: balance/pretty wrapping on all headings + prose */
+  h1, h2, h3, h4 {
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /* Minimalist Grey Grid Pattern Backdrop */
+  .bg-grid-pattern {
+    background-size: 36px 36px;
+    background-image: 
+      linear-gradient(to right, rgba(156, 163, 175, 0.24) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(156, 163, 175, 0.24) 1px, transparent 1px);
+    mask-image: radial-gradient(ellipse 90% 85% at 50% 50%, black 55%, transparent 98%);
+  }
+
+  .dark .bg-grid-pattern {
+    background-image: 
+      linear-gradient(to right, rgba(255, 255, 255, 0.14) 1px, transparent 1px),
+      linear-gradient(to bottom, rgba(255, 255, 255, 0.14) 1px, transparent 1px);
+  }
+
+  /* ─── ANIMATE: Scroll Reveal System ──────────────────────────────
+     All reveals use expo-out easing. Staggered items use CSS custom
+     property --i for clean per-item delay. Initial state is always
+     visible (no content gating) — the transition fires as the class
+     toggles. prefers-reduced-motion respected at the bottom.
+  */
+
+  /* 1. Fade + rise — default for most sections */
   .reveal-fade-up {
     opacity: 0;
-    transform: translateY(30px);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    transform: translateY(20px);
+    transition: opacity 0.65s var(--ease-expo), transform 0.65s var(--ease-expo);
   }
-
   .reveal-fade-up.visible {
     opacity: 1;
     transform: translateY(0);
   }
 
+  /* 2. Pure fade + blur — for large containers */
   .reveal-fade-in {
     opacity: 0;
-    transition: opacity 0.8s ease-out;
+    filter: blur(3px);
+    transition: opacity 0.75s var(--ease-expo), filter 0.75s var(--ease-expo);
   }
-
   .reveal-fade-in.visible {
     opacity: 1;
+    filter: blur(0);
   }
 
+  /* 3. Scale + fade — for tight clusters (cards, badges) */
   .reveal-scale-up {
     opacity: 0;
-    transform: scale(0.95);
-    transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    transform: scale(0.97) translateY(10px);
+    transition: opacity 0.65s var(--ease-expo), transform 0.65s var(--ease-expo);
   }
-
   .reveal-scale-up.visible {
     opacity: 1;
-    transform: scale(1);
+    transform: scale(1) translateY(0);
   }
 
-  body {
-    @apply bg-background text-foreground font-sans;
-    background-image:
-      radial-gradient(circle at 10% 20%, rgba(120, 119, 198, 0.05) 0%, transparent 20%),
-      radial-gradient(circle at 80% 80%, rgba(120, 119, 198, 0.08) 0%, transparent 20%);
+  /* 4. Clip reveal — for the hero heading; wipes from left with clip-path */
+  .reveal-clip {
+    clip-path: inset(0 100% 0 0);
+    transition: clip-path 0.85s var(--ease-expo);
+  }
+  .reveal-clip.visible {
+    clip-path: inset(0 0% 0 0);
   }
 
-  /* Global transitions */
-  .transition-all {
-    transition-property: all;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    transition-duration: 150ms;
+  /* Per-item stagger using CSS custom property --i */
+  /* Usage: style={{ '--i': index } as React.CSSProperties} */
+  .stagger-item {
+    transition-delay: calc(var(--i, 0) * 55ms);
   }
 
-  .glass-panel {
-    @apply bg-white/80 backdrop-blur-md border border-white/30 shadow-lg;
+  /* Legacy stagger classes (kept for backwards compat) */
+  .stagger-1 { transition-delay: 0.05s; }
+  .stagger-2 { transition-delay: 0.11s; }
+  .stagger-3 { transition-delay: 0.17s; }
+  .stagger-4 { transition-delay: 0.23s; }
+  .stagger-5 { transition-delay: 0.29s; }
+  .stagger-6 { transition-delay: 0.35s; }
+
+  /* ─── ANIMATE: Hero entrance choreography ────────────────────── */
+  @keyframes hero-fade-up {
+    from { opacity: 0; transform: translateY(18px); }
+    to   { opacity: 1; transform: translateY(0); }
   }
 
-  /* Blob shape for the card */
+  @keyframes hero-fade-in {
+    from { opacity: 0; filter: blur(4px); }
+    to   { opacity: 1; filter: blur(0); }
+  }
+
+  .hero-enter-1 {
+    animation: hero-fade-up 0.7s var(--ease-expo) both;
+    animation-delay: 0.1s;
+  }
+  .hero-enter-2 {
+    animation: hero-fade-up 0.7s var(--ease-expo) both;
+    animation-delay: 0.22s;
+  }
+  .hero-enter-3 {
+    animation: hero-fade-in 0.65s var(--ease-expo) both;
+    animation-delay: 0.36s;
+  }
+  .hero-enter-4 {
+    animation: hero-fade-in 0.65s var(--ease-expo) both;
+    animation-delay: 0.48s;
+  }
+  .hero-enter-5 {
+    animation: hero-fade-in 0.65s var(--ease-expo) both;
+    animation-delay: 0.6s;
+  }
+
+  /* ─── ANIMATE: Micro-interactions ───────────────────────────── */
+
+  /* Line expander: horizontal rule that grows in on scroll */
+  .line-grow {
+    transform-origin: left center;
+    transform: scaleX(0);
+    transition: transform 0.9s var(--ease-expo);
+  }
+  .line-grow.visible {
+    transform: scaleX(1);
+  }
+
+  /* Button press feel */
+  .btn-press {
+    transition: transform 0.1s var(--ease-quart), box-shadow 0.1s var(--ease-quart);
+  }
+  .btn-press:hover  { transform: translateY(-1px); }
+  .btn-press:active { transform: translateY(0) scale(0.98); }
+
+  /* Card lift on hover — consistent across all card types */
+  .card-lift {
+    transition: transform 0.25s var(--ease-quart), box-shadow 0.25s var(--ease-quart), border-color 0.2s ease;
+  }
+  .card-lift:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 32px -8px hsl(var(--primary) / 0.12), 0 4px 12px -4px hsl(0 0% 0% / 0.08);
+  }
+
+  /* ─── LAYOUT: Section containers ────────────────────────────── */
+  .section-container {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+    padding-top: clamp(4rem, 8vw, 7rem);
+    padding-bottom: clamp(4rem, 8vw, 7rem);
+  }
+
+  /* ─── LAYOUT + TYPESET: Section headings ────────────────────── */
+  .section-heading {
+    font-size: clamp(1.75rem, 3.5vw + 0.5rem, 3rem);
+    font-weight: 700;
+    line-height: 1.12;
+    letter-spacing: -0.025em;
+    margin-bottom: 1.25rem;
+    text-wrap: balance;
+    @apply font-display tracking-tight text-foreground;
+  }
+
+  .section-subheading {
+    @apply text-base sm:text-lg font-normal mb-6 text-muted-foreground max-w-2xl leading-relaxed;
+    text-wrap: pretty;
+  }
+
+  /* ─── TYPESET: Hero fluid display text ──────────────────────── */
+  .hero-display {
+    font-size: clamp(2rem, 4.5vw + 0.75rem, 3.75rem);
+    line-height: 1.06;
+    letter-spacing: -0.025em;
+    text-wrap: balance;
+  }
+
+  /* ─── LAYOUT: Spacing rhythm helpers ────────────────────────── */
+  .layout-tight   { gap: 0.5rem; }
+  .layout-cozy    { gap: 1rem; }
+  .layout-relaxed { gap: 1.5rem; }
+  .layout-airy    { gap: 2.5rem; }
+  .layout-spacious { gap: 4rem; }
+
+  /* ─── Blob shape for the card ───────────────────────────────── */
   .blob-shape {
     border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
     animation: blob-animation 8s ease-in-out infinite alternate;
   }
 
   .blob-card {
-    @apply bg-white backdrop-blur-md;
+    @apply backdrop-blur-md;
     border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
     animation: blob-animation 12s ease-in-out infinite alternate;
     @apply flex items-center justify-center;
+    background-color: var(--card-glass);
   }
 
   @keyframes blob-animation {
-    0% {
-      border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
-    }
-
-    50% {
-      border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%;
-    }
-
-    100% {
-      border-radius: 50% 60% 30% 70% / 40% 40% 70% 50%;
-    }
+    0%   { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+    50%  { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+    100% { border-radius: 50% 60% 30% 70% / 40% 40% 70% 50%; }
   }
 
   .tech-card {
-    @apply rounded-lg bg-white border border-border/50 shadow-sm hover:shadow-md transition-all;
-    background-image: linear-gradient(to bottom right, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.97));
+    @apply rounded-2xl border backdrop-blur-md transition-all duration-300 shadow-md hover:shadow-xl hover:-translate-y-1;
+    background-color: var(--card-glass);
+    border-color: var(--border-glass);
   }
 
-  .section-container {
-    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 md:py-24;
+  /* ─── Minimalist Card Design ─────────────────────────────────── */
+  .minimal-card {
+    @apply rounded-xl border border-border/30 bg-card/40 backdrop-blur-md;
+    transition: border-color 0.25s var(--ease-quart), transform 0.25s var(--ease-quart), background-color 0.25s var(--ease-quart), box-shadow 0.25s var(--ease-quart);
   }
-
-  .section-heading {
-    @apply text-3xl md:text-4xl font-light leading-tight mb-6 tracking-tight font-mono;
-  }
-
-  .section-subheading {
-    @apply text-xl md:text-2xl font-light mb-6 text-muted-foreground tracking-tight;
+  .minimal-card:hover {
+    @apply border-primary/40 bg-card/60;
+    transform: translateY(-3px);
+    box-shadow: 0 12px 32px -8px hsl(var(--primary) / 0.10);
   }
 
   .badge {
-    @apply inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-accent/10 text-accent;
+    @apply inline-flex items-center px-3 py-1 rounded-full text-xs font-semibold bg-accent/15 text-accent border border-accent/20 backdrop-blur-sm;
   }
 
   .gradient-text {
-    @apply bg-gradient-to-r from-accent to-primary bg-clip-text text-transparent;
+    @apply text-primary font-bold;
   }
 
   .tech-grid {
@@ -167,17 +381,17 @@
   }
 
   .tech-item {
-    @apply px-4 py-3 rounded-lg border border-border/70 bg-white/70 backdrop-blur-sm hover:shadow-md transition-all text-center;
+    @apply px-4 py-3 rounded-2xl border backdrop-blur-md hover:shadow-lg transition-all duration-300 text-center hover:scale-105;
+    background-color: var(--card-glass);
+    border-color: var(--border-glass);
   }
 
   .highlight-box {
-    @apply relative overflow-hidden rounded-xl;
-
+    @apply relative overflow-hidden rounded-2xl;
     &::before {
       content: '';
       @apply absolute inset-0 bg-gradient-to-r from-accent/20 to-primary/20 opacity-0 transition-opacity duration-300;
     }
-
     &:hover::before {
       @apply opacity-100;
     }
@@ -185,12 +399,10 @@
 
   .glow-effect {
     @apply relative;
-
     &::after {
       content: '';
-      @apply absolute inset-0 -z-10 bg-gradient-to-r from-accent/5 to-primary/5 rounded-xl opacity-0 transition-opacity duration-300;
+      @apply absolute inset-0 -z-10 bg-gradient-to-r from-accent/10 to-primary/10 rounded-2xl opacity-0 transition-opacity duration-300;
     }
-
     &:hover::after {
       @apply opacity-100 animate-glow;
     }
@@ -202,12 +414,41 @@
   }
 
   @keyframes spin-reverse {
-    from {
-      transform: translate(-50%, -50%) rotate(0deg);
-    }
+    from { transform: translate(-50%, -50%) rotate(0deg); }
+    to   { transform: translate(-50%, -50%) rotate(-360deg); }
+  }
 
-    to {
-      transform: translate(-50%, -50%) rotate(-360deg);
+  /* ─── Hero Text Shadow & Accent Glow ────────────────────────── */
+  .hero-headline-shadow {
+    text-shadow: 0 4px 24px rgba(0, 0, 0, 0.12), 0 0 50px rgba(0, 0, 0, 0.08);
+  }
+  .dark .hero-headline-shadow {
+    text-shadow: 0 6px 36px rgba(0, 0, 0, 0.45), 0 0 70px rgba(0, 0, 0, 0.25);
+  }
+
+  .hero-accent-glow {
+    text-shadow: 0 0 35px hsl(var(--primary) / 0.3), 0 0 70px hsl(var(--primary) / 0.15), 0 0 110px hsl(var(--primary) / 0.08);
+  }
+
+  /* ─── ANIMATE: Reduced motion ───────────────────────────────── */
+  @media (prefers-reduced-motion: reduce) {
+    *, ::before, ::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+    .hero-enter-1, .hero-enter-2, .hero-enter-3,
+    .hero-enter-4, .hero-enter-5 {
+      animation: none !important;
+      opacity: 1 !important;
+    }
+    .animate-spin-slow, .animate-spin-reverse,
+    .animate-float, .animate-glow, .blob-shape, .blob-card {
+      animation: none !important;
+    }
+    .reveal-clip {
+      clip-path: inset(0 0% 0 0) !important;
     }
   }
 }
