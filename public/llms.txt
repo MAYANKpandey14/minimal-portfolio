@@ -1,0 +1,19 @@
+# Mayank Pandey | Full Stack Developer
+
+> Portfolio of Mayank Pandey, a Full Stack Developer building fast, scalable React, TypeScript and Node.js applications with clean code and user-focused design.
+
+This site showcases Mayank Pandey's work, skills, freelance projects, and a sample Shopify store development proposal. Visitors can review case studies, schedule a meeting, or get in touch for collaboration.
+
+## Pages
+
+- [Home](/): Overview, hero, and introduction to Mayank Pandey as a Full Stack Developer.
+- [About](/#about): Background, experience, and approach to building software.
+- [Skills](/#skills): Technical stack — JavaScript, TypeScript, React, Node.js, SQL, and more.
+- [Projects](/#projects): Featured freelance and full stack development projects.
+- [Hire Me](/#hire-me): Engagement options, availability, and how to start a project.
+- [Schedule a Meeting](/#book): Book a 30-minute intro call directly.
+- [Contact](/#contact): Email, phone, and social links.
+
+## Optional
+
+- [Shopify Store Development Proposal](/proposal): Sample proposal covering scope, timeline, deliverables, and pricing for a Shopify e-commerce build.

@@ -26,36 +26,76 @@ export const siteContent = {
 
   seo: {
     title: "Mayank Pandey | Full Stack Developer",
-    description: "Experienced Full Stack Developer specializing in React, Node.js, and modern web technologies. Building efficient, scalable applications with clean code and user-focused design.",
+    description: "Full Stack Developer building fast, scalable React, TypeScript & Node.js apps with clean code and user-focused design.",
     keywords: ["Full Stack Developer", "React Developer", "Node.js", "TypeScript", "Web Development", "JavaScript", "Frontend", "Backend"],
-    author: "Mayank Pandey"
+    author: "Mayank Pandey",
+    siteUrl: "https://mayankpandey-portfolio.lovable.app"
+  },
+
+  proposalSeo: {
+    title: "Shopify Store Development Proposal | Mayank Pandey",
+    description: "Detailed Shopify store development proposal: scope, timeline, deliverables, and pricing for a conversion-focused e-commerce build.",
+    canonical: "https://mayankpandey-portfolio.lovable.app/proposal"
   },
 
   structuredData: {
     "@context": "https://schema.org",
-    "@type": "Person",
-    "name": "Mayank Pandey",
-    "jobTitle": "Full Stack Developer",
-    "description": "Experienced Full Stack Developer specializing in React, Node.js, and modern web technologies.",
-    "email": "mayankpandeyofficial404@gmail.com",
-    "telephone": "+91-7505728099",
-    "url": "https://mayankpandey.dev",
-    "sameAs": [
-      "https://www.linkedin.com/in/mayankpandey-21a5bb195/",
-      "https://github.com/MAYANKpandey14"
-    ],
-    "knowsAbout": [
-      "JavaScript",
-      "TypeScript",
-      "React",
-      "Node.js",
-      "Full Stack Development",
-      "Web Development",
-      "Frontend Development",
-      "Backend Development"
+    "@graph": [
+      {
+        "@type": "Person",
+        "@id": "https://mayankpandey-portfolio.lovable.app/#person",
+        "name": "Mayank Pandey",
+        "jobTitle": "Full Stack Developer",
+        "description": "Experienced Full Stack Developer specializing in React, Node.js, and modern web technologies.",
+        "email": "mayankpandeyofficial404@gmail.com",
+        "telephone": "+91-7505728099",
+        "url": "https://mayankpandey-portfolio.lovable.app",
+        "sameAs": [
+          "https://www.linkedin.com/in/mayankpandey-21a5bb195/",
+          "https://github.com/MAYANKpandey14"
+        ],
+        "knowsAbout": [
+          "JavaScript",
+          "TypeScript",
+          "React",
+          "Node.js",
+          "Full Stack Development",
+          "Web Development",
+          "Frontend Development",
+          "Backend Development"
+        ]
+      },
+      {
+        "@type": "WebSite",
+        "@id": "https://mayankpandey-portfolio.lovable.app/#website",
+        "url": "https://mayankpandey-portfolio.lovable.app",
+        "name": "Mayank Pandey | Full Stack Developer",
+        "publisher": { "@id": "https://mayankpandey-portfolio.lovable.app/#person" }
+      }
     ]
+  },
+
+  proposalStructuredData: {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Shopify Store Development",
+    "serviceType": "E-commerce Website Development",
+    "description": "End-to-end Shopify store development including setup, design, product catalog, WhatsApp integration, SEO, and launch.",
+    "provider": {
+      "@type": "Person",
+      "name": "Mayank Pandey",
+      "url": "https://mayankpandey-portfolio.lovable.app"
+    },
+    "areaServed": "Worldwide",
+    "offers": {
+      "@type": "Offer",
+      "price": "40000",
+      "priceCurrency": "INR",
+      "url": "https://mayankpandey-portfolio.lovable.app/proposal"
+    }
   }
 };
+
 
 export const technologies = [
   { name: "JavaScript", Icon: "Code", category: "Frontend" },
