@@ -6,6 +6,7 @@ export const siteContent = {
     tagline: "I build high-converting websites and web apps that help businesses establish their digital presence and scale online revenue.",
     email: "mayankpandeyofficial404@gmail.com",
     phone: "+91 7505728099",
+    whatsapp: "https://wa.me/917505728099?text=Hi%20Mayank%2C%20I'd%20like%20to%20discuss%20a%20web%20project.",
     location: "India",
     availability: "Available for Projects"
   },
@@ -44,6 +45,7 @@ export const siteContent = {
   social: {
     linkedin: "https://www.linkedin.com/in/mayankpandey-21a5bb195/",
     github: "https://github.com/MAYANKpandey14",
+    whatsapp: "https://wa.me/917505728099?text=Hi%20Mayank%2C%20I'd%20like%20to%20discuss%20a%20web%20project.",
     email: "mayankpandeyofficial404@gmail.com"
   },
 

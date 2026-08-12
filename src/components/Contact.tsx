@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Mail, MessageSquare, Phone } from 'lucide-react';
+import { Mail, MessageSquare, Phone, ArrowUpRight } from 'lucide-react';
 import { useToast } from '@/hooks/use-toast';
 import { siteContent } from "@/data/content";
 import { cn } from "@/lib/utils";
@@ -126,13 +126,27 @@ const Contact = () => {
                 </div>
                 <div>
                   <span className="text-[10px] font-mono text-muted-foreground uppercase tracking-wider block mb-0.5">Phone / WhatsApp</span>
-                  <a
-                    href={`tel:${siteContent.personal.phone}`}
-                    className="text-sm font-bold text-foreground group-hover:text-primary transition-colors font-mono"
-                    aria-label={`Call ${siteContent.personal.phone}`}
-                  >
-                    {siteContent.personal.phone}
-                  </a>
+                  <div className="flex flex-wrap items-center gap-2">
+                    <a
+                      href={siteContent.personal.whatsapp}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm font-bold text-foreground group-hover:text-primary transition-colors font-mono inline-flex items-center gap-1"
+                      aria-label={`Chat with Mayank on WhatsApp at ${siteContent.personal.phone}`}
+                    >
+                      <span>{siteContent.personal.phone}</span>
+                      <ArrowUpRight size={13} className="text-primary group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
+                    </a>
+                    <a
+                      href={siteContent.personal.whatsapp}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[10px] font-semibold font-mono uppercase tracking-wider bg-emerald-500/10 text-emerald-600 dark:text-emerald-400 hover:bg-emerald-500/20 border border-emerald-500/20 transition-all"
+                      aria-label="Open WhatsApp Chat"
+                    >
+                      <span>Chat on WhatsApp</span>
+                    </a>
+                  </div>
                 </div>
               </div>
             </address>
