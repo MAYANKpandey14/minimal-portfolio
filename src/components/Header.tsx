@@ -101,16 +101,16 @@ const Header = () => {
 
           <div className="md:hidden">
             <button
-              className="text-foreground p-2 focus:outline-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 rounded-md cursor-pointer"
+              className="text-foreground hover:text-primary p-2 hover:bg-secondary/60 transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-full cursor-pointer"
               aria-label={mobileMenuOpen ? "Close navigation menu" : "Open navigation menu"}
               aria-expanded={mobileMenuOpen}
               aria-controls="mobile-menu"
               onClick={toggleMobileMenu}
             >
               {mobileMenuOpen ? (
-                <X size={24} className="text-accent" aria-hidden="true" />
+                <X size={22} className="text-foreground" aria-hidden="true" />
               ) : (
-                <Menu size={24} className="text-accent" aria-hidden="true" />
+                <Menu size={22} className="text-foreground" aria-hidden="true" />
               )}
             </button>
           </div>
@@ -118,10 +118,11 @@ const Header = () => {
       </div>
 
       {/* Mobile menu - slides in from the right */}
+      {/* ponytail: streamlined theme-aligned drawer reusing core tokens */}
       <nav
         id="mobile-menu"
         className={cn(
-          "fixed inset-y-0 right-0 w-64 bg-background/90 backdrop-blur-md shadow-2xl border-l border-border/30 transform transition-all duration-300 ease-in-out z-50 md:hidden flex flex-col h-screen",
+          "fixed inset-y-0 right-0 w-72 bg-background/95 backdrop-blur-xl shadow-2xl border-l border-border/40 transform transition-all duration-300 ease-in-out z-50 md:hidden flex flex-col h-screen",
           mobileMenuOpen
             ? "translate-x-0 opacity-100 pointer-events-auto visible"
             : "translate-x-full opacity-0 pointer-events-none invisible"
@@ -129,18 +130,23 @@ const Header = () => {
         aria-label="Mobile navigation menu"
         aria-hidden={!mobileMenuOpen}
       >
-        <div className="flex justify-end p-4">
+        <div className="flex items-center justify-between p-5 border-b border-border/20">
+          <span className="text-base font-bold font-display text-foreground">
+            <span className="text-primary font-mono font-bold">&lt;</span>
+            <span>mayankpandey</span>
+            <span className="text-primary font-mono font-bold">/&gt;</span>
+          </span>
           <button
             onClick={closeMobileMenu}
-            className="text-accent p-2 hover:bg-accent/10 rounded-full transition-colors focus:outline-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 cursor-pointer"
+            className="text-muted-foreground hover:text-foreground p-2 hover:bg-secondary/60 rounded-full transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-primary cursor-pointer"
             aria-label="Close navigation menu"
           >
-            <X size={24} aria-hidden="true" />
+            <X size={20} aria-hidden="true" />
           </button>
         </div>
 
-        <div className="flex flex-col h-full px-5">
-          <div className="flex flex-col space-y-2 py-4" role="list">
+        <div className="flex flex-col h-full px-5 py-6 justify-between">
+          <div className="flex flex-col space-y-1.5" role="list">
             {siteContent.navigation.map((link) => {
               const isActive = activeSection === link.href;
               return (
@@ -148,10 +154,10 @@ const Header = () => {
                   key={link.href}
                   href={link.href}
                   className={cn(
-                    "text-sm font-medium transition-all duration-200 px-4 py-3 rounded-xl flex items-center justify-between focus:outline-none focus-visible:ring-2 focus-visible:ring-primary",
+                    "text-xs font-semibold uppercase tracking-wider transition-all duration-200 px-4 py-3 rounded-full flex items-center justify-between focus:outline-none focus-visible:ring-2 focus-visible:ring-primary",
                     isActive
-                      ? "text-primary font-bold bg-primary/10"
-                      : "text-foreground hover:text-primary hover:bg-secondary/60"
+                      ? "text-primary font-bold bg-primary/10 shadow-xs"
+                      : "text-muted-foreground hover:text-foreground hover:bg-secondary/60"
                   )}
                   onClick={closeMobileMenu}
                   role="listitem"
@@ -164,14 +170,14 @@ const Header = () => {
             })}
           </div>
 
-          <div className="mt-auto pb-8">
+          <div className="pb-6">
             <a
               href="#contact"
-              className="inline-flex w-full items-center justify-center rounded-2xl bg-accent px-4 py-2.5 text-sm font-medium text-accent-foreground shadow-md transition-colors hover:bg-accent/90 focus:outline-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+              className="inline-flex w-full items-center justify-center gap-2 rounded-full bg-primary px-4 py-3 text-xs font-semibold text-primary-foreground shadow-md transition-all hover:bg-primary/90 focus:outline-none focus-visible:ring-2 focus-visible:ring-primary group"
               onClick={closeMobileMenu}
-              aria-label="Go to contact section"
             >
-              Contact Me
+              <span>Request Quote</span>
+              <ArrowRight size={13} className="group-hover:translate-x-0.5 transition-transform" />
             </a>
           </div>
         </div>
@@ -180,7 +186,7 @@ const Header = () => {
       {/* Overlay when mobile menu is open */}
       {mobileMenuOpen && (
         <div
-          className="fixed inset-0 bg-background/40 backdrop-blur-sm z-40 md:hidden"
+          className="fixed inset-0 bg-background/60 backdrop-blur-sm z-40 md:hidden"
           onClick={closeMobileMenu}
           aria-hidden="true"
         />
