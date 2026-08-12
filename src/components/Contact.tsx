@@ -167,6 +167,7 @@ const Contact = () => {
                   type="text"
                   id="name"
                   name="name"
+                  autoComplete="name"
                   value={formData.name}
                   onChange={handleChange}
                   className="w-full px-4 py-2.5 text-xs border border-border/40 rounded-lg focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all bg-background/60 text-foreground"
@@ -183,6 +184,7 @@ const Contact = () => {
                   type="email"
                   id="email"
                   name="email"
+                  autoComplete="email"
                   value={formData.email}
                   onChange={handleChange}
                   className="w-full px-4 py-2.5 text-xs border border-border/40 rounded-lg focus:outline-none focus:border-primary focus:ring-2 focus:ring-primary/20 transition-all bg-background/60 text-foreground"
