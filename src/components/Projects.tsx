@@ -3,10 +3,13 @@ import { cn } from "@/lib/utils";
 import { useScrollReveal } from "@/hooks/use-scroll-reveal";
 import { ArrowUpRight } from 'lucide-react';
 
-// Project images (optimized modern WebP formats)
-import vertexAirseaImg from '@/assets/vertexairsea.webp';
-import photographyPortfolioImg from '@/assets/aesphotography.webp';
-import grnlSupplyChainImg from '@/assets/grnlsupplychain.webp';
+// Project images (ultra-optimized modern AVIF + WebP formats)
+import vertexAirseaWebp from '@/assets/vertexairsea.webp';
+import vertexAirseaAvif from '@/assets/vertexairsea.avif';
+import photographyPortfolioWebp from '@/assets/aesphotography.webp';
+import photographyPortfolioAvif from '@/assets/aesphotography.avif';
+import grnlSupplyChainWebp from '@/assets/grnlsupplychain.webp';
+import grnlSupplyChainAvif from '@/assets/grnlsupplychain.avif';
 
 interface Project {
   id: number;
@@ -15,7 +18,8 @@ interface Project {
   category: string;
   tech: string[];
   previewUrl: string;
-  image: string;
+  imageWebp: string;
+  imageAvif: string;
   imageAlt: string;
   liveDomain: string;
 }
@@ -28,7 +32,8 @@ const projects: Project[] = [
     category: "Logistics Platform",
     tech: ["React", "TypeScript", "Tailwind CSS", "Vercel"],
     previewUrl: "https://www.grnlsupplychain.com/",
-    image: grnlSupplyChainImg,
+    imageWebp: grnlSupplyChainWebp,
+    imageAvif: grnlSupplyChainAvif,
     imageAlt: "GRNL Supply Chain — Global Freight Platform",
     liveDomain: "grnlsupplychain.com",
   },
@@ -39,7 +44,8 @@ const projects: Project[] = [
     category: "Photography Portfolio",
     tech: ["React", "Tailwind CSS", "Framer Motion", "Vercel"],
     previewUrl: "https://www.aesphotography.in/",
-    image: photographyPortfolioImg,
+    imageWebp: photographyPortfolioWebp,
+    imageAvif: photographyPortfolioAvif,
     imageAlt: "AES Photography — Editorial Portfolio",
     liveDomain: "aesphotography.in",
   },
@@ -50,11 +56,21 @@ const projects: Project[] = [
     category: "International Cargo",
     tech: ["React", "Tailwind CSS", "Framer Motion", "Vercel"],
     previewUrl: "https://www.vertexairsea.com/",
-    image: vertexAirseaImg,
+    imageWebp: vertexAirseaWebp,
+    imageAvif: vertexAirseaAvif,
     imageAlt: "Vertex Air Sea Cargo — Freight Forwarding",
     liveDomain: "vertexairsea.com",
   },
 ];
+
+const prefetchProjectMedia = (p: Project) => {
+  if (typeof window === "undefined") return;
+  const link = document.createElement("link");
+  link.rel = "prefetch";
+  link.as = "image";
+  link.href = p.imageAvif || p.imageWebp;
+  document.head.appendChild(link);
+};
 
 const Projects = () => {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -103,7 +119,12 @@ const Projects = () => {
                 href={project.previewUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                onMouseEnter={() => setActiveIndex(i)}
+                onMouseEnter={() => {
+                  setActiveIndex(i);
+                  prefetchProjectMedia(project);
+                }}
+                onFocus={() => prefetchProjectMedia(project)}
+                onTouchStart={() => prefetchProjectMedia(project)}
                 onClick={(e) => {
                   // On mobile: first tap activates, second tap navigates
                   if (!isActive) {
@@ -113,7 +134,7 @@ const Projects = () => {
                 }}
                 aria-label={`Open ${project.title} live website`}
                 className={cn(
-                  "group relative py-7 sm:py-8 flex items-center justify-between gap-4 transition-all duration-300 outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-sm",
+                  "group relative py-7 sm:py-8 flex items-center justify-between gap-4 transition-all duration-300 outline-none focus-visible:ring-2 focus-visible:ring-primary rounded-sm cursor-pointer",
                 )}
               >
                 {/* Active bar */}
@@ -214,17 +235,22 @@ const Projects = () => {
                   key={p.id}
                   className={cn(
                     "absolute inset-0 overflow-y-auto scrollbar-none transition-opacity duration-500 ease-out",
-                    i === activeIndex ? "opacity-100 z-10" : "opacity-0 z-0"
+                    i === activeIndex ? "opacity-100 z-10" : "opacity-0 z-0 pointer-events-none"
                   )}
                 >
-                  <img
-                    src={p.image}
-                    alt={p.imageAlt}
-                    className="w-full h-auto block"
-                    loading={i === 0 ? "eager" : "lazy"}
-                    decoding="async"
-                    width={1400}
-                  />
+                  <picture>
+                    <source srcSet={p.imageAvif} type="image/avif" />
+                    <source srcSet={p.imageWebp} type="image/webp" />
+                    <img
+                      src={p.imageAvif}
+                      alt={p.imageAlt}
+                      className="w-full h-auto block"
+                      loading={i === 0 ? "eager" : "lazy"}
+                      fetchPriority={i === 0 ? "high" : "low"}
+                      decoding="async"
+                      width={1400}
+                    />
+                  </picture>
                 </div>
               ))}
 
@@ -246,14 +272,18 @@ const Projects = () => {
           </span>
         </div>
         <div className="overflow-y-auto scrollbar-none" style={{ maxHeight: '360px' }}>
-          <img
-            src={projects[activeIndex].image}
-            alt={projects[activeIndex].imageAlt}
-            className="w-full h-auto block"
-            loading="lazy"
-            decoding="async"
-            width={1400}
-          />
+          <picture>
+            <source srcSet={projects[activeIndex].imageAvif} type="image/avif" />
+            <source srcSet={projects[activeIndex].imageWebp} type="image/webp" />
+            <img
+              src={projects[activeIndex].imageAvif}
+              alt={projects[activeIndex].imageAlt}
+              className="w-full h-auto block"
+              loading="lazy"
+              decoding="async"
+              width={1400}
+            />
+          </picture>
         </div>
       </div>
     </section>
