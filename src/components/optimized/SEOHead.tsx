@@ -9,10 +9,10 @@ interface SEOHeadProps {
 }
 
 const SEOHead = ({ 
-  title = "Mayank Pandey | Full Stack Developer", 
-  description = "Experienced Full Stack Developer specializing in React, Node.js, and modern web technologies. Building efficient, scalable applications with clean code and user-focused design.",
+  title = "Mayank Pandey | Freelance Web Designer & Developer", 
+  description = "Freelance Web Designer & Developer building high-converting websites and scalable React web applications engineered for speed, trust, and business revenue.",
   canonical = window.location.href,
-  ogImage = "/profile-pic.webp",
+  ogImage = "/og-image.png",
   structuredData
 }: SEOHeadProps) => {
 
@@ -20,21 +20,30 @@ const SEOHead = ({
     // Update document title
     document.title = title;
 
-    // Update meta description
+    // Update standard meta tags
     updateMetaTag('description', description);
     
     // Update Open Graph tags
     updateMetaTag('og:title', title, 'property');
     updateMetaTag('og:description', description, 'property');
     updateMetaTag('og:url', canonical, 'property');
-    updateMetaTag('og:image', `${window.location.origin}${ogImage}`, 'property');
+    const fullImageUrl = ogImage.startsWith('http') ? ogImage : `${window.location.origin}${ogImage}`;
+    updateMetaTag('og:image', fullImageUrl, 'property');
+    updateMetaTag('og:image:secure_url', fullImageUrl, 'property');
+    updateMetaTag('og:image:type', 'image/png', 'property');
+    updateMetaTag('og:image:width', '1200', 'property');
+    updateMetaTag('og:image:height', '630', 'property');
+    updateMetaTag('og:image:alt', title, 'property');
     updateMetaTag('og:type', 'website', 'property');
+    updateMetaTag('og:site_name', 'Mayank Pandey Portfolio', 'property');
+    updateMetaTag('og:locale', 'en_US', 'property');
     
     // Update Twitter Card tags
     updateMetaTag('twitter:card', 'summary_large_image');
     updateMetaTag('twitter:title', title);
     updateMetaTag('twitter:description', description);
-    updateMetaTag('twitter:image', `${window.location.origin}${ogImage}`);
+    updateMetaTag('twitter:image', fullImageUrl);
+    updateMetaTag('twitter:image:alt', title);
     
     // Update canonical link
     updateCanonicalLink(canonical);

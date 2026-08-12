@@ -49,16 +49,18 @@ export const siteContent = {
 
   seo: {
     title: "Mayank Pandey | Freelance Web Designer & Developer",
-    description: "Freelance web designer & developer helping businesses establish digitally, scale online presence, and convert visitors into paying clients.",
-    keywords: ["Freelance Web Designer", "Web Developer", "High-Converting Websites", "React Developer", "UI/UX Design", "Business Growth", "Web Design India"],
+    description: "Freelance Web Designer & Developer building high-converting websites and scalable React web applications engineered for speed, trust, and business revenue.",
+    keywords: ["Freelance Web Designer", "Web Developer", "High-Converting Websites", "React Developer", "UI/UX Design", "Custom Web Development", "Web Design India", "TypeScript Developer", "Next.js Developer"],
     author: "Mayank Pandey",
-    siteUrl: "https://mayankpandey-portfolio.lovable.app"
+    siteUrl: "https://mayankpandey.dev",
+    ogImage: "/og-image.png"
   },
 
   proposalSeo: {
     title: "Shopify Store Development Proposal | Mayank Pandey",
     description: "Detailed Shopify store development proposal: scope, timeline, deliverables, and pricing for a conversion-focused e-commerce build.",
-    canonical: "https://mayankpandey-portfolio.lovable.app/proposal"
+    canonical: "https://mayankpandey.dev/proposal",
+    ogImage: "/og-image.png"
   },
 
   structuredData: {
@@ -66,13 +68,14 @@ export const siteContent = {
     "@graph": [
       {
         "@type": "Person",
-        "@id": "https://mayankpandey-portfolio.lovable.app/#person",
+        "@id": "https://mayankpandey.dev/#person",
         "name": "Mayank Pandey",
         "jobTitle": "Freelance Web Designer & Developer",
         "description": "Freelance web designer & developer helping businesses establish digitally and scale online revenue.",
         "email": "mayankpandeyofficial404@gmail.com",
         "telephone": "+91-7505728099",
-        "url": "https://mayankpandey-portfolio.lovable.app",
+        "url": "https://mayankpandey.dev",
+        "image": "https://mayankpandey.dev/og-image.png",
         "sameAs": [
           "https://www.linkedin.com/in/mayankpandey-21a5bb195/",
           "https://github.com/MAYANKpandey14"
@@ -90,10 +93,10 @@ export const siteContent = {
       },
       {
         "@type": "WebSite",
-        "@id": "https://mayankpandey-portfolio.lovable.app/#website",
-        "url": "https://mayankpandey-portfolio.lovable.app",
+        "@id": "https://mayankpandey.dev/#website",
+        "url": "https://mayankpandey.dev",
         "name": "Mayank Pandey | Freelance Web Designer & Developer",
-        "publisher": { "@id": "https://mayankpandey-portfolio.lovable.app/#person" }
+        "publisher": { "@id": "https://mayankpandey.dev/#person" }
       }
     ]
   },
@@ -107,14 +110,14 @@ export const siteContent = {
     "provider": {
       "@type": "Person",
       "name": "Mayank Pandey",
-      "url": "https://mayankpandey-portfolio.lovable.app"
+      "url": "https://mayankpandey.dev"
     },
     "areaServed": "Worldwide",
     "offers": {
       "@type": "Offer",
       "price": "40000",
       "priceCurrency": "INR",
-      "url": "https://mayankpandey-portfolio.lovable.app/proposal"
+      "url": "https://mayankpandey.dev/proposal"
     }
   }
 };
