@@ -44,14 +44,14 @@
 **Files:**
 - Modify: `package.json:59, 78, 79`
 
-- [ ] **Step 1: Check existing values in `package.json`**
+- [x] **Step 1: Check existing values in `package.json`**
 
 Verify lines:
 - Line 59: `"react-router-dom": "^7.11.0"`
 - Line 78: `"postcss": "^8.5.6"`
 - Line 79: `"sharp": "^0.35.3"`
 
-- [ ] **Step 2: Update direct dependency versions in `package.json`**
+- [x] **Step 2: Update direct dependency versions in `package.json`**
 
 Edit `package.json`:
 ```json
@@ -63,7 +63,7 @@ Edit `package.json`:
 "sharp": "^0.35.5",
 ```
 
-- [ ] **Step 3: Validate `package.json` syntax**
+- [x] **Step 3: Validate `package.json` syntax**
 
 Run:
 ```bash
@@ -78,7 +78,7 @@ Expected output: Exits cleanly with code 0 (no syntax errors).
 **Files:**
 - Modify: `package.json`
 
-- [ ] **Step 1: Add the complete `overrides` object into `package.json`**
+- [x] **Step 1: Add the complete `overrides` object into `package.json`**
 
 Insert the following `overrides` block directly before the closing brace in `package.json`:
 
@@ -99,7 +99,7 @@ Insert the following `overrides` block directly before the closing brace in `pac
   }
 ```
 
-- [ ] **Step 2: Verify `overrides` integrity via node script**
+- [x] **Step 2: Verify `overrides` integrity via node script**
 
 Run:
 ```bash
@@ -115,7 +115,7 @@ Expected output: Prints formatted JSON containing all 10 override keys.
 - Modify: `package-lock.json`
 - Modify: `node_modules/`
 
-- [ ] **Step 1: Execute npm install with overrides enforced**
+- [x] **Step 1: Execute npm install with overrides enforced**
 
 Run:
 ```bash
@@ -123,7 +123,7 @@ npm install
 ```
 Expected output: Packages are updated, tree is re-resolved, and `package-lock.json` is updated.
 
-- [ ] **Step 2: Verify resolved versions in `package-lock.json` against all 22 alerts**
+- [x] **Step 2: Verify resolved versions in `package-lock.json` against all 22 alerts**
 
 Run:
 ```bash
@@ -140,7 +140,7 @@ Expected output:
 - `baseline-browser-mapping`: versions >= 2.11.0
 - `postcss-selector-parser`: versions >= 6.1.3
 
-- [ ] **Step 3: Verify both 1.x and 2.x `brace-expansion` instances**
+- [x] **Step 3: Verify both 1.x and 2.x `brace-expansion` instances**
 
 Run:
 ```bash
@@ -157,7 +157,7 @@ Expected output:
 **Files:**
 - Test: Full repository health check
 
-- [ ] **Step 1: Run TypeScript compiler and production build**
+- [x] **Step 1: Run TypeScript compiler and production build**
 
 Run:
 ```bash
@@ -170,7 +170,7 @@ vite v7.3.0 building client environment for production...
 ```
 Exits with code 0.
 
-- [ ] **Step 2: Run ESLint**
+- [x] **Step 2: Run ESLint**
 
 Run:
 ```bash
@@ -186,7 +186,7 @@ Expected output: Exits with code 0, no linting regressions.
 - Modify: `package.json`
 - Modify: `package-lock.json`
 
-- [ ] **Step 1: Stage and commit updated manifests**
+- [x] **Step 1: Stage and commit updated manifests**
 
 Run:
 ```bash
@@ -194,7 +194,7 @@ git add package.json package-lock.json
 git commit -m "fix(security): resolve all 22 Dependabot vulnerabilities via dependency updates and overrides"
 ```
 
-- [ ] **Step 2: Verify git status is clean**
+- [x] **Step 2: Verify git status is clean**
 
 Run:
 ```bash
