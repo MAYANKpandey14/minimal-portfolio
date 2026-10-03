@@ -10,6 +10,10 @@ import photographyPortfolioWebp from '@/assets/aesphotography.webp';
 import photographyPortfolioAvif from '@/assets/aesphotography.avif';
 import grnlSupplyChainWebp from '@/assets/grnlsupplychain.webp';
 import grnlSupplyChainAvif from '@/assets/grnlsupplychain.avif';
+import logistics365Webp from '@/assets/365logistics.webp';
+import logistics365Avif from '@/assets/365logistics.avif';
+import germanMitharshWebp from '@/assets/germanmitharsh.webp';
+import germanMitharshAvif from '@/assets/germanmitharsh.avif';
 
 interface Project {
   id: number;
@@ -27,6 +31,30 @@ interface Project {
 const projects: Project[] = [
   {
     id: 1,
+    title: "365 Logistics",
+    year: "2025",
+    category: "Express Freight & Logistics",
+    tech: ["React", "TypeScript", "Tailwind CSS", "Vercel"],
+    previewUrl: "https://365logistics.in/",
+    imageWebp: logistics365Webp,
+    imageAvif: logistics365Avif,
+    imageAlt: "365 Logistics — Express Freight Platform",
+    liveDomain: "365logistics.in",
+  },
+  {
+    id: 2,
+    title: "German Mitharsh",
+    year: "2025",
+    category: "Language Institute & EdTech",
+    tech: ["React", "TypeScript", "Tailwind CSS", "Vercel"],
+    previewUrl: "https://www.germanmitharsh.com/",
+    imageWebp: germanMitharshWebp,
+    imageAvif: germanMitharshAvif,
+    imageAlt: "German Mitharsh — German Language Institute",
+    liveDomain: "germanmitharsh.com",
+  },
+  {
+    id: 3,
     title: "GRNL Supply Chain",
     year: "2025",
     category: "Logistics Platform",
@@ -38,7 +66,7 @@ const projects: Project[] = [
     liveDomain: "grnlsupplychain.com",
   },
   {
-    id: 2,
+    id: 4,
     title: "AES Photography",
     year: "2025",
     category: "Photography Portfolio",
@@ -50,7 +78,7 @@ const projects: Project[] = [
     liveDomain: "aesphotography.in",
   },
   {
-    id: 3,
+    id: 5,
     title: "Vertex Air Sea",
     year: "2025",
     category: "International Cargo",
@@ -105,12 +133,12 @@ const Projects = () => {
       {/* Main showcase: list + image */}
       <div
         className={cn(
-          "grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 transition-all duration-700 ease-out delay-100",
+          "grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-stretch transition-all duration-700 ease-out delay-100",
           isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"
         )}
       >
         {/* Left: Rollover list */}
-        <div className="flex flex-col justify-center divide-y divide-border/30">
+        <div className="flex flex-col justify-between divide-y divide-border/30">
           {projects.map((project, i) => {
             const isActive = i === activeIndex;
             return (
@@ -204,32 +232,33 @@ const Projects = () => {
           })}
         </div>
 
-        {/* Right: Full-page screenshot frame */}
-        <div className="hidden lg:block relative">
-          <div className="sticky top-28">
+        {/* Right: Full-height browser frame matching left links section */}
+        <div className="hidden lg:flex lg:flex-col h-full relative">
+          <div className="sticky top-24 flex flex-col h-full w-full">
             {/* Browser chrome */}
-            <div className="rounded-t-xl border border-b-0 border-border/40 bg-secondary/80 px-4 py-2.5 flex items-center gap-2 backdrop-blur-md">
-              <span className="w-2.5 h-2.5 rounded-full bg-rose-400/80" />
-              <span className="w-2.5 h-2.5 rounded-full bg-amber-400/80" />
-              <span className="w-2.5 h-2.5 rounded-full bg-emerald-400/80" />
-              <div className="ml-2 flex-1 max-w-xs px-3 py-0.5 rounded bg-background/70 border border-border/30 text-[10px] font-mono text-muted-foreground truncate">
-                {projects[activeIndex].liveDomain}
+            <div className="rounded-t-xl border border-b-0 border-border/40 bg-secondary/80 px-4 py-2.5 flex items-center justify-between gap-2 backdrop-blur-md shrink-0">
+              <div className="flex items-center gap-1.5">
+                <span className="w-2.5 h-2.5 rounded-full bg-rose-400/80" />
+                <span className="w-2.5 h-2.5 rounded-full bg-amber-400/80" />
+                <span className="w-2.5 h-2.5 rounded-full bg-emerald-400/80" />
               </div>
+
+              <div className="flex-1 max-w-xs px-3 py-0.5 rounded bg-background/70 border border-border/30 text-[10px] font-mono text-muted-foreground truncate text-center">
+                https://{projects[activeIndex].liveDomain}
+              </div>
+
               <a
                 href={projects[activeIndex].previewUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="ml-auto text-[10px] font-mono text-primary hover:underline flex items-center gap-1 shrink-0"
+                className="text-[10px] font-mono text-primary hover:underline flex items-center gap-1 shrink-0"
               >
                 Open <ArrowUpRight className="w-3 h-3" />
               </a>
             </div>
 
-            {/* Screenshot viewport */}
-            <div
-              className="relative border border-border/40 rounded-b-xl overflow-hidden bg-background"
-              style={{ height: 'clamp(360px, 55vh, 520px)' }}
-            >
+            {/* Viewport frame matching full height of left links section */}
+            <div className="relative border border-border/40 rounded-b-xl overflow-hidden bg-background flex-1 h-full min-h-[580px] shadow-lg">
               {projects.map((p, i) => (
                 <div
                   key={p.id}

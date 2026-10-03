@@ -9,15 +9,19 @@ const root = path.resolve(__dirname, '..');
 
 async function run() {
   const assetsDir = path.join(root, 'src', 'assets');
-  const files = ['vertexairsea', 'aesphotography', 'grnlsupplychain'];
+  const files = ['365logistics', 'germanmitharsh', 'vertexairsea', 'aesphotography', 'grnlsupplychain'];
 
   for (const name of files) {
     const webpPath = path.join(assetsDir, `${name}.webp`);
     const avifPath = path.join(assetsDir, `${name}.avif`);
+    if (!fs.existsSync(webpPath)) {
+      console.log(`Skipping AVIF conversion for ${name}: WebP file not found.`);
+      continue;
+    }
     const buffer = fs.readFileSync(webpPath);
-    console.log(`Processing ${name}...`);
+    console.log(`Processing ${name} to AVIF...`);
     await sharp(buffer).avif({ quality: 75, effort: 6 }).toFile(avifPath);
-    console.log(`Done ${name}.avif:`, fs.statSync(avifPath).size);
+    console.log(`Done ${name}.avif:`, fs.statSync(avifPath).size, 'bytes');
   }
 }
 
